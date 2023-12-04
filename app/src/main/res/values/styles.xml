@@ -1,0 +1,121 @@
+<resources>
+
+    <!-- 拓展主题 theme. -->
+    <style name="XUITheme" parent="XUIBaseTheme">
+        <!--设置默认窗口的动画样式-->
+        <item name="android:windowAnimationStyle">@style/WindowAnimStyle</item>
+
+        <!--自定义标题栏样式方法1-->
+        <!--<item name="xui_actionbar_color">@color/app_color_theme_1</item>-->
+        <!--<item name="xui_actionbar_text_color">@color/xui_config_color_primary_text</item>-->
+        <!--<item name="xui_actionbar_immersive">true</item>-->
+
+        <!--自定义标题栏样式方法2-->
+        <!--<item name="TitleBarStyle">@style/TitleBar.Custom</item>-->
+    </style>
+
+    <!--<style name="TitleBar.Custom">-->
+    <!--<item name="tb_titleTextColor">@color/xui_config_color_primary_text</item>-->
+    <!--<item name="tb_immersive">true</item>-->
+    <!--</style>-->
+
+    <style name="WindowAnimStyle" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/xpage_slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/xpage_slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/xpage_slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/xpage_slide_out_right</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="XUITheme.Phone">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <!--窗体背景，这个背景能在第一时间显示, 避免启动时白屏，黑屏问题-->
+    <style name="XUITheme.Launch.Demo">
+        <item name="android:windowBackground">@drawable/xui_config_bg_splash</item>
+        <item name="xui_config_splash_app_logo">@drawable/ic_splash_app_logo_xui</item>
+        <item name="xui_config_splash_company_logo">@drawable/ic_splash_company_logo_xuexiang</item>
+    </style>
+
+    <!--XVideo-->
+    <style name="XVideoNoBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+
+    <!--SettingTheme-->
+    <style name="SettingTheme" parent="XUITheme.Phone">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--系统弹窗按钮样式-->
+        <item name="buttonStyle">@style/Button.AlertDialog</item>
+
+        <!--有Title-->
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+        <item name="actionBarStyle">@style/ActionBarStyle</item>
+    </style>
+
+
+    <style name="ActionBarStyle" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/ToolbarTitle</item>
+        <item name="subtitleTextStyle">@style/ToolbarSubTitle</item>
+        <item name="background">?attr/colorPrimary</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+
+    <!--DialogTheme，用于将Activity作为Dialog的主题-->
+    <style name="DialogTheme" parent="XUITheme.Phone">
+        <!--设置dialog的背景，此处为系统给定的透明值-->
+        <item name="android:windowBackground">@color/xui_config_color_transparent</item>
+        <!--Dialog的windowFrame框为无-->
+        <item name="android:windowFrame">@null</item>
+        <!--无标题-->
+        <item name="android:windowNoTitle">true</item>　　　　　
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否半透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--是否有覆盖-->
+        <item name="android:windowContentOverlay">@null</item>
+        <!--设置Activity出现方式-->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <!--背景是否模糊显示-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!-- 自定义默认二维码扫描界面的主题. -->
+    <style name="XQRCodeTheme.Custom">
+        <item name="ViewfinderViewStyle">@style/ViewfinderView.Custom</item>
+    </style>
+
+    <style name="ViewfinderView.Custom">
+        <item name="inner_corner_color">#FF9900</item>
+        <!--<item name="inner_scan_bitmap">@drawable/ic_qrcode_scanning</item>-->
+        <item name="inner_corner_width">6dp</item>
+        <item name="inner_scan_bitmap_tint">#FF9900</item>
+        <item name="inner_scan_animation_interval">25</item>
+    </style>
+
+    <style name="AppTheme.Camera">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+</resources>

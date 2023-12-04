@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2019 xuexiangjys(xuexiangjys@163.com)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView style="@style/ScrollViewStyle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextStyle.Explain"
+                android:layout_marginTop="10dp"
+                android:text="默认点击：" />
+
+            <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
+                android:id="@+id/flowlayout_normal_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/TextStyle.Explain"
+                android:layout_marginTop="20dp"
+                android:text="单选(不可取消)：" />
+
+            <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
+                android:id="@+id/flowlayout_single_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/TextStyle.Explain"
+                android:layout_marginTop="20dp"
+                android:text="单选(可点击取消)：" />
+
+            <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
+                android:id="@+id/flowlayout_single_select_cancelable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ftl_single_cancelable="true" />
+
+            <TextView
+                style="@style/TextStyle.Explain"
+                android:layout_marginTop="20dp"
+                android:text="多选：" />
+
+            <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
+                android:id="@+id/flowlayout_multi_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/TextStyle.Explain"
+                android:layout_marginTop="20dp"
+                android:text="多选(xml配置)：" />
+
+            <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ftl_check_mode="multi"
+                app:ftl_entries="@array/tags_values"
+                app:ftl_selecteds="@array/tags_selects_values" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextStyle.Explain"
+                    android:text="标签展示：" />
+
+                <com.xuexiang.xui.widget.alpha.XUIAlphaButton
+                    android:id="@+id/btn_add_tag"
+                    style="@style/Button.Primary.wrap"
+                    android:layout_marginStart="20dp"
+                    android:text="添加标签" />
+
+                <com.xuexiang.xui.widget.alpha.XUIAlphaButton
+                    android:id="@+id/btn_clear_tag"
+                    style="@style/Button.Primary.wrap"
+                    android:layout_marginStart="20dp"
+                    android:text="清除标签" />
+
+            </LinearLayout>
+
+
+            <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
+                android:id="@+id/flowlayout_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ftl_check_mode="display"
+                app:ftl_entries="@array/tags_values" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

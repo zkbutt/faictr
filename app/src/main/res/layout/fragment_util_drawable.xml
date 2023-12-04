@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2019 xuexiangjys(xuexiangjys@163.com)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentWrap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <!-- 创建一张指定大小的纯色图片，支持圆角 -->
+            <TextView
+                style="@style/TextStyle.Content.wrap"
+                android:text="@string/drawable_utils_solid_image_title" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/solidImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/drawable_utils_column_marginBottom"
+                android:contentDescription="@string/common_example" />
+
+            <!-- 创建一张指定大小的圆形图片，并带文字 -->
+            <TextView
+                style="@style/TextStyle.Content.wrap"
+                android:text="@string/drawable_utils_circle_image_title" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circleImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/drawable_utils_column_marginBottom"
+                android:contentDescription="@string/common_example" />
+
+            <!-- 创建一张圆形渐变图片，支持圆角 -->
+            <TextView
+                style="@style/TextStyle.Content.wrap"
+                android:text="@string/drawable_utils_circle_gradient_title" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circleGradient"
+                android:layout_width="@dimen/drawable_utils_common_shape_size"
+                android:layout_height="@dimen/drawable_utils_common_shape_size"
+                android:layout_marginBottom="@dimen/drawable_utils_column_marginBottom"
+                android:contentDescription="@string/common_example" />
+
+            <!-- 设置 Drawable 的颜色 -->
+            <TextView
+                style="@style/TextStyle.Content.wrap"
+                android:text="@string/drawable_utils_tint_color_title" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/drawable_utils_column_marginBottom"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/tintColorOrigin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/common_example" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/color_utils_square_margin"
+                    android:contentDescription="@null"
+                    android:src="@drawable/icon_arrow_right" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/tintColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/color_utils_square_margin"
+                    android:contentDescription="@string/common_example" />
+
+            </LinearLayout>
+
+            <!-- 创建带上分隔线或下分隔线的 Drawable -->
+            <TextView
+                style="@style/TextStyle.Content.wrap"
+                android:text="@string/drawable_utils_separator_title" />
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/drawable_utils_common_shape_size"
+                android:layout_marginBottom="@dimen/drawable_utils_column_marginBottom" />
+
+
+            <!-- 创建一个带选中状态的Drawable -->
+
+            <TextView
+                style="@style/TextStyle.Content.wrap"
+                android:text="@string/drawable_utils_create_state_list_drawable" />
+
+            <Button
+                android:id="@+id/btn_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:paddingStart="@dimen/spacing_16"
+                android:paddingTop="@dimen/margin8"
+                android:paddingEnd="@dimen/spacing_16"
+                android:paddingBottom="@dimen/margin8"
+                android:text="动态设置选中状态的按钮" />
+
+
+            <!-- 从一个 View 创建 Bitmap -->
+            <TextView
+                style="@style/TextStyle.Content.wrap"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:text="@string/drawable_utils_create_from_view_title" />
+
+            <com.xuexiang.xui.widget.alpha.XUIAlphaButton
+                android:id="@+id/createFromView"
+                style="@style/Button.Primary.wrap"
+                android:layout_width="wrap_content"
+                android:text="@string/drawable_utils_create_from_view_button" />
+
+            <com.xuexiang.xui.widget.alpha.XUIAlphaButton
+                android:id="@+id/createFromView1"
+                style="@style/Button.Primary.wrap"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="截取scrollview长图" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

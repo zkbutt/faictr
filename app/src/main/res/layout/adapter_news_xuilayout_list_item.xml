@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xuexiang.xui.widget.layout.XUIFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    style="@style/XUILayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:layout_marginBottom="4dp"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingTop="3dp"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingBottom="8dp"
+    app:xui_shadowElevation="0dp">
+
+    <include layout="@layout/layout_news_card_item" />
+
+</com.xuexiang.xui.widget.layout.XUIFrameLayout>

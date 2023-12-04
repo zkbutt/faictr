@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/colorAccent" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="LoopBanner"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="图片轮播简单使用"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleImageBanner
+                android:id="@+id/sib_simple_usage"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:bb_scale="0.5625" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="自定义轮播简单使用"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <com.xuexiang.xuidemo.widget.RadiusImageBanner
+                android:id="@+id/rib_simple_usage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bb_barPaddingBottom="10dp"
+                app:bb_scale="0.4317" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="图片轮播复杂使用"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleImageBanner
+                android:id="@+id/sib_the_most_comlex_usage"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:bb_barColor="#88000000"
+                app:bb_barPaddingBottom="5dp"
+                app:bb_barPaddingLeft="10dp"
+                app:bb_barPaddingRight="10dp"
+                app:bb_barPaddingTop="5dp"
+                app:bb_delay="2"
+                app:bb_indicatorCornerRadius="3dp"
+                app:bb_indicatorGap="8dp"
+                app:bb_indicatorGravity="RIGHT"
+                app:bb_indicatorHeight="6dp"
+                app:bb_indicatorSelectColor="#ffffff"
+                app:bb_indicatorStyle="CORNER_RECTANGLE"
+                app:bb_indicatorUnselectColor="#88ffffff"
+                app:bb_indicatorWidth="6dp"
+                app:bb_isAutoScrollEnable="true"
+                app:bb_isBarShowWhenLast="true"
+                app:bb_isIndicatorShow="true"
+                app:bb_isLoopEnable="true"
+                app:bb_isTitleShow="true"
+                app:bb_period="10"
+                app:bb_scale="0.5625"
+                app:bb_textColor="#ffffff"
+                app:bb_textSize="13.5sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="索引点使用资源图片"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleImageBanner
+                android:id="@+id/sib_res"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                app:bb_indicatorGap="7dp"
+                app:bb_indicatorHeight="7dp"
+                app:bb_indicatorSelectRes="@drawable/ic_banner_dot_select"
+                app:bb_indicatorStyle="DRAWABLE_RESOURCE"
+                app:bb_indicatorUnselectRes="@drawable/ic_banner_dot_unselect"
+                app:bb_indicatorWidth="7dp"
+                app:bb_scale="0.5625" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="矩形索引点"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleImageBanner
+                android:id="@+id/sib_rectangle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:bb_delay="7"
+                app:bb_indicatorCornerRadius="0dp"
+                app:bb_period="7"
+                app:bb_scale="0.5625" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="扁长条索引点"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleImageBanner
+                android:id="@+id/sib_corner_rectangle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:bb_indicatorCornerRadius="2dp"
+                app:bb_indicatorHeight="4dp"
+                app:bb_indicatorWidth="10dp"
+                app:bb_scale="0.5625" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="索引在右文字在左"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleImageBanner
+                android:id="@+id/sib_indicator_right_with_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:bb_delay="3"
+                app:bb_indicatorCornerRadius="2dp"
+                app:bb_indicatorGravity="RIGHT"
+                app:bb_indicatorHeight="4dp"
+                app:bb_indicatorWidth="10dp"
+                app:bb_period="5"
+                app:bb_scale="0.5625" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="索引在左文字在右"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleImageBanner
+                android:id="@+id/sib_indicator_left_with_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:bb_delay="3"
+                app:bb_indicatorGravity="LEFT"
+                app:bb_period="5"
+                app:bb_scale="0.5625" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="索引动画"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleImageBanner
+                android:id="@+id/sib_anim"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:bb_barColor="#88000000"
+                app:bb_indicatorGravity="RIGHT"
+                app:bb_scale="0.5625" />
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleImageBanner
+                android:id="@+id/sib_anim2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:bb_barColor="#88000000"
+                app:bb_indicatorCornerRadius="2dp"
+                app:bb_indicatorGravity="RIGHT"
+                app:bb_indicatorHeight="4dp"
+                app:bb_indicatorWidth="10dp"
+                app:bb_scale="0.5625" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/colorAccent" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="NormalBanner"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_user_guide"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="简单的引导页使用"
+                android:textColor="#383838"
+                android:textSize="16sp"
+                tools:ignore="RtlSymmetry" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/colorAccent" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="Transformer"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_select_transformer"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="点击选择一种切换方式"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_select_transformer2"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="点击选择一种切换方式"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/colorAccent" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="其他使用方式"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical"
+                android:paddingStart="25dp"
+                android:text="简单的文字轮播"
+                android:textColor="#383838"
+                android:textSize="16sp" />
+
+            <com.xuexiang.xui.widget.banner.widget.banner.SimpleTextBanner
+                android:id="@+id/stb"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                app:bb_isIndicatorShow="false" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

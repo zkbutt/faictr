@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextStyle.Content"
+                android:text="标准输入框样式：" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                    android:id="@+id/et_basic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:hint="标准输入框样式"
+                    app:met_clearButton="true"
+                    app:met_maxCharacters="5" />
+
+
+                <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+                    android:id="@+id/bt_disenable"
+                    style="@style/RoundButton.Auto"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="不允许输入" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextStyle.Content"
+                android:text="校验输入框：" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                    android:id="@+id/et_check"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:hint="手动验证"
+                    app:met_floatingLabel="highlight"
+                    app:met_maxCharacters="15" />
+
+                <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+                    android:id="@+id/bt_check_vaild"
+                    style="@style/RoundButton.Auto"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="手动校验" />
+            </LinearLayout>
+
+            <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                android:id="@+id/et_auto_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="自动验证"
+                app:met_autoValidate="true"
+                app:met_floatingLabel="highlight"
+                app:met_maxCharacters="15" />
+
+            <EditText
+                style="@style/EditText.Normal"
+                android:layout_width="300dp"
+                android:layout_margin="10dp"
+                android:singleLine="true" />
+
+            <com.xuexiang.xui.widget.edittext.ValidatorEditText
+                style="@style/EditText"
+                android:layout_width="300dp"
+                android:layout_margin="10dp"
+                android:singleLine="true"
+                app:vet_errorMessage="@string/tip_number_only_error_message"
+                app:vet_regexp="@string/regexp_number_only"
+                app:vet_tipPosition="top" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

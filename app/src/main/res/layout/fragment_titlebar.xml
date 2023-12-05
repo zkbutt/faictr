@@ -16,7 +16,8 @@
         app:tb_leftText="回退"
         app:tb_sideTextPadding="20dp"
         app:tb_subTitleText="这是副标题"
-        app:tb_titleText="这是一个Title" />
+        app:tb_titleText="这是一个Title"
+        />
 
 
     <com.xuexiang.xui.widget.actionbar.TitleBar

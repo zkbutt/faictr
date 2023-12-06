@@ -31,7 +31,7 @@
     </shortcut>
 
     <shortcut
-        android:icon="@drawable/ic_action_search"
+        android:icon="@drawable/bt_search"
         android:shortcutId="shortcut_search"
         android:shortcutShortLabel="@string/shortcut_label_search"
         tools:targetApi="n_mr1">

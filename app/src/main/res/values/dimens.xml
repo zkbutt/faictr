@@ -60,4 +60,9 @@
     <dimen name="config_padding_24dp">24dp</dimen>
     <dimen name="config_padding_30dp">30dp</dimen>
 
+    <dimen name="main_top">10dp</dimen>
+    <dimen name="main_lr">30dp</dimen>
+
+
+
 </resources>

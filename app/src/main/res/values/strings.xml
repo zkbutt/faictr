@@ -482,6 +482,8 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <string name="main_bt_one_link">一键连接（适用Android 10以下）</string>
     <string name="main_bt_pair_link">配对码连接</string>
     <string name="main_bt_qr_code_link">扫码连接</string>
+    <string name="FSwipeRecyclerView_bt_add">添加</string>
+    <string name="FSwipeRecyclerView_bt_del">删除</string>
     <string name="regex_ip">请输入正确的IP 格式：192.168.0.22 </string>
     <string name="show_android11">连接Android 11+</string>
 

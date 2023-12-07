@@ -62,6 +62,7 @@
 
     <dimen name="main_top">10dp</dimen>
     <dimen name="main_lr">30dp</dimen>
+    <dimen name="test_lr">10dp</dimen>
 
 
 

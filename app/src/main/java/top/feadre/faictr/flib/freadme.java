@@ -1,6 +1,11 @@
 package top.feadre.faictr.flib;
 
 /**
+ * 带单选项的DIALOG + 复杂嵌套滑动 +当前网络异常，点击重试
+ * 拓展 - Material Design - BottomSheetDialog 播放列表
+ * dialog + 刷表刷新 - SwipeMenuItem
+ * SwipeDragMoveFragment
+ *
  * top.feadre.faictr
  * com.xuexiang.xuidemo
  *

@@ -18,27 +18,29 @@
 package top.feadre.faictr.activitys;
 
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.xuexiang.xui.utils.ResUtils;
+import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.utils.XToastUtils;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
 import com.xuexiang.xui.widget.edittext.ValidatorEditText;
 import com.xuexiang.xui.widget.edittext.materialedittext.validation.RegexpValidator;
-import com.xuexiang.xui.widget.picker.widget.OptionsPickerView;
-import com.xuexiang.xui.widget.picker.widget.builder.OptionsPickerBuilder;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.feadre.faictr.R;
 import top.feadre.faictr.flib.FREValidator;
 import top.feadre.faictr.flib.base.FBaseActivity;
-import top.feadre.faictr.flib.base.FProgressDialog;
+import top.feadre.faictr.flib.fviews.dialog_edit.FDialogBottomEdit;
+import top.feadre.faictr.fragments.HelpFragment;
 
 public class FMainActivity extends FBaseActivity implements CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "FMainActivity";
@@ -90,7 +92,7 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
         tb_titlebar.addAction(new TitleBar.ImageAction(R.drawable.bt_help) {
             @Override
             public void performAction(View view) {
-                XToastUtils.success("点击帮忙！");
+                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
             }
         });
 
@@ -109,22 +111,28 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.xuiab_ip_res:
-                show_ip_res();
+                FDialogBottomEdit fDialogBottomEdit = new FDialogBottomEdit(this);
+                fDialogBottomEdit.show();
                 break;
             case R.id.bt_ip_search:
+//                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
                 XToastUtils.info("bt_ip_search");
                 break;
             case R.id.bt_one_link:
                 //手动校验
                 boolean validateOnFocusLost = vet_ip.validate();
                 XToastUtils.info(String.valueOf(validateOnFocusLost));
-                fMainHelp4FProgressDialog.showDialog("bt_one_link", "一键连接", 180);
-                fMainHelp4FProgressDialog.updateProgress(170, "正在工作的内容 bt_one_link");
+//                fMainHelp4FProgressDialog.showDialog("bt_one_link", "一键连接", 180);
+//                fMainHelp4FProgressDialog.updateProgress(170, "正在工作的内容 bt_one_link");
+
+                Intent intent = new Intent(this, CtrActivity.class);
+                startActivity(intent);
                 break;
             case R.id.bt_pair_link:
                 XToastUtils.info("bt_pair_link");
                 fMainHelp4FProgressDialog.showDialog("bt_pair_link", "bt_pair_link", 90);
                 fMainHelp4FProgressDialog.updateProgress(90, "正在工作的内容 bt_pair_link");
+                openNewPage(HelpFragment.class);
                 break;
             case R.id.bt_qr_code_link:
                 XToastUtils.info("bt_qr_code_link");
@@ -139,18 +147,15 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
 
 
     private void show_ip_res() {
-        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, (v, options1, options2, options3) -> {
-//            xuiab_ip.setText(mConstellationOption[options1]);
-            vet_ip.setText(arr_ip_res[options1]);
-            ;
-            option_ip_res = options1;
-            return false;
-        })
-//                .setTitleText(getString(R.string.title_constellation_select))
-                .setSelectOptions(option_ip_res)
-                .build();
-        pvOptions.setPicker(arr_ip_res);
-        pvOptions.show();
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_bottom_edit, null);
+
+        dialog.setContentView(view);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
+        WidgetUtils.transparentBottomSheetDialogBackground(dialog);
     }
 
 

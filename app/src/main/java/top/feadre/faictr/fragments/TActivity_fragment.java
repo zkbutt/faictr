@@ -15,7 +15,7 @@
  *
  */
 
-package top.feadre.faictr.activitys;
+package top.feadre.faictr.fragments;
 
 import android.os.Bundle;
 
@@ -30,7 +30,7 @@ import top.feadre.faictr.R;
 import top.feadre.faictr.fragments.T001Fragment;
 
 public class TActivity_fragment extends AppCompatActivity {
-    private static final String TAG = "TActivity";
+    private static final String TAG = "TActivity_fragment";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -54,6 +54,29 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activitys.CtrActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:label="CtrActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".activitys.TActivity_base"
+            android:exported="false"
+            android:label="TActivity_base"
+            android:theme="@style/AppTheme"            >
+        </activity>
+
+        <activity
+            android:name=".fragments.TActivity_fragment"
+            android:exported="false"
+            android:label="TActivity_fragment"
+            android:theme="@style/AppTheme"            >
+        </activity>
+
+
         <!--        <activity-->
         <!--            android:name="com.xuexiang.xuidemo.activity.SplashActivity"-->
         <!--            android:configChanges="screenSize|keyboardHidden|orientation|keyboard"-->

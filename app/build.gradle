@@ -233,4 +233,7 @@ dependencies {
 
     // ANR异常捕获
     implementation 'com.github.anrwatchdog:anrwatchdog:1.4.0'
+
+    // 悬浮移动菜单  https://github.com/rjsvieira/floatingMenu
+    implementation 'com.github.rjsvieira:floatingMenu:1.3.0'
 }

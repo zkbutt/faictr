@@ -23,7 +23,7 @@ import butterknife.BindView;
 @Page(name = "StatusBarUtils", extra = R.drawable.ic_util_status_bar)
 public class StatusBarUtilsFragment extends BaseFragment {
 
-    @BindView(R.id.groupListView)
+    @BindView(R.id.xuiglv)
     XUIGroupListView groupListView;
 
     CheckBox checkBox;

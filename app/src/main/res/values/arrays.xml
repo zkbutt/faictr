@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2018 xuexiangjys(xuexiangjys@163.com)
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -401,4 +400,36 @@
         <item>@color/app_color_theme_8</item>
     </array>
 
+    <!--    Feadre-->
+    <string-array name="select_set_ctr_size_ratio">
+        <item> 1.0</item>
+        <item> 0.8</item>
+        <item> 0.6</item>
+        <item> 0.4</item>
+        <item> 0.2</item>
+    </string-array>
+
+    <string-array name="select_set_ctr_bitrate_val_keys">
+        <item>1 Mbps</item>
+        <item>2 Mbps</item>
+        <item>4 Mbps</item>
+        <item>6 Mbps</item>
+    </string-array>
+
+    <string-array name="select_set_ctr_bitrate_val">
+        <item>1024000</item>
+        <item>2048000</item>
+        <item>4096000</item>
+        <item>6144000</item>
+    </string-array>
+
+    <string-array name="select_set_ctr_display_mode_keys">
+        <item>拉伸屏幕</item>
+        <item>保持比例</item>
+    </string-array>
+
+    <string-array name="select_set_ctr_display_mode_val">
+        <item>true</item>
+        <item>false</item>
+    </string-array>
 </resources>

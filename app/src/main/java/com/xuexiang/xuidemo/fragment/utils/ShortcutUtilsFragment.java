@@ -43,7 +43,7 @@ import butterknife.BindView;
 @Page(name = "ShortcutUtils", extra = R.drawable.ic_util_shortcut)
 public class ShortcutUtilsFragment extends BaseFragment {
 
-    @BindView(R.id.groupListView)
+    @BindView(R.id.xuiglv)
     XUIGroupListView groupListView;
 
     @Override

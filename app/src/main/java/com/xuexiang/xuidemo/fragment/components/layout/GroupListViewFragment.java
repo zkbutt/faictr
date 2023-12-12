@@ -42,7 +42,7 @@ import butterknife.BindView;
 @Page(name = "XUIGroupListView\n通用的GroupListView，注意它不是ListView")
 public class GroupListViewFragment extends BaseFragment {
 
-    @BindView(R.id.groupListView)
+    @BindView(R.id.xuiglv)
     XUIGroupListView mGroupListView;
 
 

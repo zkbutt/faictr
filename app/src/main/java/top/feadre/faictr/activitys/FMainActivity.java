@@ -18,7 +18,6 @@
 package top.feadre.faictr.activitys;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,14 +32,17 @@ import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
 import com.xuexiang.xui.widget.edittext.ValidatorEditText;
 import com.xuexiang.xui.widget.edittext.materialedittext.validation.RegexpValidator;
+import com.xuexiang.xutil.app.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.feadre.faictr.R;
 import top.feadre.faictr.flib.FREValidator;
+import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.base.FBaseActivity;
 import top.feadre.faictr.flib.fviews.dialog_edit.FDialogBottomEdit;
 import top.feadre.faictr.fragments.HelpFragment;
+import top.feadre.faictr.fragments.SettingsFragment;
 
 public class FMainActivity extends FBaseActivity implements CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "FMainActivity";
@@ -74,7 +76,7 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        flog_d(TAG, "onCreate --- ");
+        FTools.log_d(TAG, "onCreate --- ");
 
         /*  --- title --- */
         String appName = getPackageManager().getApplicationLabel(getApplicationInfo()).toString();
@@ -85,14 +87,15 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
         tb_titlebar.addAction(new TitleBar.ImageAction(R.drawable.bt_more) {
             @Override
             public void performAction(View view) {
-                XToastUtils.error("点击菜单！");
+                openNewPage(SettingsFragment.class);
             }
         });
 
         tb_titlebar.addAction(new TitleBar.ImageAction(R.drawable.bt_help) {
             @Override
             public void performAction(View view) {
-                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
+                ActivityUtils.startActivity(TActivity_base.class);
+//                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
             }
         });
 
@@ -125,8 +128,9 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
 //                fMainHelp4FProgressDialog.showDialog("bt_one_link", "一键连接", 180);
 //                fMainHelp4FProgressDialog.updateProgress(170, "正在工作的内容 bt_one_link");
 
-                Intent intent = new Intent(this, CtrActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(this, CtrActivity.class);
+//                startActivity(intent);
+                ActivityUtils.startActivity(CtrActivity.class);
                 break;
             case R.id.bt_pair_link:
                 XToastUtils.info("bt_pair_link");

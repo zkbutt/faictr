@@ -15,11 +15,22 @@
  *
  */
 
-package top.feadre.faictr.flib.base;
-
+package top.feadre.faictr.flib;
 
 import com.xuexiang.xtask.logger.TaskLogger;
-import com.xuexiang.xuidemo.base.BaseActivity;
 
-public class FBaseActivity extends BaseActivity {
+public class FTools {
+    public static void log_d(String tag, String text) {
+        TaskLogger.setTag(tag);
+        TaskLogger.d(text);
+    }
+
+    public static void log_e(String tag, String text) {
+        TaskLogger.setTag(tag);
+        TaskLogger.e(text);
+    }
+    public static void log_w(String tag, String text) {
+        TaskLogger.setTag(tag);
+        TaskLogger.w(text);
+    }
 }

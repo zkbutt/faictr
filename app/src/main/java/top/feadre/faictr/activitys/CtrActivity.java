@@ -17,6 +17,7 @@
 
 package top.feadre.faictr.activitys;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -28,9 +29,11 @@ import butterknife.BindView;
 import rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton;
 import rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton;
 import top.feadre.faictr.R;
+import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.base.FBaseActivity;
 
 public class CtrActivity extends FBaseActivity implements View.OnClickListener {
+    private SharedPreferences sp;
     @BindView(R.id.fmb_ctr_l_bt1)
     FloatingSubButton fmb_ctr_l_bt1;
     @BindView(R.id.fmb_ctr_l_bt2)
@@ -76,6 +79,7 @@ public class CtrActivity extends FBaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         fam_ctr = findViewById(R.id.fam_ctr);
         fmb_ctr_r = findViewById(R.id.fmb_ctr_r);
         fmb_ctr_l = findViewById(R.id.fmb_ctr_l);

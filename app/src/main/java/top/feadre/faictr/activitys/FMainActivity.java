@@ -19,14 +19,10 @@ package top.feadre.faictr.activitys;
 
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.xuexiang.xui.utils.ResUtils;
-import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.utils.XToastUtils;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
@@ -40,7 +36,7 @@ import top.feadre.faictr.R;
 import top.feadre.faictr.flib.FREValidator;
 import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.base.FBaseActivity;
-import top.feadre.faictr.flib.fviews.dialog_edit.FDialogBottomEdit;
+import top.feadre.faictr.flib.fviews.dialog_edit.EntityItem4SimpleRecyclerAdapter;
 import top.feadre.faictr.fragments.HelpFragment;
 import top.feadre.faictr.fragments.SettingsFragment;
 
@@ -63,10 +59,9 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     @BindView(R.id.sb_android11)
     SwitchButton sb_android11;
 
-
-    private String[] arr_ip_res;
     private int option_ip_res = 0;
     private FMainHelp4FProgressDialog fMainHelp4FProgressDialog;
+    private FMainDialogBottomEdit fMainDialogBottomEdit; //历史下拉菜单
 
     @Override
     protected int getLayoutId() {
@@ -78,19 +73,14 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
         super.onCreate(savedInstanceState);
         FTools.log_d(TAG, "onCreate --- ");
 
-        /*  --- title --- */
-        String appName = getPackageManager().getApplicationLabel(getApplicationInfo()).toString();
-        tb_titlebar.setLeftClickListener(view -> XToastUtils.toast("点击返回"))
-                .setTitle(appName)
-                .setCenterClickListener(v -> XToastUtils.warning("点击标题"));
+        /*  --- title点击侦听 --- */
+//        String appName = getPackageManager().getApplicationLabel(getApplicationInfo()).toString();
+//        tb_titlebar.setLeftClickListener(view -> XToastUtils.toast("点击返回"))
+//                .setTitle(appName)
+//                .setCenterClickListener(v -> XToastUtils.warning("点击标题"));
 
-        tb_titlebar.addAction(new TitleBar.ImageAction(R.drawable.bt_more) {
-            @Override
-            public void performAction(View view) {
-                openNewPage(SettingsFragment.class);
-            }
-        });
 
+        /*添加顶部菜单*/
         tb_titlebar.addAction(new TitleBar.ImageAction(R.drawable.bt_help) {
             @Override
             public void performAction(View view) {
@@ -98,8 +88,14 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
 //                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
             }
         });
+        tb_titlebar.setTitle(getString(R.string.main_title));
 
-        arr_ip_res = ResUtils.getStringArray(this, R.array.constellation_entry);
+        tb_titlebar.addAction(new TitleBar.ImageAction(R.drawable.set) {
+            @Override
+            public void performAction(View view) {
+                openNewPage(SettingsFragment.class);
+            }
+        });
 
         /*  --- ip输入校验 --- */
 //        met_ip.addValidator(new RegexpValidator("只能输入数字!", "\\d+"));
@@ -107,6 +103,8 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
 
         fMainHelp4FProgressDialog = new FMainHelp4FProgressDialog(this);
         sb_android11.setOnCheckedChangeListener(this);
+
+        fMainDialogBottomEdit = new FMainDialogBottomEdit(this);
     }
 
     @OnClick({R.id.xuiab_ip_res, R.id.bt_ip_search, R.id.bt_one_link, R.id.bt_pair_link,
@@ -114,23 +112,24 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.xuiab_ip_res:
-                FDialogBottomEdit fDialogBottomEdit = new FDialogBottomEdit(this);
-                fDialogBottomEdit.show();
+                fMainDialogBottomEdit.show();
                 break;
             case R.id.bt_ip_search:
 //                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
                 XToastUtils.info("bt_ip_search");
+                fMainDialogBottomEdit.addData(new EntityItem4SimpleRecyclerAdapter("K40", "192.168.0.1"));
                 break;
             case R.id.bt_one_link:
                 //手动校验
                 boolean validateOnFocusLost = vet_ip.validate();
-                XToastUtils.info(String.valueOf(validateOnFocusLost));
+                vet_ip.showErrorMsg();
+//                XToastUtils.info(String.valueOf(validateOnFocusLost));
 //                fMainHelp4FProgressDialog.showDialog("bt_one_link", "一键连接", 180);
 //                fMainHelp4FProgressDialog.updateProgress(170, "正在工作的内容 bt_one_link");
 
 //                Intent intent = new Intent(this, CtrActivity.class);
 //                startActivity(intent);
-                ActivityUtils.startActivity(CtrActivity.class);
+//                ActivityUtils.startActivity(CtrActivity.class);
                 break;
             case R.id.bt_pair_link:
                 XToastUtils.info("bt_pair_link");
@@ -147,19 +146,6 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
             default:
                 break;
         }
-    }
-
-
-    private void show_ip_res() {
-        BottomSheetDialog dialog = new BottomSheetDialog(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_bottom_edit, null);
-
-        dialog.setContentView(view);
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.show();
-
-        WidgetUtils.transparentBottomSheetDialogBackground(dialog);
     }
 
 

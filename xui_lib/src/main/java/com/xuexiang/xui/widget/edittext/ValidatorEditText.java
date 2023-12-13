@@ -179,7 +179,7 @@ public class ValidatorEditText extends AppCompatEditText implements View.OnFocus
     /**
      * 显示出错提示
      */
-    private void showErrorMsg() {
+    public void showErrorMsg() {
         if (!mIsValid) {
             ViewTooltip
                     .on(this)

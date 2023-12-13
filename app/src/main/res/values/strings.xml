@@ -478,16 +478,21 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <string name="description_demo">演示</string>
 
     <!--  FEADRE FString   -->
+    <!--  Main   -->
+    <string name="main_title">智能遥控</string>
     <string name="main_hint_met">请输入控制机IP</string>
-    <string name="main_bt_one_link">一键连接（适用Android 10以下）</string>
+    <string name="main_bt_one_link">一键连接（适用Android 10及以下）</string>
     <string name="main_bt_pair_link">配对码连接</string>
     <string name="main_bt_qr_code_link">扫码连接</string>
     <string name="FSwipeRecyclerView_bt_add">添加</string>
     <string name="FSwipeRecyclerView_bt_del">删除</string>
     <string name="regex_ip">请输入正确的IP 格式：192.168.0.22 </string>
     <string name="show_android11">连接Android 11+</string>
-<!--    SettingsFragment-->
-    <string name="set_title_1">控制参数</string>
+    <string name="hint">请输入被控制设备的IP地址</string>
+    <string name="FMainDialogBottomEdit_tv_dbe_right">确认要清空连接的历史？</string>
+    <string name="FMainDialogBottomEdit_hint">还没有连接成功的设备？</string>
+    <!--    SettingsFragment-->
+    <string name="set_title_1">控制参数配置</string>
     <string name="set_label_ctr_size_ratio">传输尺寸比例</string>
     <string name="set_label_ctr_bitrate">传输码率</string>
     <string name="set_label_ctr_display_mode">显示模式</string>

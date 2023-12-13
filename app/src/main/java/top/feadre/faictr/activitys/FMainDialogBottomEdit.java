@@ -15,7 +15,7 @@
  *
  */
 
-package top.feadre.faictr.flib.fviews.dialog_edit;
+package top.feadre.faictr.activitys;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -27,6 +27,8 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.utils.XToastUtils;
+import com.xuexiang.xui.widget.dialog.materialdialog.DialogAction;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
 import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 
@@ -34,19 +36,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import top.feadre.faictr.R;
+import top.feadre.faictr.flib.fviews.dialog_edit.EntityItem4SimpleRecyclerAdapter;
+import top.feadre.faictr.flib.fviews.dialog_edit.FSimpleRecyclerAdapter;
+import top.feadre.faictr.flib.fviews.dialog_edit.FSwipeRecyclerView;
 
-public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClickListener {
+public class FMainDialogBottomEdit extends BottomSheetDialog implements View.OnClickListener {
     private TextView tv_dbe_mid;
-    private TextView tv_dbe_left;
+    //    private TextView tv_dbe_left;
     private TextView tv_dbe_right;
 
     private FSwipeRecyclerView fSwipeRecyclerView;
-    private ArrayList<EntityItem4SimpleRecyclerAdapter> dataItem;
     private FSimpleRecyclerAdapter mAdapter;
 
     private OnItemMenuClickListener mMenuItemClickListener;
 
-    public FDialogBottomEdit(@NonNull Context context) {
+    public FMainDialogBottomEdit(@NonNull Context context) {
         super(context);
         init();
     }
@@ -54,10 +58,10 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
     private void init() {
         View view = LayoutInflater.from(this.getContext()).inflate(R.layout.dialog_bottom_edit, null);
         tv_dbe_mid = view.findViewById(R.id.tv_dbe_mid);
-        tv_dbe_left = view.findViewById(R.id.tv_dbe_left);
+//        tv_dbe_mid.setOnClickListener(this);
+//        tv_dbe_left = view.findViewById(R.id.tv_dbe_left);
+//        tv_dbe_left.setOnClickListener(this);
         tv_dbe_right = view.findViewById(R.id.tv_dbe_right);
-        tv_dbe_mid.setOnClickListener(this);
-        tv_dbe_left.setOnClickListener(this);
         tv_dbe_right.setOnClickListener(this);
 
         this.setContentView(view);
@@ -91,7 +95,7 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
 //        mAdapter.refresh(demoData);
         fSwipeRecyclerView.setAdapter(mAdapter);
 
-        dataItem = new ArrayList<EntityItem4SimpleRecyclerAdapter>();
+        ArrayList<EntityItem4SimpleRecyclerAdapter> dataItem = new ArrayList<EntityItem4SimpleRecyclerAdapter>();
         dataItem.add(new EntityItem4SimpleRecyclerAdapter("K41", "192.168.0.1"));
         dataItem.add(new EntityItem4SimpleRecyclerAdapter("K42", "192.168.0.1"));
         dataItem.add(new EntityItem4SimpleRecyclerAdapter("K43", "192.168.0.1"));
@@ -122,14 +126,40 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
             case R.id.tv_dbe_mid:
                 XToastUtils.info("tv_dbe_mid");
                 break;
-            case R.id.tv_dbe_left:
-                XToastUtils.info("tv_dbe_left");
-                break;
+//            case R.id.tv_dbe_left:
+//                XToastUtils.info("tv_dbe_left");
+//                break;
             case R.id.tv_dbe_right:
-                XToastUtils.info("tv_dbe_right");
+                new MaterialDialog.Builder(getContext())
+                        .content(R.string.FMainDialogBottomEdit_tv_dbe_right)
+                        .positiveText(R.string.lab_yes)
+                        .negativeText(R.string.lab_no)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                mAdapter.getData().clear();
+                                mAdapter.notifyDataSetChanged();
+                                FMainDialogBottomEdit.this.cancel();
+                            }
+                        })
+                        .show();
+
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void show() {
+        if (mAdapter.getData().size() > 0) {
+            super.show();
+        } else {
+            XToastUtils.info(getContext().getString(R.string.FMainDialogBottomEdit_hint));
+        }
+    }
+
+    public void addData(EntityItem4SimpleRecyclerAdapter entityItem4SimpleRecyclerAdapter) {
+        mAdapter.getData().add(entityItem4SimpleRecyclerAdapter);
     }
 }

@@ -26,22 +26,22 @@
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
-        <TextView
-            android:id="@+id/tv_dbe_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start"
-            android:layout_marginStart="10dp"
-            android:text="收藏全部"
-            android:textColor="#757575"
-            android:textSize="14sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_dbe_left"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_vertical|start"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="收藏全部"-->
+<!--            android:textColor="#757575"-->
+<!--            android:textSize="14sp" />-->
 
         <TextView
             android:id="@+id/tv_dbe_mid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="播放列表(20)"
+            android:text="历史连接的设备(20)"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:layout_marginEnd="10dp"
-            android:text="清空"
+            android:text="清空历史"
             android:textColor="#757575"
             android:textSize="14sp" />
     </FrameLayout>

@@ -50,9 +50,23 @@
                 style="@style/EditText.Normal"
                 android:layout_width="wrap_content"
                 android:layout_marginRight="10dp"
+                android:hint="@string/hint"
                 android:layout_weight="1"
                 android:singleLine="true"
                 app:vet_tipPosition="top" />
+
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/vet_ip"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_marginRight="12dp"-->
+<!--                android:background="@color/xui_config_color_white"-->
+<!--                android:hint="@string/hint"-->
+<!--                android:inputType="textPassword"-->
+<!--                android:paddingVertical="@dimen/config_margin_8dp"-->
+<!--                android:textSize="18sp" />-->
+
 
             <com.xuexiang.xui.widget.alpha.XUIAlphaButton
                 android:id="@+id/xuiab_ip_res"

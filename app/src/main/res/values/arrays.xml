@@ -409,14 +409,14 @@
         <item> 0.2</item>
     </string-array>
 
-    <string-array name="select_set_ctr_bitrate_val_keys">
+    <string-array name="select_set_ctr_bitrate_keys">
         <item>1 Mbps</item>
         <item>2 Mbps</item>
         <item>4 Mbps</item>
         <item>6 Mbps</item>
     </string-array>
 
-    <string-array name="select_set_ctr_bitrate_val">
+    <string-array name="select_set_ctr_bitrate_vals">
         <item>1024000</item>
         <item>2048000</item>
         <item>4096000</item>
@@ -428,8 +428,8 @@
         <item>保持比例</item>
     </string-array>
 
-    <string-array name="select_set_ctr_display_mode_val">
-        <item>true</item>
-        <item>false</item>
+    <string-array name="select_set_ctr_display_mode_vals">
+        <item>0</item>
+        <item>1</item>
     </string-array>
 </resources>

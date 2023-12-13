@@ -5,13 +5,15 @@ public final class FCFGBusiness {
 
     public static final class SPSet {
         public final static String KEY_CTR = "CTRActivity";
+        public final static String SIZE_RATIO = "size_ratio";
+        public final static String BITRATE = "bitrate";
+        public final static String DISPLAY_MODE = "display_mode";
+
         public final static String KEY_ADB = "AdbActivity";
         public final static String SERVER_ADDRESS = "Server Address";
         public final static String COMMAND_HISTORY_SIZE = "command_history_size";
         public final static String NAV_SWITCH = "Nav Switch";
         public final static String LINKED_IP_SIZE = "linked_ip";
-        public final static String RESOLUTION_RATIO = "resolution_ratio";
-        public final static String VIDEO_BITRATE = "video_bitrate";
         public final static String position_resolution_ratio_t = "position_resolution_ratio";
         public final static String position_video_bitrate_t = "position_video_bitrate";
         public final static String position_sp_scale_t = "position_sp_scale";

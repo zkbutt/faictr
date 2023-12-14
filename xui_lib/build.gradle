@@ -2,6 +2,29 @@ apply plugin: 'com.android.library'
 //apply plugin: 'img-optimizer'
 
 android {
+//    signingConfigs {
+//        debug {
+//            signingConfig signingConfigs.releaseConfig
+
+//            storeFile file(app_release.storeFile)
+//            storePassword app_release.storePassword
+//            keyAlias app_release.keyAlias
+//            keyPassword app_release.keyPassword
+
+//        }
+//    }
+//    signingConfigs {
+//        debug {
+//            storeFile file('D:/zhuanye/sdk/signature_feadre.jks')
+//        }
+//        release {
+//            storeFile file('D:/zhuanye/sdk/signature_feadre.jks')
+//            keyAlias 'androiddebugkey'
+//            keyPassword 'android'
+//            storePassword 'android'
+//        }
+//    }
+
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
 

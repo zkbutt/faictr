@@ -3,6 +3,12 @@ package top.feadre.faictr.cfg;
 public final class FCFGBusiness {
     public static final String PARSE_STRING = "%_%"; //要进度 需通过这个手动分解析
 
+    public static final class APPSet {
+        //AutoUpdater
+        public final static String AU_URL_PATH = "http://tx.feadre.top:89/app_auto_updater/faictr/";
+        public final static String AU_NAME_APK_CFG = "output.json";
+    }
+
     public static final class SPSet {
         public final static String KEY_CTR = "CTRActivity";
         public final static String SIZE_RATIO = "size_ratio";

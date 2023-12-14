@@ -36,7 +36,7 @@ public class MyApp extends Application {
         XTask.debug(MyApp.isDebug());
         XTask.getTaskChain()
                 .addTask(new MainInitTask(this))
-                .addTask(new AsyncInitTask(this))
+//                .addTask(new AsyncInitTask(this))
                 .start();
     }
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><!-- https://blog.csdn.net/a497785609/article/details/113896609 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <ProgressBar
+        android:id="@+id/pb_au"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_au"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@id/progress"
+        android:text="状态"
+        android:textSize="10sp"
+        android:textStyle="normal" />
+
+</LinearLayout>

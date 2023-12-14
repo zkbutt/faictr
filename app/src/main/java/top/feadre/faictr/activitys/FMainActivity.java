@@ -23,6 +23,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 
+import androidx.annotation.NonNull;
+
 import com.xuexiang.xui.utils.XToastUtils;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.button.switchbutton.SwitchButton;
@@ -33,6 +35,7 @@ import com.xuexiang.xutil.app.ActivityUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.feadre.faictr.R;
+import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.FREValidator;
 import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.base.FBaseActivity;
@@ -62,6 +65,7 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     private int option_ip_res = 0;
     private FMainHelp4FProgressDialog fMainHelp4FProgressDialog;
     private FMainDialogBottomEdit fMainDialogBottomEdit; //历史下拉菜单
+    private FMainHelp4AutoUpdater fMainHelp4AutoUpdater; //自动更新
 
     @Override
     protected int getLayoutId() {
@@ -72,6 +76,12 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FTools.log_d(TAG, "onCreate --- ");
+
+        fMainHelp4AutoUpdater = new FMainHelp4AutoUpdater(this,
+                FCFGBusiness.APPSet.AU_URL_PATH,
+                FCFGBusiness.APPSet.AU_NAME_APK_CFG);
+        fMainHelp4AutoUpdater.checkPermissionsAndUpdate();
+
 
         /*  --- title点击侦听 --- */
 //        String appName = getPackageManager().getApplicationLabel(getApplicationInfo()).toString();
@@ -162,5 +172,11 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
                 bt_one_link.setEnabled(true);
             }
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        fMainHelp4AutoUpdater.funOnRequestPermissionsResult(requestCode, grantResults);
     }
 }

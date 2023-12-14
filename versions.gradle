@@ -105,10 +105,15 @@ build_versions.build_tools = "29.0.3"
 ext.build_versions = build_versions
 
 def app_release = [:]
-app_release.storeFile = "../keystores/android.keystore"
-app_release.storePassword = "xuexiang"
-app_release.keyAlias = "android.keystore"
-app_release.keyPassword = "xuexiang"
+//app_release.storeFile = "../keystores/android.keystore"
+//app_release.storePassword = "xuexiang"
+//app_release.keyAlias = "android.keystore"
+//app_release.keyPassword = "xuexiang"
+app_release.storeFile = "D:/zhuanye/sdk/signature_feadre.jks"
+app_release.storePassword = "mfkssk123"
+app_release.keyAlias = "faictr"
+app_release.keyPassword = "mfkssk123"
+
 
 ext.app_release = app_release
 

@@ -7,6 +7,21 @@ if (isNeedPackage.toBoolean() && isUseBooster.toBoolean()) {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('D:/zhuanye/sdk/signature_feadre.jks')
+            keyPassword 'mfkssk123'
+            keyAlias 'faictr'
+            storePassword 'mfkssk123'
+        }
+        release {
+            storeFile file('D:/zhuanye/sdk/signature_feadre.jks')
+            keyPassword 'mfkssk123'
+            keyAlias 'faictr'
+            storePassword 'mfkssk123'
+        }
+    }
+
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
 
@@ -42,10 +57,12 @@ android {
         }
     }
 
+
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled true//混淆打开
+            zipAlignEnabled true  //优化代码
+            shrinkResources true//优化资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             if (isNeedPackage.toBoolean()) {
                 signingConfig signingConfigs.release
@@ -64,6 +81,7 @@ android {
             buildConfigField "String", "APP_ID_BUGLY", '""'
             buildConfigField "String", "APP_ID_UMENG", '""'
         }
+
     }
 
     sourceSets {
@@ -134,7 +152,7 @@ dependencies {
     // ButterKnife
     implementation deps.butterknife.runtime
     annotationProcessor deps.butterknife.compiler
-    
+
     // LeakCanary内存泄漏检测
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 
@@ -236,4 +254,6 @@ dependencies {
 
     // 悬浮移动菜单  https://github.com/rjsvieira/floatingMenu
     implementation 'com.github.rjsvieira:floatingMenu:1.3.0'
+
+    /* feadre */
 }

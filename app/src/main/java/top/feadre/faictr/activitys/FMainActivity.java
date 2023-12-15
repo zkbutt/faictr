@@ -75,7 +75,7 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FTools.log_d(TAG, "onCreate --- ");
+        FTools.log_d(TAG, "onCreate");
 
         fMainHelp4AutoUpdater = new FMainHelp4AutoUpdater(this,
                 FCFGBusiness.APPSet.AU_URL_PATH,

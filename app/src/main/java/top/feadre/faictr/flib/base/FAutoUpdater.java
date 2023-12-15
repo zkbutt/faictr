@@ -47,7 +47,6 @@ import top.feadre.faictr.flib.FTools;
  */
 public class FAutoUpdater {
     private static final String TAG = "AutoUpdater";
-    private static final boolean isDebugTest = false;
     private static final String NAME_SAVE_APK = "app-release.apk"; // 在下载时先要指定一个名称，叫什么名字无所谓
     private String name_apk_cfg_remote; // "output.json"
     private File file_apk_local; // 在下载时先要指定一个名称
@@ -89,7 +88,14 @@ public class FAutoUpdater {
 
     public FAutoUpdater(Context context, String url_path, String name_apk_cfg_remote) {
         mContext = context;
-        file_apk_local = new File(mContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), NAME_SAVE_APK);
+        ///storage/emulated/0/Android/data/top.feadre.faictr/files/Download
+//        String externalStorageState = Environment.getExternalStorageState();
+        File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+        FTools.log_d(TAG, "FAutoUpdater", ""
+//                        + " externalStorageState = " + externalStorageState
+                        + " externalFilesDir = " + externalFilesDir
+        );
+        file_apk_local = new File(externalFilesDir, NAME_SAVE_APK);
         this.url_path = url_path;
         this.name_apk_cfg_remote = name_apk_cfg_remote;
     }
@@ -142,7 +148,8 @@ public class FAutoUpdater {
                 intent.setDataAndType(Uri.fromFile(file_apk_local), "application/vnd.android.package-archive");
             }
             mContext.startActivity(intent);
-            android.os.Process.killProcess(android.os.Process.myPid());//安装完之后会提示”完成” “打开”。
+            //这个导致解析出错
+//            android.os.Process.killProcess(android.os.Process.myPid());//安装完之后会提示”完成” “打开”。
         } catch (Exception e) {
         }
     }

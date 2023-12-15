@@ -20,17 +20,30 @@ package top.feadre.faictr.flib;
 import com.xuexiang.xtask.logger.TaskLogger;
 
 public class FTools {
-    public static void log_d(String tag, String text) {
+    public static void log_d(String tag, String fun, String text) {
         TaskLogger.setTag(tag);
-        TaskLogger.d(text);
+        TaskLogger.d(fun + ": " + text);
     }
 
-    public static void log_e(String tag, String text) {
-        TaskLogger.setTag(tag);
-        TaskLogger.e(text);
+    public static void log_d(String tag, String fun) {
+        log_d(tag, fun, "");
     }
-    public static void log_w(String tag, String text) {
+
+    public static void log_e(String tag, String fun, String text) {
         TaskLogger.setTag(tag);
-        TaskLogger.w(text);
+        TaskLogger.e(fun + ": " + text);
+    }
+
+    public static void log_e(String tag, String fun) {
+        log_e(tag, fun, "");
+    }
+
+    public static void log_w(String tag, String fun, String text) {
+        TaskLogger.setTag(tag);
+        TaskLogger.w(fun + ": " + text);
+    }
+
+    public static void log_w(String tag, String fun) {
+        log_w(tag, fun, "");
     }
 }

@@ -2,23 +2,23 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 apply plugin: 'com.xuexiang.xrouter' //引用xrouter-plugin插件实现自动注册
 apply plugin: 'img-optimizer'
-if (isNeedPackage.toBoolean() && isUseBooster.toBoolean()) {
-    apply plugin: 'com.didiglobal.booster'
-}
+//if (isNeedPackage.toBoolean() && isUseBooster.toBoolean()) {
+//    apply plugin: 'com.didiglobal.booster'
+//}
 
 android {
     signingConfigs {
         debug {
-            storeFile file('D:/zhuanye/sdk/signature_feadre.jks')
-            keyPassword 'mfkssk123'
-            keyAlias 'faictr'
-            storePassword 'mfkssk123'
+            storeFile file(app_release.storeFile)
+            storePassword app_release.storePassword
+            keyAlias app_release.keyAlias
+            keyPassword app_release.keyPassword
         }
         release {
-            storeFile file('D:/zhuanye/sdk/signature_feadre.jks')
-            keyPassword 'mfkssk123'
-            keyAlias 'faictr'
-            storePassword 'mfkssk123'
+            storeFile file(app_release.storeFile)
+            storePassword app_release.storePassword
+            keyAlias app_release.keyAlias
+            keyPassword app_release.keyPassword
         }
     }
 
@@ -27,7 +27,7 @@ android {
 
     defaultConfig {
         applicationId "top.feadre.faictr"
-        minSdkVersion 17
+        minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 22
         versionName "1.2.1"
@@ -46,16 +46,16 @@ android {
         }
     }
 
-    if (isNeedPackage.toBoolean()) {
-        signingConfigs {
-            release {
-                storeFile file(app_release.storeFile)
-                storePassword app_release.storePassword
-                keyAlias app_release.keyAlias
-                keyPassword app_release.keyPassword
-            }
-        }
-    }
+//    if (isNeedPackage.toBoolean()) {
+//        signingConfigs {
+//            release {
+//                storeFile file(app_release.storeFile)
+//                storePassword app_release.storePassword
+//                keyAlias app_release.keyAlias
+//                keyPassword app_release.keyPassword
+//            }
+//        }
+//    }
 
 
     buildTypes {
@@ -64,22 +64,22 @@ android {
             zipAlignEnabled true  //优化代码
             shrinkResources true//优化资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            if (isNeedPackage.toBoolean()) {
-                signingConfig signingConfigs.release
-
-                Properties properties = new Properties()
-                properties.load(project.rootProject.file('local.properties').newDataInputStream())
-                buildConfigField "String", "APP_ID_BUGLY", properties.getProperty("APP_ID_BUGLY")
-                buildConfigField "String", "APP_ID_UMENG", properties.getProperty("APP_ID_UMENG")
-            }
+//            if (isNeedPackage.toBoolean()) {
+//                signingConfig signingConfigs.release
+//
+//                Properties properties = new Properties()
+//                properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//                buildConfigField "String", "APP_ID_BUGLY", properties.getProperty("APP_ID_BUGLY")
+//                buildConfigField "String", "APP_ID_UMENG", properties.getProperty("APP_ID_UMENG")
+//            }
         }
 
         debug {
             debuggable true
             minifyEnabled false
 
-            buildConfigField "String", "APP_ID_BUGLY", '""'
-            buildConfigField "String", "APP_ID_UMENG", '""'
+//            buildConfigField "String", "APP_ID_BUGLY", '""'
+//            buildConfigField "String", "APP_ID_UMENG", '""'
         }
 
     }

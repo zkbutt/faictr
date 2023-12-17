@@ -22,10 +22,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.xuexiang.xui.utils.XToastUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.feadre.faictr.R;
 import top.feadre.faictr.flib.base.FBaseActivity;
+import top.feadre.faictr.flib.net.FNetTools;
 import top.feadre.faictr.fragments.TActivity_fragment;
 import top.feadre.faictr.fragments.base.FSwipeMenuItemFragment;
 
@@ -59,13 +65,17 @@ public class TActivity_base extends FBaseActivity {
     }
 
     @OnClick({R.id.bt_t001, R.id.bt_t002, R.id.bt_t003, R.id.bt_t004,
-            R.id.bt_t005,R.id.bt_t006,R.id.bt_t007,R.id.bt_t008,})
+            R.id.bt_t005, R.id.bt_t006, R.id.bt_t007, R.id.bt_t008,})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_t001:
                 openNewPage(FSwipeMenuItemFragment.class);
                 break;
             case R.id.bt_t002:
+                ArrayList<String> ipAddress = FNetTools.getLocalIPAddress();
+                XToastUtils.info("bt_ip_search" + ipAddress);
+                String local_ip_str = ipAddress.get(0);
+
                 break;
             case R.id.bt_t003:
                 break;

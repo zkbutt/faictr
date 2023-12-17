@@ -21,7 +21,7 @@ import top.feadre.faictr.flib.base.FAutoUpdater;
 
 
 public class FMainHelp4AutoUpdater {
-    private static final String TAG = "Help4AutoUpdater";
+    private static final String TAG = "FMainH4AutoUpdater";
     private final Activity activity;
     private final String name_apk_cfg;
     private final String url_path;

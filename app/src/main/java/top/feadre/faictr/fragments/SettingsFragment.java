@@ -65,7 +65,7 @@ public class SettingsFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        sp = getContext().getSharedPreferences(FCFGBusiness.SPSet.KEY_CTR, 0);
+        sp = getContext().getSharedPreferences(FCFGBusiness.SPSet.KEY_MAIN, 0);
         v_ctr_size_ratio = sp.getFloat(FCFGBusiness.SPSet.SIZE_RATIO, 0.6F);
         v_ctr_bitrate = sp.getInt(FCFGBusiness.SPSet.BITRATE, 1024000);
         v_ctr_display_mode = sp.getInt(FCFGBusiness.SPSet.DISPLAY_MODE, 0); // 0是拉伸屏幕

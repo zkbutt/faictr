@@ -32,6 +32,8 @@ import com.xuexiang.xui.widget.edittext.ValidatorEditText;
 import com.xuexiang.xui.widget.edittext.materialedittext.validation.RegexpValidator;
 import com.xuexiang.xutil.app.ActivityUtils;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import top.feadre.faictr.R;
@@ -39,7 +41,8 @@ import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.FREValidator;
 import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.base.FBaseActivity;
-import top.feadre.faictr.flib.fviews.dialog_edit.EntityItem4SimpleRecyclerAdapter;
+import top.feadre.faictr.flib.fviews.FDialogBottomEdit;
+import top.feadre.faictr.flib.net.FNetTools;
 import top.feadre.faictr.fragments.HelpFragment;
 import top.feadre.faictr.fragments.SettingsFragment;
 
@@ -63,9 +66,10 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     SwitchButton sb_android11;
 
     private int option_ip_res = 0;
-    private FMainHelp4FProgressDialog fMainHelp4FProgressDialog;
-    private FMainDialogBottomEdit fMainDialogBottomEdit; //历史下拉菜单
+    protected FMainHelp4FProgressDialog fMainHelp4FProgressDialog;
+    protected FMainHelp4FDialogBottomEdit fMainDialogBottomEdit; //历史下拉菜单
     private FMainHelp4AutoUpdater fMainHelp4AutoUpdater; //自动更新
+    protected FMainHelp4NetUtils fMainHelp4NetUtils;
 
     @Override
     protected int getLayoutId() {
@@ -109,12 +113,16 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
 
         /*  --- ip输入校验 --- */
 //        met_ip.addValidator(new RegexpValidator("只能输入数字!", "\\d+"));
-        vet_ip.addValidator(new RegexpValidator(getString(R.string.regex_ip), FREValidator.REGEX_IP));
-
-        fMainHelp4FProgressDialog = new FMainHelp4FProgressDialog(this);
+        vet_ip.addValidator(new RegexpValidator(getString(R.string.ValidatorEditText_regex_ip), FREValidator.REGEX_IP));
         sb_android11.setOnCheckedChangeListener(this);
 
-        fMainDialogBottomEdit = new FMainDialogBottomEdit(this);
+        fMainHelp4FProgressDialog = new FMainHelp4FProgressDialog(this);
+
+        fMainDialogBottomEdit = new FMainHelp4FDialogBottomEdit(this);
+        fMainDialogBottomEdit.loadDatas();//加载数据
+
+
+        fMainHelp4NetUtils = new FMainHelp4NetUtils(this);
     }
 
     @OnClick({R.id.xuiab_ip_res, R.id.bt_ip_search, R.id.bt_one_link, R.id.bt_pair_link,
@@ -122,12 +130,30 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.xuiab_ip_res:
+//                fMainDialogBottomEdit.addData(new EntityItem4SimpleRecyclerAdapter("K40", "192.168.0.1"));
                 fMainDialogBottomEdit.show();
                 break;
             case R.id.bt_ip_search:
 //                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
-                XToastUtils.info("bt_ip_search");
-                fMainDialogBottomEdit.addData(new EntityItem4SimpleRecyclerAdapter("K40", "192.168.0.1"));
+//                XToastUtils.info("bt_ip_search");
+                ArrayList<String> ipAddress = FNetTools.getLocalIPAddress();
+                if (ipAddress == null) {
+                    XToastUtils.error(getString(R.string.FMain_bt_ip_search));
+                    return;
+                }
+                fMainHelp4FProgressDialog.showDialog(
+                        getString(R.string.FMainHelp4FProgressDialog_bt_ip_search),
+                        fMainHelp4NetUtils.getCountTask()
+                );
+
+                for (String ip : ipAddress) {
+                    //找一个内网IP进行扫描
+                    if (FNetTools.isLocalNet(ip)) {
+                        fMainHelp4NetUtils.scan_ip(ip);
+                        break;
+                    }
+                }
+
                 break;
             case R.id.bt_one_link:
                 //手动校验

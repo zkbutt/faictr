@@ -10,7 +10,7 @@ public final class FCFGBusiness {
     }
 
     public static final class SPSet {
-        public final static String KEY_CTR = "CTRActivity";
+        public final static String KEY_MAIN = "FMainActivity"; //哪个页面用哪个命名
         public final static String SIZE_RATIO = "size_ratio";
         public final static String BITRATE = "bitrate";
         public final static String DISPLAY_MODE = "display_mode";

@@ -50,7 +50,7 @@
                 style="@style/EditText.Normal"
                 android:layout_width="wrap_content"
                 android:layout_marginRight="10dp"
-                android:hint="@string/hint"
+                android:hint="@string/ValidatorEditText_hint"
                 android:layout_weight="1"
                 android:singleLine="true"
                 app:vet_tipPosition="top" />

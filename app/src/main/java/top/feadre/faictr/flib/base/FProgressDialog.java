@@ -24,6 +24,7 @@ import com.xuexiang.xui.widget.dialog.materialdialog.GravityEnum;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
 import top.feadre.faictr.R;
+import top.feadre.faictr.flib.FTools;
 
 public class FProgressDialog {
     private static final String TAG = "FProgressDialogHelp";
@@ -32,6 +33,7 @@ public class FProgressDialog {
     private OnFProgressDialogListener onFProgressDialogListener;
     private String id;
     protected MaterialDialog dialog;
+    protected int progress_val;
 
     public FProgressDialog(Activity activity) {
         this.activity = activity;
@@ -41,23 +43,44 @@ public class FProgressDialog {
         this.onFProgressDialogListener = onFProgressDialogListener;
     }
 
-    public void showDialog(String id, String title, int progress_max) {
+    public void showDialog(String id, String title, int progress_max, boolean enabled_cancel) {
+        FTools.log_d(TAG, "showDialog progress_max = " + progress_max);
         this.id = id;
         md_builder = new MaterialDialog.Builder(activity)
                 .title(title)
 //                .content(R.string.content_downloading)
                 .contentGravity(GravityEnum.CENTER)
-                .progress(false, 100, true)
-                .cancelListener(di -> {
-//                    XToastUtils.info("点取消");
-                    if (onFProgressDialogListener != null) {
-                        onFProgressDialogListener.on_dialog_cancel(id, di);
-                    }
-                })
+                .progress(false, progress_max, true);
+//                .cancelListener(di -> {
+////                    XToastUtils.info("点取消");
+//                    if (onFProgressDialogListener != null) {
+//                        onFProgressDialogListener.on_dialog_cancel(id, di);
+//                    }
+//                })
 //                .showListener(dialog -> onFProgressDialogListener.on_running(id, (MaterialDialog) dialog))
-                .negativeText(R.string.lab_cancel);
+//                .negativeText(R.string.lab_cancel);
+        if (enabled_cancel) {
+            md_builder.cancelListener(di -> {
+//                    XToastUtils.info("点取消");
+                if (onFProgressDialogListener != null) {
+                    onFProgressDialogListener.on_dialog_cancel(id, di);
+                }
+            }).negativeText(R.string.lab_cancel);
+        }
         dialog = md_builder.show();
-        dialog.setMaxProgress(progress_max);
+//        dialog.setMaxProgress(progress_max);
+    }
+
+    public void showDialog(String id, String title, int progress_max) {
+        showDialog(id, title, progress_max, true);
+    }
+
+    public void showDialog(String title) {
+        showDialog(title, title, 100);
+    }
+
+    public void showDialog(String title, int progress_max) {
+        showDialog(title, title, progress_max);
     }
 
     public void showDialog(String id, String title) {
@@ -65,6 +88,11 @@ public class FProgressDialog {
     }
 
     public void updateProgress(int val, String text) {
+        FTools.log_d(TAG, "updateProgress "
+                + " val = " + val
+                + " dialog.getMaxProgress() = " + dialog.getMaxProgress()
+        );
+        this.progress_val = val;
         this.dialog.setProgress(val);
         this.dialog.setContent(text);
         if (val >= dialog.getMaxProgress()) {

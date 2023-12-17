@@ -90,7 +90,8 @@ public class FREValidator {
         return ss;
     }
 
-    public static String networkSegment(String ip) {
+    public static String getNetworkSegment(String ip) {
+        /* 192.168.22.22 -> 结果为：192.168.22.*/
         String res = null;
         if (ip_verify(ip)) {
             Pattern pattern = Pattern.compile(REGEX_IP);

@@ -33,6 +33,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -51,7 +52,7 @@ public abstract class XRecyclerAdapter<T, V extends RecyclerView.ViewHolder> ext
     /**
      * 数据源
      */
-    protected final List<T> mData = new ArrayList<>();
+    protected final List<T> mData = new LinkedList<>();
     /**
      * 点击监听
      */

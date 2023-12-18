@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -33,6 +34,7 @@ import com.xuexiang.xui.widget.edittext.materialedittext.validation.RegexpValida
 import com.xuexiang.xutil.app.ActivityUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -146,12 +148,18 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
                         fMainHelp4NetUtils.getCountTask()
                 );
 
+                boolean enable_localIP = false;
                 for (String ip : ipAddress) {
                     //找一个内网IP进行扫描
                     if (FNetTools.isLocalNet(ip)) {
                         fMainHelp4NetUtils.scan_ip(ip);
+                        enable_localIP = true;
                         break;
                     }
+                }
+                if (!enable_localIP) {
+                    XToastUtils.warning("没有内网地址： ipAddress = " + ipAddress, Toast.LENGTH_LONG);
+                    fMainHelp4FProgressDialog.close();
                 }
 
                 break;

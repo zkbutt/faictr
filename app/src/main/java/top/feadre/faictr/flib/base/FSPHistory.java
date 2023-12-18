@@ -5,7 +5,10 @@ import android.content.SharedPreferences;
 
 import java.util.LinkedList;
 
+import top.feadre.faictr.flib.FTools;
+
 public abstract class FSPHistory<T> {
+    private static final String TAG = "FSPHistory";
     private final String saveKey;//spkey
     private SharedPreferences obj_sp;
     protected LinkedList<T> datas;//数组
@@ -56,6 +59,7 @@ public abstract class FSPHistory<T> {
     }
 
     public void save() {
+        FTools.log_d(TAG, "datas.size() = " + datas.size());
         //重新保存
         SharedPreferences.Editor edit = obj_sp.edit();
         for (int i = 0; i < datas.size(); i++) {

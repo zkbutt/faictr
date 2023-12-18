@@ -14,7 +14,7 @@ import top.feadre.faictr.flib.fviews.dialog_edit.EntityItem4SimpleRecyclerAdapte
  * @author Administrator
  * @version 1.0.0
  * @projectName faictr
- * @description: top.feadre.faictr.activitys
+ * @description: 用于连接 FDialogBottomEdit 和 fspHistory
  * @date :2023/12/16 21:43
  */
 public class FMainHelp4FDialogBottomEdit extends FDialogBottomEdit {
@@ -45,9 +45,36 @@ public class FMainHelp4FDialogBottomEdit extends FDialogBottomEdit {
     }
 
     public void loadDatas() {
+        //数据同步
         fspHistory.init();
         LinkedList<EntityItem4SimpleRecyclerAdapter> datas = fspHistory.getDatas();
         this.setDatas(datas);
     }
 
+    /**
+     * 添加一条数据
+     */
+    @Override
+    public void addData(EntityItem4SimpleRecyclerAdapter e) {
+        super.addData(e);
+        fspHistory.save();
+    }
+
+    /**
+     * 清空数组
+     */
+    @Override
+    protected void onClearDatas() {
+        super.onClearDatas();
+        fspHistory.save();
+    }
+
+    /**
+     * 删除一个数据
+     */
+    @Override
+    protected void onRemoveData(int position) {
+        super.onRemoveData(position);
+        fspHistory.save();
+    }
 }

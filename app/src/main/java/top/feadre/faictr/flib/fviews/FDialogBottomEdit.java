@@ -78,10 +78,7 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
             int menuPosition = menuBridge.getPosition(); // 菜单在RecyclerView的Item中的Position。
 
             if (direction == SwipeRecyclerView.RIGHT_DIRECTION) {
-                List<EntityItem4SimpleRecyclerAdapter> _d = mAdapter.getData();
-                _d.remove(position);
-                mAdapter.notifyItemRemoved(position);
-                update_tv_dbe_mid();
+                onRemoveData(position);
 //                XToastUtils.toast("list第" + position + "; 右侧菜单第" + menuPosition);
             } else if (direction == SwipeRecyclerView.LEFT_DIRECTION) {
                 XToastUtils.toast("list第" + position + "; 左侧菜单第" + menuPosition);
@@ -147,9 +144,7 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                mAdapter.getData().clear();
-                                mAdapter.notifyDataSetChanged();
-                                FDialogBottomEdit.this.cancel();
+                                onClearDatas();
                             }
                         })
                         .show();
@@ -158,6 +153,19 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
             default:
                 break;
         }
+    }
+
+    protected void onRemoveData(int position) {
+        List<EntityItem4SimpleRecyclerAdapter> _d = mAdapter.getData();
+        _d.remove(position);
+        mAdapter.notifyItemRemoved(position);
+        update_tv_dbe_mid();
+    }
+
+    protected void onClearDatas() {
+        mAdapter.getData().clear();
+        mAdapter.notifyDataSetChanged();
+        this.cancel();
     }
 
     @Override

@@ -79,11 +79,14 @@ public class FNetTools extends Thread2Main<String, String, String> {
             return false;
         }
         String[] ip_place_vals = ip.split("\\.");
+        // 判断内网IP的规则
         if ("10".equals(ip_place_vals[0]) && "0".equals(ip_place_vals[1])) {   // 10.0.x.x
             return true;
         } else if ("192".equals(ip_place_vals[0]) && "168".equals(ip_place_vals[1])) { //192.168.x.x
             return true;
-        } else if ("172".equals(ip_place_vals[0]) && "16".equals(ip_place_vals[1])) {//172.16.x.x
+        } else if ("172".equals(ip_place_vals[0])
+                && ("16".equals(ip_place_vals[1]) || "168".equals(ip_place_vals[1]))) {//172.16.x.x
+
             return true;
         } else {
             return false;

@@ -121,8 +121,6 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
         fMainHelp4FProgressDialog = new FMainHelp4FProgressDialog(this);
 
         fMainDialogBottomEdit = new FMainHelp4FDialogBottomEdit(this);
-        fMainDialogBottomEdit.loadDatas();//加载数据
-
 
         fMainHelp4NetUtils = new FMainHelp4NetUtils(this);
     }

@@ -37,6 +37,7 @@ public abstract class FSPHistory<T> {
     public void init() {
         // 从SP读取保存值
         int size = obj_sp.getInt(saveKey, 0); //获取设置的最大尺寸
+        FTools.log_d(TAG, "init size = " + size);
         for (int i = 0; i < size; i++) {
             String _d = obj_sp.getString(saveKey + i, null);
             if (_d != null) {
@@ -47,7 +48,7 @@ public abstract class FSPHistory<T> {
 
     public void add(T d) {
         int i = datas.indexOf(d);
-        if (i != -1) {//如果已经有了
+        if (i != -1) {//如果已经有了 移到顶
             datas.remove(i);
         } else {
             if (datas.size() >= sizeLimit) {
@@ -58,8 +59,13 @@ public abstract class FSPHistory<T> {
         save();
     }
 
+    public void del(int position) {
+        datas.remove(position);
+        save();
+    }
+
     public void save() {
-        FTools.log_d(TAG, "datas.size() = " + datas.size());
+        FTools.log_d(TAG, "save datas.size() = " + datas.size());
         //重新保存
         SharedPreferences.Editor edit = obj_sp.edit();
         for (int i = 0; i < datas.size(); i++) {
@@ -78,6 +84,7 @@ public abstract class FSPHistory<T> {
         datas.clear();
         edit.putInt(saveKey, datas.size());
         edit.apply();
+        save();
     }
 
     public String getKeySp() {

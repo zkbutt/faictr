@@ -8,6 +8,7 @@ import com.xuexiang.xui.utils.XToastUtils;
 import java.util.LinkedList;
 
 import top.feadre.faictr.R;
+import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.base.FProgressDialog;
 import top.feadre.faictr.flib.base.Thread2Main;
 import top.feadre.faictr.flib.fviews.dialog_edit.EntityItem4SimpleRecyclerAdapter;
@@ -34,10 +35,11 @@ public class FMainHelp4NetUtils extends LocalNetUtil implements Thread2Main.OnTh
 
     @Override
     public void on_fun_res_success(int status_run, LinkedList<String> obj) {
+        FTools.log_d(TAG, "on_fun_res_success obj = " + obj.toString());
         String _txt = String.format(
                 ResUtils.getString(R.string.FMainHelp4NetUtils_on_fun_res_success),
                 obj.size(),
-                obj);
+                obj.toString());
         XToastUtils.success(_txt, Toast.LENGTH_LONG);
         if (obj.size() == 1) {
             fMainActivity.vet_ip.setText(obj.get(0));

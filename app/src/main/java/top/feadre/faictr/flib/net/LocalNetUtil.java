@@ -197,8 +197,11 @@ public class LocalNetUtil extends Thread2Main<String, LinkedList<String>, String
 //        }
 
 //        ThreadPoolExecutor pool = new ThreadPoolExecutor(2, _total, 60L,
-        pool = new ThreadPoolExecutor(4, COUNT_TOTAL, 60L,
-                TimeUnit.SECONDS, new LinkedBlockingQueue<>(1));
+        pool = new ThreadPoolExecutor(3,
+                COUNT_TOTAL, 60L,
+                TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(6)//无界队列
+        );
 
         //没有权限
         //if (!LocalNetUtil.isRootSystem()) {
@@ -225,7 +228,7 @@ public class LocalNetUtil extends Thread2Main<String, LinkedList<String>, String
             //产生253个线程  即 int count_task = count_total - 2;
             Thread _thread = new Thread(new Runnable() {
                 @Override
-                public synchronized void run() {
+                public void run() {
                     String command = command_ping + currentIp;
                     try {
                         process = runtime.exec(command);

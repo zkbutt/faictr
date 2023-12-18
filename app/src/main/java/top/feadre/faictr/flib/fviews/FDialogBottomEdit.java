@@ -177,24 +177,32 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
         }
     }
 
-    public void addData(EntityItem4SimpleRecyclerAdapter e) {
+    public boolean addData(EntityItem4SimpleRecyclerAdapter e) {
+        boolean res = true;//是否新增
         //排除唯一性
-        LinkedList<EntityItem4SimpleRecyclerAdapter> data = (LinkedList<EntityItem4SimpleRecyclerAdapter>) mAdapter.getData();
-        for (EntityItem4SimpleRecyclerAdapter d : data) {
+        LinkedList<EntityItem4SimpleRecyclerAdapter> datas = (LinkedList<EntityItem4SimpleRecyclerAdapter>) mAdapter.getData();
+        for (EntityItem4SimpleRecyclerAdapter d : datas) {
             //如果有一个值是包括的，则不处理
             if (d.getContent().equals(e.getContent())) {
-                return;
+                datas.remove(d);
+                res = false;
+                break;
             }
         }
-        data.addFirst(e);
+        datas.addFirst(e);
         update_tv_dbe_mid();
+        return res;
     }
 
     public void setDatas(LinkedList<EntityItem4SimpleRecyclerAdapter> datas) {
         mAdapter.getData().addAll(datas);
     }
 
-    private void update_tv_dbe_mid() {
+    protected LinkedList<EntityItem4SimpleRecyclerAdapter> getDatas() {
+        return (LinkedList<EntityItem4SimpleRecyclerAdapter>) mAdapter.getData();
+    }
+
+    protected void update_tv_dbe_mid() {
         String _text = ResUtils.getString(R.string.FMainHelp4DialogBottomEdit_tv_dbe_mid_text);
         tv_dbe_mid.setText(String.format(_text, mAdapter.getData().size()));
     }

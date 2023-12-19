@@ -67,11 +67,11 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     @BindView(R.id.sb_android11)
     SwitchButton sb_android11;
 
-    private int option_ip_res = 0;
     protected FMainHelp4FProgressDialog fMainHelp4FProgressDialog;
     protected FMainHelp4FDialogBottomEdit fMainDialogBottomEdit; //历史下拉菜单
     private FMainHelp4AutoUpdater fMainHelp4AutoUpdater; //自动更新
     protected FMainHelp4NetUtils fMainHelp4NetUtils;
+    private FMainHelp4ADBShellService fMainHelp4ADBShellService;
 
     @Override
     protected int getLayoutId() {
@@ -123,17 +123,20 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
         fMainDialogBottomEdit = new FMainHelp4FDialogBottomEdit(this);
 
         fMainHelp4NetUtils = new FMainHelp4NetUtils(this);
+
+        fMainHelp4ADBShellService = new FMainHelp4ADBShellService(this);
+
     }
 
     @OnClick({R.id.xuiab_ip_res, R.id.bt_ip_search, R.id.bt_one_link, R.id.bt_pair_link,
             R.id.bt_qr_code_link,})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.xuiab_ip_res:
+            case R.id.xuiab_ip_res: //历史连接的IP
 //                fMainDialogBottomEdit.addData(new EntityItem4SimpleRecyclerAdapter("K40", "192.168.0.1"));
                 fMainDialogBottomEdit.show();
                 break;
-            case R.id.bt_ip_search:
+            case R.id.bt_ip_search: //IP 扫描
 //                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
 //                XToastUtils.info("bt_ip_search");
                 ArrayList<String> ipAddress = FNetTools.getLocalIPAddress();
@@ -161,10 +164,16 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
                 }
 
                 break;
-            case R.id.bt_one_link:
-                //手动校验
-                boolean validateOnFocusLost = vet_ip.validate();
-                vet_ip.showErrorMsg();
+            case R.id.bt_one_link: //一键连接
+                //手动校验 通过
+                boolean fvailid = vet_ip.fvailid();
+//                FTools.log_d(TAG,"validate = "+fvailid);
+                if (!fvailid) {
+                    vet_ip.showErrorMsg();
+                }
+                fMainHelp4FProgressDialog.showDialog(getString(R.string.main_bt_one_link));
+
+
 //                XToastUtils.info(String.valueOf(validateOnFocusLost));
 //                fMainHelp4FProgressDialog.showDialog("bt_one_link", "一键连接", 180);
 //                fMainHelp4FProgressDialog.updateProgress(170, "正在工作的内容 bt_one_link");
@@ -173,16 +182,16 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
 //                startActivity(intent);
 //                ActivityUtils.startActivity(CtrActivity.class);
                 break;
-            case R.id.bt_pair_link:
+            case R.id.bt_pair_link: // 配对码连接
                 XToastUtils.info("bt_pair_link");
-                fMainHelp4FProgressDialog.showDialog("bt_pair_link", "bt_pair_link", 90);
-                fMainHelp4FProgressDialog.updateProgress(90, "正在工作的内容 bt_pair_link");
+//                fMainHelp4FProgressDialog.showDialog("bt_pair_link", "bt_pair_link", 90);
+//                fMainHelp4FProgressDialog.updateProgress(90, "正在工作的内容 bt_pair_link");
                 openNewPage(HelpFragment.class);
                 break;
-            case R.id.bt_qr_code_link:
+            case R.id.bt_qr_code_link://扫码连接
                 XToastUtils.info("bt_qr_code_link");
-                fMainHelp4FProgressDialog.showDialog("bt_qr_code_link", "bt_qr_code_link", 180);
-                fMainHelp4FProgressDialog.updateProgress(110, "正在工作的内容 bt_qr_code_link");
+//                fMainHelp4FProgressDialog.showDialog("bt_qr_code_link", "bt_qr_code_link", 180);
+//                fMainHelp4FProgressDialog.updateProgress(110, "正在工作的内容 bt_qr_code_link");
                 break;
 
             default:
@@ -194,6 +203,7 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if (compoundButton.getId() == R.id.sb_android11) {
+            // android 11 的切换
             if (b) {
                 bt_qr_code_link.setVisibility(View.VISIBLE);
                 bt_pair_link.setVisibility(View.VISIBLE);

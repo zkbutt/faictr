@@ -31,7 +31,6 @@ public class FSimpleRecyclerAdapter extends BaseRecyclerAdapter<EntityItem4Simpl
         super();
     }
 
-
     @Override
     protected void bindData(@NonNull RecyclerViewHolder holder, int position, EntityItem4SimpleRecyclerAdapter item) {
         holder.text(android.R.id.text1, item.getTitle());

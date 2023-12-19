@@ -263,6 +263,11 @@ public class ValidatorEditText extends AppCompatEditText implements View.OnFocus
         mIsValid = validate();
     }
 
+    public boolean fvailid() {
+        mIsValid = validate();
+        return mIsValid;
+    }
+
     /**
      * 输入的内容是否有效
      *

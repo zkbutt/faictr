@@ -1,6 +1,8 @@
 package top.feadre.faictr.activitys;
 
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 
 import java.util.LinkedList;
@@ -101,5 +103,13 @@ public class FMainHelp4FDialogBottomEdit extends FDialogBottomEdit {
     protected void onRemoveData(int position) {
         super.onRemoveData(position);
         fspHistory.del(position);
+    }
+
+    @Override
+    public void onItemClick(View view, int adapterPosition) {
+        LinkedList<EntityItem4SimpleRecyclerAdapter> datas = getDatas();
+        EntityItem4SimpleRecyclerAdapter e = datas.get(adapterPosition);
+        fMainActivity.vet_ip.setText(e.getContent());
+        this.cancel();
     }
 }

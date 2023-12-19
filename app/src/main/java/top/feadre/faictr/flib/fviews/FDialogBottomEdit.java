@@ -31,6 +31,7 @@ import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.utils.XToastUtils;
 import com.xuexiang.xui.widget.dialog.materialdialog.DialogAction;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
+import com.yanzhenjie.recyclerview.OnItemClickListener;
 import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
 import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 
@@ -39,11 +40,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import top.feadre.faictr.R;
+import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.fviews.dialog_edit.EntityItem4SimpleRecyclerAdapter;
 import top.feadre.faictr.flib.fviews.dialog_edit.FSimpleRecyclerAdapter;
 import top.feadre.faictr.flib.fviews.dialog_edit.FSwipeRecyclerView;
 
-public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClickListener {
+public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClickListener, OnItemClickListener {
     private static final String TAG = "FDialogBottomEdit ";
 
     private TextView tv_dbe_mid;
@@ -72,6 +74,9 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
         mAdapter = new FSimpleRecyclerAdapter();
 
         mMenuItemClickListener = (menuBridge, position) -> {
+            FTools.log_d(TAG, "mMenuItemClickListener "
+                    + " menuBridge = " + menuBridge
+                    + " position = " + position);
             menuBridge.closeMenu();
 
             int direction = menuBridge.getDirection(); // 左侧还是右侧菜单。
@@ -87,6 +92,7 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
 
         //必须在setAdapter之前调用
         fSwipeRecyclerView.setOnItemMenuClickListener(mMenuItemClickListener);
+        fSwipeRecyclerView.setOnItemClickListener(this);
 //        Collection<String> demoData = DemoDataProvider.getDemoData();
 //        mAdapter.refresh(demoData);
         fSwipeRecyclerView.setAdapter(mAdapter);
@@ -95,23 +101,6 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
 //        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K41", "192.168.0.1"));
 //        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K42", "192.168.0.1"));
 //        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K43", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K44", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K45", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K46", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K47", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K48", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K49", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K40", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K41", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K42", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K43", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K44", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K45", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K46", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K47", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K48", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K49", "192.168.0.1"));
-//        dataItem.add(new EntityItem4SimpleRecyclerAdapter("K40", "192.168.0.1"));
         setDatas(dataItem);
 
         tv_dbe_mid = view.findViewById(R.id.tv_dbe_mid);
@@ -129,10 +118,11 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
     }
 
     public void onClick(View view) {
+        FTools.log_d(TAG, "onClick view.getId() = " + view.getId());
         switch (view.getId()) {
-            case R.id.tv_dbe_mid:
-                XToastUtils.info("tv_dbe_mid");
-                break;
+//            case R.id.tv_dbe_mid:
+//                XToastUtils.info("tv_dbe_mid");
+//                break;
 //            case R.id.tv_dbe_left:
 //                XToastUtils.info("tv_dbe_left");
 //                break;
@@ -148,7 +138,6 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
                             }
                         })
                         .show();
-
                 break;
             default:
                 break;
@@ -205,5 +194,13 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
     protected void update_tv_dbe_mid() {
         String _text = ResUtils.getString(R.string.FMainHelp4DialogBottomEdit_tv_dbe_mid_text);
         tv_dbe_mid.setText(String.format(_text, mAdapter.getData().size()));
+    }
+
+    @Override
+    public void onItemClick(View view, int adapterPosition) {
+        FTools.log_d(TAG, "setOnItemClickListener "
+                + " view = " + view
+                + " adapterPosition = " + adapterPosition
+        );
     }
 }

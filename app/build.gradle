@@ -256,4 +256,5 @@ dependencies {
     implementation 'com.github.rjsvieira:floatingMenu:1.3.0'
 
     /* feadre */
+    implementation 'com.tananaev:adblib:1.3'
 }

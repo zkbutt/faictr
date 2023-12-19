@@ -59,7 +59,6 @@
         android:layout_height="1px"
         android:background="@android:color/darker_gray" />
 
-
     <top.feadre.faictr.flib.fviews.dialog_edit.FSwipeRecyclerView
         android:id="@+id/fsrv"
         android:layout_width="match_parent"

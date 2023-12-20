@@ -35,11 +35,12 @@ import com.yanzhenjie.recyclerview.OnItemClickListener;
 import com.yanzhenjie.recyclerview.OnItemMenuClickListener;
 import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import top.feadre.faictr.R;
+import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.fviews.dialog_edit.EntityItem4SimpleRecyclerAdapter;
 import top.feadre.faictr.flib.fviews.dialog_edit.FSimpleRecyclerAdapter;
@@ -145,21 +146,29 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
     }
 
     protected void onRemoveData(int position) {
-        List<EntityItem4SimpleRecyclerAdapter> _d = mAdapter.getData();
+        List<EntityItem4SimpleRecyclerAdapter> _d = mAdapter.getDatas();
         _d.remove(position);
         mAdapter.notifyItemRemoved(position);
         update_tv_dbe_mid();
     }
 
     protected void onClearDatas() {
-        mAdapter.getData().clear();
+        List<EntityItem4SimpleRecyclerAdapter> datas = mAdapter.getDatas();
+        Iterator<EntityItem4SimpleRecyclerAdapter> iterator = datas.iterator();
+        while (iterator.hasNext()) {
+            EntityItem4SimpleRecyclerAdapter e = iterator.next();
+            if (e.getTitle().equals(FCFGBusiness.FDialogBottomEdit.DEFAULT_NAME)) {
+                iterator.remove();
+            }
+        }
+//        data.clear();
         mAdapter.notifyDataSetChanged();
         this.cancel();
     }
 
     @Override
     public void show() {
-        if (mAdapter.getData().size() > 0) {
+        if (mAdapter.getDatas().size() > 0) {
             super.show();
         } else {
             XToastUtils.info(getContext().getString(R.string.FMainHelp4DialogBottomEdit_hint));
@@ -169,7 +178,7 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
     public boolean addData(EntityItem4SimpleRecyclerAdapter e) {
         boolean res = true;//是否新增
         //排除唯一性
-        LinkedList<EntityItem4SimpleRecyclerAdapter> datas = (LinkedList<EntityItem4SimpleRecyclerAdapter>) mAdapter.getData();
+        LinkedList<EntityItem4SimpleRecyclerAdapter> datas = (LinkedList<EntityItem4SimpleRecyclerAdapter>) mAdapter.getDatas();
         for (EntityItem4SimpleRecyclerAdapter d : datas) {
             //如果有一个值是包括的，则不处理
             if (d.getContent().equals(e.getContent())) {
@@ -184,16 +193,16 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
     }
 
     public void setDatas(LinkedList<EntityItem4SimpleRecyclerAdapter> datas) {
-        mAdapter.getData().addAll(datas);
+        mAdapter.getDatas().addAll(datas);
     }
 
     protected LinkedList<EntityItem4SimpleRecyclerAdapter> getDatas() {
-        return (LinkedList<EntityItem4SimpleRecyclerAdapter>) mAdapter.getData();
+        return (LinkedList<EntityItem4SimpleRecyclerAdapter>) mAdapter.getDatas();
     }
 
     protected void update_tv_dbe_mid() {
         String _text = ResUtils.getString(R.string.FMainHelp4DialogBottomEdit_tv_dbe_mid_text);
-        tv_dbe_mid.setText(String.format(_text, mAdapter.getData().size()));
+        tv_dbe_mid.setText(String.format(_text, mAdapter.getDatas().size()));
     }
 
     @Override

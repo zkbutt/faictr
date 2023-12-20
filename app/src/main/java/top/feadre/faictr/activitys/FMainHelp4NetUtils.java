@@ -8,6 +8,7 @@ import com.xuexiang.xui.utils.XToastUtils;
 import java.util.LinkedList;
 
 import top.feadre.faictr.R;
+import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.base.FProgressDialog;
 import top.feadre.faictr.flib.base.Thread2Main;
@@ -43,11 +44,13 @@ public class FMainHelp4NetUtils extends LocalNetUtil implements Thread2Main.OnTh
         XToastUtils.success(_txt, Toast.LENGTH_LONG);
         if (obj.size() == 1) {
             fMainActivity.vet_ip.setText(obj.get(0));
+            fMainActivity.help4SharedPreferences.setVetIpVal(obj.get(0));
         }
         //添加到历史
         for (String ip : obj) {
             fMainActivity.fMainDialogBottomEdit.addData(
-                    new EntityItem4SimpleRecyclerAdapter("未知", ip));
+                    new EntityItem4SimpleRecyclerAdapter(
+                            FCFGBusiness.FDialogBottomEdit.DEFAULT_NAME, ip));
         }
 
     }

@@ -30,7 +30,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.xuexiang.xui.logs.UILog;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -206,7 +205,7 @@ public abstract class XRecyclerAdapter<T, V extends RecyclerView.ViewHolder> ext
     /**
      * @return 数据源
      */
-    public List<T> getData() {
+    public List<T> getDatas() {
         return mData;
     }
 

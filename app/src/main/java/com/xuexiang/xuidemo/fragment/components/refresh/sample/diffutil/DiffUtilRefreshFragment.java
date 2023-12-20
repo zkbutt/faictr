@@ -83,7 +83,7 @@ public class DiffUtilRefreshFragment extends BaseFragment {
             return;
         }
         mNewDatas = new ArrayList<>();
-        for (NewInfo info : mAdapter.getData()) {
+        for (NewInfo info : mAdapter.getDatas()) {
             //clone一遍旧数据 ，模拟刷新操作
             mNewDatas.add(info.clone().resetContent());
         }
@@ -98,7 +98,7 @@ public class DiffUtilRefreshFragment extends BaseFragment {
         RxJavaUtils.executeAsyncTask(mNewDatas, new Function<List<NewInfo>, DiffUtil.DiffResult>() {
             @Override
             public DiffUtil.DiffResult apply(List<NewInfo> newInfos) throws Exception {
-                return DiffUtil.calculateDiff(new DiffUtilCallback(mAdapter.getData(), newInfos), true);
+                return DiffUtil.calculateDiff(new DiffUtilCallback(mAdapter.getDatas(), newInfos), true);
             }
         }, diffResult -> {
             if (mAdapter != null) {

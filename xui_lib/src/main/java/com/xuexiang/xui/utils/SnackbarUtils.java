@@ -17,10 +17,13 @@
 package com.xuexiang.xui.utils;
 
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -178,8 +181,32 @@ public class SnackbarUtils {
      * @return
      */
     public static SnackbarUtils Indefinite(View view, String message) {
-        return new SnackbarUtils(new WeakReference<>(Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE))).backColor(0XFF323232);
+        WeakReference<Snackbar> snackbarWeakReference = new WeakReference<>(Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE));
+        return new SnackbarUtils(snackbarWeakReference).backColor(0XFF323232);
     }
+
+    /**
+     * 自定义多行确认窗口
+     */
+    public static SnackbarUtils FIndefinite(Context context, View view, String message) {
+        SnackbarUtils indefinite = Indefinite(view, message); //复写方法加强
+        Snackbar snackbar = indefinite.mSnackbarWeakRef.get();
+        TextView textView = (TextView) snackbar.getView().findViewById(R.id.snackbar_text);
+        textView.setMaxLines(20);
+        indefinite.factionColor(ResUtils.getColor(context, R.color.xui_config_color_white));
+        return indefinite;
+    }
+
+    private SnackbarUtils factionColor(@ColorInt int actionTextColor) {
+//        this.actionColor(actionTextColor);
+        if (getSnackbar() != null) {
+            Button viewById = (Button) getSnackbar().getView().findViewById(R.id.snackbar_action);
+            viewById.setTextColor(actionTextColor);
+            viewById.setBackgroundColor(Color.BLACK);
+        }
+        return this;
+    }
+
 
     /**
      * 初始化Snackbar实例
@@ -265,7 +292,9 @@ public class SnackbarUtils {
      */
     public SnackbarUtils actionColor(@ColorInt int actionTextColor) {
         if (getSnackbar() != null) {
-            ((Button) getSnackbar().getView().findViewById(R.id.snackbar_action)).setTextColor(actionTextColor);
+            Button viewById = (Button) getSnackbar().getView().findViewById(R.id.snackbar_action);
+            viewById.setTextColor(actionTextColor);
+//            viewById.setBackgroundColor(Color.GRAY);
         }
         return this;
     }

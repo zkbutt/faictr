@@ -97,7 +97,7 @@ public class StickyCustomFragment extends BaseFragment {
 
                 int firstPosition = mLayoutManager.findFirstVisibleItemPosition();
                 int firstCompletePosition = mLayoutManager.findFirstCompletelyVisibleItemPosition();
-                List<StickyItem> items = mAdapter.getData();
+                List<StickyItem> items = mAdapter.getDatas();
 
                 // Here is the logic of the sticky:
 

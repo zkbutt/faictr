@@ -92,11 +92,11 @@ public class DragItemCallBack extends ItemTouchHelper.Callback {
         if (fromPosition < toPosition) {
             // 索引变大
             for (int index = fromPosition; index < toPosition; index++) {
-                Collections.swap(mDragAdapter.getData(), index, index + 1);
+                Collections.swap(mDragAdapter.getDatas(), index, index + 1);
             }
         } else {
             for (int index = fromPosition; index > toPosition; index--) {
-                Collections.swap(mDragAdapter.getData(), index, index - 1);
+                Collections.swap(mDragAdapter.getDatas(), index, index - 1);
             }
         }
         // 刷新布局

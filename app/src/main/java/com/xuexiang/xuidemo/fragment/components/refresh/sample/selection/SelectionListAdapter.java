@@ -110,7 +110,7 @@ public class SelectionListAdapter extends BaseRecyclerAdapter<SelectionItem> {
      */
     public int getSelection1Count() {
         int count = 0;
-        for (SelectionItem item : getData()) {
+        for (SelectionItem item : getDatas()) {
             if (item.isSelection1()) {
                 count++;
             }
@@ -125,7 +125,7 @@ public class SelectionListAdapter extends BaseRecyclerAdapter<SelectionItem> {
      */
     public int getSelection2Count() {
         int count = 0;
-        for (SelectionItem item : getData()) {
+        for (SelectionItem item : getDatas()) {
             if (item.isSelection2()) {
                 count++;
             }
@@ -141,7 +141,7 @@ public class SelectionListAdapter extends BaseRecyclerAdapter<SelectionItem> {
     public int[] getSelectionCount() {
         int count1 = 0;
         int count2 = 0;
-        for (SelectionItem item : getData()) {
+        for (SelectionItem item : getDatas()) {
             if (item.isSelection1()) {
                 count1++;
             } else if (item.isSelection2()) {
@@ -157,7 +157,7 @@ public class SelectionListAdapter extends BaseRecyclerAdapter<SelectionItem> {
      */
     public List<SelectionItem> getSelectionResult() {
         List<SelectionItem> items = new ArrayList<>();
-        for (SelectionItem item : getData()) {
+        for (SelectionItem item : getDatas()) {
             if (!item.isTitle()) {
                 items.add(item);
             }

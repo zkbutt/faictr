@@ -49,6 +49,9 @@ import top.feadre.faictr.flib.FToolsAndroid;
 import top.feadre.faictr.flib.base.DelayThread2Main;
 import top.feadre.faictr.flib.base.Thread2Main;
 
+/**
+ * 服务需要注册
+ */
 public class ADBShellService extends Service implements DelayThread2Main.FunDelay {
     private static final String TAG = "ADBShellService";
     private static final String KEY_PUBLIC = "public.key";
@@ -212,6 +215,7 @@ public class ADBShellService extends Service implements DelayThread2Main.FunDela
                 + FCFGBusiness.PARSE_STRING + getProgressVal(100));
         adbDelayThread2Main.run_over_success("启动成功");
         adbDelayThread2Main.setCheckoutDelay(false); //不用再超时检测
+
         isCommandLoop = true;
         try {
             while (isCommandLoop) {
@@ -257,17 +261,18 @@ public class ADBShellService extends Service implements DelayThread2Main.FunDela
 
     @Override
     public void on_fun_run4thread(DelayThread2Main that) {
+        //用DelayThread2Main start启动，这个就是核心运行方法
         obj_socket = new Socket();
         try {
             //默认端口 5555
             obj_socket.connect(new InetSocketAddress(host, port), 5000);
         } catch (IOException e) {
-            adbDelayThread2Main.run_over_fail("socket.connect 失败！ "
-                    + " host = " + host
-                    + ":" + port + " " + e.getMessage());
+            adbDelayThread2Main.run_over_fail("socket 连接失败！ "
+                    + "\nhost = " + host
+                    + ":" + port + "\n错误详情：" + e.getMessage());
             return;
         }
-        adbDelayThread2Main.running_info("socket.connect 成功！ "
+        adbDelayThread2Main.running_info("socket 连接成功！ "
                 + " host = " + host
                 + ":" + port
                 + FCFGBusiness.PARSE_STRING + getProgressVal(15));
@@ -300,10 +305,10 @@ public class ADBShellService extends Service implements DelayThread2Main.FunDela
             adbDelayThread2Main.running_info("shell 成功！ "
                     + FCFGBusiness.PARSE_STRING + getProgressVal(50));
         } catch (UnsupportedEncodingException e) {
-            adbDelayThread2Main.run_over_fail("adbConnection.open 失败！ UnsupportedEncodingException" + e.getMessage());
+            adbDelayThread2Main.run_over_fail("adbConnection.open 失败！ \n错误详情：UnsupportedEncodingException:" + e.getMessage());
             return;
         } catch (IOException e) {
-            adbDelayThread2Main.run_over_fail("adbConnection.open 失败！ IOException" + e.getMessage());
+            adbDelayThread2Main.run_over_fail("adbConnection.open 失败！ \nIOException:" + e.getMessage());
             return;
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -469,6 +474,5 @@ public class ADBShellService extends Service implements DelayThread2Main.FunDela
         msg.obj = o;
         this.mHandler.sendMessage(msg);
     }
-
 
 }

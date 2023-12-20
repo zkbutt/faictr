@@ -15,7 +15,7 @@
  *
  */
 
-package top.feadre.faictr.fragments;
+package top.feadre.faictr.activitys;
 
 import android.os.Bundle;
 
@@ -29,7 +29,7 @@ import com.xuexiang.xtask.logger.TaskLogger;
 import top.feadre.faictr.R;
 import top.feadre.faictr.fragments.T001Fragment;
 
-public class TActivity_fragment extends AppCompatActivity {
+public class TActivity_tfragment extends AppCompatActivity {
     private static final String TAG = "TActivity_fragment";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

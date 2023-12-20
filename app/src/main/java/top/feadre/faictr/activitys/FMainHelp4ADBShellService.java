@@ -4,9 +4,16 @@ package top.feadre.faictr.activitys;
 import static top.feadre.faictr.flib.FToolsAndroid.*;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+import com.xuexiang.xui.utils.ResUtils;
+import com.xuexiang.xui.utils.SnackbarUtils;
+import com.xuexiang.xui.utils.XToastUtils;
 
 import java.util.Arrays;
 
+import top.feadre.faictr.R;
 import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.FToolsAndroid;
 import top.feadre.faictr.services.adb.ADBCommands;
@@ -34,7 +41,6 @@ public class FMainHelp4ADBShellService extends ADBShellConn implements Thread2Ma
     private static final String PACKAGE_NAME_SERVER = "top.feadre.fctr.Server";
     private boolean isAdbConnected = false;
     private final FMainActivity fMainActivity;
-    private OnHelp4ADBListener onHelp4ADBListener;
     private boolean isInit = true;//强制重新开始  用于重新ADB
 
     public FMainHelp4ADBShellService(FMainActivity fMainActivity) {
@@ -177,14 +183,9 @@ public class FMainHelp4ADBShellService extends ADBShellConn implements Thread2Ma
 
     private void adbRunSuccess() {
         isAdbConnected = true;
-
-//                FToolsAndroid.ftoast(mainActivity, "运行彻底完成！");
         String _t = "ADB启动服务成功";
 //        mainActivity.state_dialog_run = 0; //最终完成
-//        mainActivity.mainActivityHelp4Dialog.set_progress_val(getProgressVal(100), _t);
-        if (onHelp4ADBListener != null) {
-            onHelp4ADBListener.onADBRunSuccess(_t);
-        }
+        fMainActivity.fMainHelp4FProgressDialog.updateProgress(100, _t);
     }
 
 
@@ -244,6 +245,7 @@ public class FMainHelp4ADBShellService extends ADBShellConn implements Thread2Ma
     public void fstart_service(Class<ADBShellService> cls, String control_ip_str, int control_port, boolean isInit) {
         //父类方法复写
         super.fstart_service(cls);
+        //本方法的逻辑控制
         this.isInit = isInit;
         setControlIpStr(control_ip_str);
         setPort(control_port);
@@ -270,10 +272,13 @@ public class FMainHelp4ADBShellService extends ADBShellConn implements Thread2Ma
 //        fMainActivity.state_dialog_run = 0;
         Log.e(TAG, "on_fun_res_fail: conn_adb_shell失败 = " + obj);
         isAdbConnected = false;
-//        mainActivity.mainActivityHelp4Dialog.close();
-        if (onHelp4ADBListener != null) {
-            onHelp4ADBListener.onADBRunFail(obj);
-        }
+        fMainActivity.fMainHelp4FProgressDialog.close();
+//        XToastUtils.error(obj, 1);
+        SnackbarUtils.FIndefinite(fMainActivity, fMainActivity.xuiab_ip_res, obj)
+                .danger()
+                .setAction("确定", v -> {
+                }) //v -> XToastUtils.toast("点击了确定！")
+                .show();
     }
 
     @Override
@@ -292,21 +297,11 @@ public class FMainHelp4ADBShellService extends ADBShellConn implements Thread2Ma
 
     @Override
     public void onResTextLine(String resText, int orderId, int isFinish) {
-//        if (orderId == ID_ORDER_MainActivity_RUN_JAR) {
-//            Log.d(TAG, "onResTextLine: " + resText);
-//        } else {
-//            Log.d(TAG, "onResTextLine: else  " + resText);
-//        }
+        if (orderId == ID_ORDER_MainActivity_RUN_JAR) {
+            Log.d(TAG, "onResTextLine: " + resText);
+        } else {
+            Log.d(TAG, "onResTextLine: else  " + resText);
+        }
     }
 
-    public void setOnHelp4ADBListener(OnHelp4ADBListener onHelp4ADBListener) {
-        this.onHelp4ADBListener = onHelp4ADBListener;
-    }
-
-    public interface OnHelp4ADBListener {
-        void onADBRunSuccess(String res_text);
-
-        void onADBRunFail(String res_text);
-
-    }
 }

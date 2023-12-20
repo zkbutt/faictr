@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--    app:tb_leftImageResource="@drawable/icon_back_white" -->
     <com.xuexiang.xui.widget.actionbar.TitleBar
         android:id="@+id/tb_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tb_actionPadding="5dp"
-        app:tb_leftImageResource="@drawable/icon_back_white" />
 
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,9 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/main_top"
             android:gravity="center_vertical"
-            android:paddingRight="15dp"
+            android:orientation="horizontal"
             android:paddingLeft="15dp"
-            android:orientation="horizontal">
+            android:paddingRight="15dp">
 
 
             <Button
@@ -50,22 +51,22 @@
                 style="@style/EditText.Normal"
                 android:layout_width="wrap_content"
                 android:layout_marginRight="10dp"
-                android:hint="@string/ValidatorEditText_hint"
                 android:layout_weight="1"
+                android:hint="@string/ValidatorEditText_hint"
                 android:singleLine="true"
                 app:vet_tipPosition="top" />
 
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/vet_ip"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_marginRight="12dp"-->
-<!--                android:background="@color/xui_config_color_white"-->
-<!--                android:hint="@string/hint"-->
-<!--                android:inputType="textPassword"-->
-<!--                android:paddingVertical="@dimen/config_margin_8dp"-->
-<!--                android:textSize="18sp" />-->
+            <!--            <com.google.android.material.textfield.TextInputEditText-->
+            <!--                android:id="@+id/vet_ip"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:layout_marginRight="12dp"-->
+            <!--                android:background="@color/xui_config_color_white"-->
+            <!--                android:hint="@string/hint"-->
+            <!--                android:inputType="textPassword"-->
+            <!--                android:paddingVertical="@dimen/config_margin_8dp"-->
+            <!--                android:textSize="18sp" />-->
 
 
             <com.xuexiang.xui.widget.alpha.XUIAlphaButton
@@ -127,7 +128,6 @@
 
             <com.xuexiang.xui.widget.button.roundbutton.RoundButton
                 android:id="@+id/bt_pair_link"
-                android:visibility="invisible"
                 style="@style/RoundButton.Green"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,11 +136,11 @@
                 android:layout_marginTop="@dimen/main_top"
                 android:layout_marginRight="@dimen/main_lr"
                 android:text="@string/main_bt_pair_link"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="invisible" />
 
             <com.xuexiang.xui.widget.button.roundbutton.RoundButton
                 android:id="@+id/bt_qr_code_link"
-                android:visibility="invisible"
                 style="@style/RoundButton.Green"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,7 +149,8 @@
                 android:layout_marginTop="@dimen/main_top"
                 android:layout_marginRight="@dimen/main_lr"
                 android:text="@string/main_bt_qr_code_link"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="invisible" />
 
 
         </LinearLayout>

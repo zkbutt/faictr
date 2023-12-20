@@ -140,7 +140,7 @@ public class PreviewRecycleViewFragment extends BaseFragment {
             public void onItemClick(View itemView, ImageViewInfo item, int position) {
                 computeBoundsBackward(mGridLayoutManager.findFirstVisibleItemPosition());
                 PreviewBuilder.from(getActivity())
-                        .setImgs(mAdapter.getData())
+                        .setImgs(mAdapter.getDatas())
                         .setCurrentIndex(position)
                         .setSingleFling(true)
                         .setProgressColor(SettingSPUtils.getInstance().isUseCustomTheme() ? R.color.custom_color_main_theme : R.color.xui_config_color_main_theme)

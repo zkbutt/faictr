@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="100dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -49,11 +50,11 @@
         android:gravity="center"
         android:text="TActivity_base" />
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/fl_container"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:background="@color/color_red" />-->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/fl_container"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:background="@color/color_red" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,5 +92,60 @@
             android:text="t008" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="5dp">
+
+        <Button
+            android:id="@+id/bt_start_adb_fast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/test_lr"
+            android:text="快速ADB" />
+
+        <Button
+            android:id="@+id/bt_start_scrcpy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/test_lr"
+            android:text="开启服务" />
+
+        <Button
+            android:id="@+id/bt_start_transmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/test_lr"
+            android:text="开启传输" />
+
+        <Button
+            android:id="@+id/bt_debug_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/test_lr"
+            android:text="开启测试" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
+        <Button
+            android:id="@+id/bt_adb_shell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/test_lr"
+            android:text="shell" />
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

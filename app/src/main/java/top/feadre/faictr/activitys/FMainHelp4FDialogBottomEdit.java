@@ -110,6 +110,7 @@ public class FMainHelp4FDialogBottomEdit extends FDialogBottomEdit {
         LinkedList<EntityItem4SimpleRecyclerAdapter> datas = getDatas();
         EntityItem4SimpleRecyclerAdapter e = datas.get(adapterPosition);
         fMainActivity.vet_ip.setText(e.getContent());
+        fMainActivity.help4SharedPreferences.setVetIpVal(e.getContent());
         this.cancel();
     }
 }

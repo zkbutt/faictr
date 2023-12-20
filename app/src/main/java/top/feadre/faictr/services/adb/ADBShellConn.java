@@ -25,7 +25,11 @@ import android.util.Log;
 import top.feadre.faictr.flib.base.FServiceConn;
 import top.feadre.faictr.flib.base.Thread2Main;
 
-
+/**
+ * 这个添加了主进程转换和回调
+ * 拿到了服务的对象
+ * 和是否执行JAR 的业务逻辑
+ */
 public class ADBShellConn extends FServiceConn<ADBShellService> {
     private static final String TAG = "ADBShellConn";
     protected ADBShellService serviceAdbShell;
@@ -33,7 +37,7 @@ public class ADBShellConn extends FServiceConn<ADBShellService> {
     private int controlPort;
     private Thread2Main.OnThread2MainCallback<String, String, String> onThread2MainCallback;
     private ADBShellService.OnADBShellResListener onADBShellResListener;
-    private boolean isAdbRunJar = false;
+    private boolean isAdbRunJar = false;//是否执行JAR
 
     public void setOnThread2MainCallback(Thread2Main.OnThread2MainCallback<String, String, String> onThread2MainCallback) {
         this.onThread2MainCallback = onThread2MainCallback;

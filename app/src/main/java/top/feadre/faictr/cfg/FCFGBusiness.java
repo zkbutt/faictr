@@ -9,11 +9,17 @@ public final class FCFGBusiness {
         public final static String AU_NAME_APK_CFG = "output.json";
     }
 
+    public static final class FDialogBottomEdit {
+        //AutoUpdater
+        public final static String DEFAULT_NAME = "未知";
+    }
+
     public static final class SPSet {
         public final static String KEY_MAIN = "FMainActivity"; //哪个页面用哪个命名
         public final static String SIZE_RATIO = "size_ratio";
         public final static String BITRATE = "bitrate";
         public final static String DISPLAY_MODE = "display_mode";
+        public final static String LINK_IP = "link_ip";
 
         public final static String KEY_ADB = "AdbActivity";
         public final static String SERVER_ADDRESS = "Server Address";

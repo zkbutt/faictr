@@ -8,6 +8,10 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+/**
+ * 这个用于服务绑定时，进行停止，和状态处理的逻辑
+ * 服务需要注册哦
+ */
 public abstract class FServiceConn<T> implements ServiceConnection {
     private static final String TAG = "FServiceConn";
     protected Activity activity;
@@ -18,7 +22,7 @@ public abstract class FServiceConn<T> implements ServiceConnection {
     }
 
     @Override
-    public  void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         isServiceBound = true;
     }
 
@@ -28,6 +32,7 @@ public abstract class FServiceConn<T> implements ServiceConnection {
     }
 
     public void fstart_service(Class<T> cls) {
+        // 先停止再绑定
         if (getServiceBound()) {
             fstop_service();
         }

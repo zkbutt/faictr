@@ -34,6 +34,7 @@ import java.util.Arrays;
 
 import butterknife.BindView;
 import top.feadre.faictr.R;
+import top.feadre.faictr.activitys.Help4SharedPreferences;
 import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.FTools;
 
@@ -65,10 +66,11 @@ public class SettingsFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        sp = getContext().getSharedPreferences(FCFGBusiness.SPSet.KEY_MAIN, 0);
-        v_ctr_size_ratio = sp.getFloat(FCFGBusiness.SPSet.SIZE_RATIO, 0.6F);
-        v_ctr_bitrate = sp.getInt(FCFGBusiness.SPSet.BITRATE, 1024000);
-        v_ctr_display_mode = sp.getInt(FCFGBusiness.SPSet.DISPLAY_MODE, 0); // 0是拉伸屏幕
+        Help4SharedPreferences h = new Help4SharedPreferences(FCFGBusiness.SPSet.KEY_MAIN);
+        Help4SharedPreferences.DataMain dataMain = h.getMainSet();
+        v_ctr_size_ratio = dataMain.v_ctr_size_ratio;
+        v_ctr_bitrate = dataMain.v_ctr_bitrate;
+        v_ctr_display_mode = dataMain.v_ctr_display_mode;
 
         //初始化显示和取值
         arr_select_set_ctr_size_ratio = ResUtils.getStringArray(getContext(), R.array.select_set_ctr_size_ratio);

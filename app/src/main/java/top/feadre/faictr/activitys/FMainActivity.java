@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2023 xuexiangjys(xuexiangjys@163.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package top.feadre.faictr.activitys;
 
 
@@ -34,7 +17,6 @@ import com.xuexiang.xui.widget.edittext.materialedittext.validation.RegexpValida
 import com.xuexiang.xutil.app.ActivityUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,10 +25,10 @@ import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.FREValidator;
 import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.base.FBaseActivity;
-import top.feadre.faictr.flib.fviews.FDialogBottomEdit;
 import top.feadre.faictr.flib.net.FNetTools;
 import top.feadre.faictr.fragments.HelpFragment;
 import top.feadre.faictr.fragments.SettingsFragment;
+import top.feadre.faictr.services.adb.ADBShellService;
 
 public class FMainActivity extends FBaseActivity implements CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "FMainActivity";
@@ -72,6 +54,8 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
     private FMainHelp4AutoUpdater fMainHelp4AutoUpdater; //自动更新
     protected FMainHelp4NetUtils fMainHelp4NetUtils;
     private FMainHelp4ADBShellService fMainHelp4ADBShellService;
+    private final int control_port = 5555;
+    protected Help4SharedPreferences help4SharedPreferences;
 
     @Override
     protected int getLayoutId() {
@@ -97,6 +81,7 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
 
 
         /*添加顶部菜单*/
+        tb_titlebar.setLeftImageDrawable(null);
         tb_titlebar.addAction(new TitleBar.ImageAction(R.drawable.bt_help) {
             @Override
             public void performAction(View view) {
@@ -116,6 +101,10 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
         /*  --- ip输入校验 --- */
 //        met_ip.addValidator(new RegexpValidator("只能输入数字!", "\\d+"));
         vet_ip.addValidator(new RegexpValidator(getString(R.string.ValidatorEditText_regex_ip), FREValidator.REGEX_IP));
+
+        help4SharedPreferences = new Help4SharedPreferences(FCFGBusiness.SPSet.KEY_MAIN);
+        vet_ip.setText(help4SharedPreferences.getVetIpVal());
+
         sb_android11.setOnCheckedChangeListener(this);
 
         fMainHelp4FProgressDialog = new FMainHelp4FProgressDialog(this);
@@ -170,8 +159,19 @@ public class FMainActivity extends FBaseActivity implements CompoundButton.OnChe
 //                FTools.log_d(TAG,"validate = "+fvailid);
                 if (!fvailid) {
                     vet_ip.showErrorMsg();
+                    return;
                 }
                 fMainHelp4FProgressDialog.showDialog(getString(R.string.main_bt_one_link));
+                fMainHelp4ADBShellService.setAdbConnected(false);
+
+//                Help4SharedPreferences h = new Help4SharedPreferences();
+//                Help4SharedPreferences.DataMain dataMain = h.updateMainInfo();
+
+                //启动服务
+                fMainHelp4ADBShellService.fstart_service(
+                        ADBShellService.class,
+                        String.valueOf(vet_ip.getText()),
+                        control_port, true);
 
 
 //                XToastUtils.info(String.valueOf(validateOnFocusLost));

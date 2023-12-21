@@ -50,7 +50,7 @@ import top.feadre.faictr.flib.base.DelayThread2Main;
 import top.feadre.faictr.flib.base.Thread2Main;
 
 /**
- * 服务需要注册
+ * 服务需要注册 用于进行 adb 命令的响应逻辑
  */
 public class ADBShellService extends Service implements DelayThread2Main.FunDelay {
     private static final String TAG = "ADBShellService";
@@ -62,7 +62,7 @@ public class ADBShellService extends Service implements DelayThread2Main.FunDela
     protected final static int MSG_WHAT_OVER_FIRST = 101;
     protected final static int MSG_WHAT_OVER = 102;
     protected final static int MSG_WHAT_OVER_LINE = 103;
-    private boolean isAdbRunJar = false; //用于处理进度
+    private boolean isAdbRunJar = false; //用于处理进度 如果是运行jar 则进度减半 由 startConnect 中转传入
     private String host;
     private int port;
     private AdbConnection adbConnection;
@@ -86,16 +86,17 @@ public class ADBShellService extends Service implements DelayThread2Main.FunDela
 
             ADBShellOrderEntity obj = null;
             switch (msg.what) {
-                case MSG_WHAT_OVER_FIRST:
+                // 三种消息类型
+                case MSG_WHAT_OVER_FIRST://第一次连接成功的反馈不处理
                     obj = (ADBShellOrderEntity) msg.obj;
                     onADBShellResListener.onInitSuccess(obj);
                     onADBShellResListener.onResText(obj);
                     break;
-                case MSG_WHAT_OVER:
+                case MSG_WHAT_OVER://一个命令的结果输出完结
                     obj = (ADBShellOrderEntity) msg.obj;
                     onADBShellResListener.onResText(obj);
                     break;
-                case MSG_WHAT_OVER_LINE:
+                case MSG_WHAT_OVER_LINE://一个命令的过程输出 第行
                     String res_text = (String) msg.obj;
                     int isFinish = msg.arg1;
                     onADBShellResListener.onResTextLine(res_text, obj_order_entity.getOrderId(), isFinish);
@@ -251,17 +252,13 @@ public class ADBShellService extends Service implements DelayThread2Main.FunDela
     }
 
     private int getProgressVal(int val) {
+        // 三目运算 直接进度除以2
         return isAdbRunJar ? val / 2 : val;
-    }
-
-    public void setAdbRunJar(boolean adbRunJar) {
-        //startConnect
-        isAdbRunJar = adbRunJar; //
     }
 
     @Override
     public void on_fun_run4thread(DelayThread2Main that) {
-        //用DelayThread2Main start启动，这个就是核心运行方法
+        /**用DelayThread2Main start启动，这个就是核心运行方法  用于启动并进行循环侦听 */
         obj_socket = new Socket();
         try {
             //默认端口 5555
@@ -460,7 +457,9 @@ public class ADBShellService extends Service implements DelayThread2Main.FunDela
     }
 
     public interface OnADBShellResListener {
+        //adb shell命令完成后 启动完成
         void onInitSuccess(ADBShellOrderEntity objOrderEntity);
+
 
         void onResTextLine(String resText, int orderId, int isFinish);
 

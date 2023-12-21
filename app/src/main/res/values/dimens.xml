@@ -63,9 +63,9 @@
     <dimen name="main_top">10dp</dimen>
     <dimen name="main_lr">30dp</dimen>
     <dimen name="test_lr">10dp</dimen>
-    <dimen name="FloatingMenuButton_size">50dp</dimen>
-    <dimen name="FloatingSubButton_size">40dp</dimen>
-
+    <dimen name="FloatingMenuButton_size">35dp</dimen>
+    <dimen name="FloatingSubButton_size">30dp</dimen>
+    <dimen name="FloatingActionMenu_size">35dp</dimen>
 
 
 </resources>

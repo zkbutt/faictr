@@ -498,9 +498,13 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <string name="FMainHelp4FProgressDialog_bt_ip_search">扫描</string>
     <string name="FMainHelp4NetUtils_on_fun_res_success">找到 %s 个设备, %s，请点击历史选择</string>
 
+    <string name="FMain_on_back_pressed">再次回退将退出APP</string>
+
     <!--  AdbActivity  -->
     <string name="adb_linking">ADB Shell连接中</string>
 
+    <!--  CtrActivity  -->
+    <string name="ctr_on_back_pressed">再次回退将退出控制</string>
 
     <!--自动更新-->
     <string name="au_dialog_title">正在更新，%s版本！</string>

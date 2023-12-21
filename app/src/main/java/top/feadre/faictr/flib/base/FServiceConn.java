@@ -8,6 +8,8 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import top.feadre.faictr.flib.FTools;
+
 /**
  * 这个用于服务绑定时，进行停止，和状态处理的逻辑
  * 服务需要注册哦
@@ -39,11 +41,11 @@ public abstract class FServiceConn<T> implements ServiceConnection {
         //网 PING 成功，开始绑定并开启ADB  执行 conn_adb_shell 及回调
         Intent intent = new Intent(activity, cls);
         activity.bindService(intent, this, Context.BIND_AUTO_CREATE);
-        Log.d(TAG, "fstart_service: 绑定中......");
+        FTools.log_d(TAG, "fstart_service: 绑定中......");
     }
 
     public void fstop_service() {
-        Log.d(TAG, "fstop_service: ---");
+        FTools.log_d(TAG, "fstop_service: ---");
         if (getServiceBound()) {
             try {
                 activity.unbindService(this);//这个触发是子线程

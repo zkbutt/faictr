@@ -71,20 +71,17 @@ public class FMainHelp4FDialogBottomEdit extends FDialogBottomEdit {
      * 添加一条数据
      */
     @Override
-    public boolean addData(EntityItem4SimpleRecyclerAdapter e) {
-        boolean b = super.addData(e);
+    public void addData(EntityItem4SimpleRecyclerAdapter e) {
+        super.addData(e);
         FTools.log_d(TAG, "addData "
                 + " fspHistory.getDatas().size() = " + fspHistory.getDatas().size()
                 + " mAdapter.getData() = " + this.getDatas().size()
         );
-        if (b) {
-            fspHistory.add(e);
-        }
+        fspHistory.add(e);
         FTools.log_d(TAG, "addData "
                 + " fspHistory.getDatas().size() = " + fspHistory.getDatas().size()
                 + " mAdapter.getData() = " + this.getDatas().size()
         );
-        return b;
     }
 
     /**

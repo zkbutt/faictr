@@ -24,8 +24,8 @@ public class AdbActivityFSPHistory extends FSPHistory<String> {
     @Override
     public void init() {
         this.datas.add("ls -l");
-        this.datas.add("cat /data/local/tmp/aaa");
-        this.datas.add("rm /data/local/tmp/aaa");
+        this.datas.add("cat /data/local/tmp/" + FMainHelp4ADBShellService.FILE_LOG);
+        this.datas.add("rm /data/local/tmp/" + FMainHelp4ADBShellService.FILE_LOG);
         this.datas.add(String.format(ADBCommands.Order.SYS_CD, "/data/local/tmp"));
         super.init();
     }

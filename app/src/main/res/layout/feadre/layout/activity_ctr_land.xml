@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:floatingMenuActionButton="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <SurfaceView
+        android:id="@+id/sv_decoder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+<!--    36 x 36-->
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fam_ctr"
+        style="@style/FabMenu"
+        android:layout_width="@dimen/FloatingSubButton_size"
+        android:layout_height="@dimen/FloatingSubButton_size"
+        android:layout_marginTop="6dp"
+        android:layout_alignParentRight="true"
+        floatingMenuActionButton:menu_icon="@drawable/ctr_mode"
+        floatingMenuActionButton:menu_buttonSpacing="-5dp"
+        floatingMenuActionButton:menu_colorNormal="#3E99D2"
+        floatingMenuActionButton:menu_colorPressed="#2488C6"
+        floatingMenuActionButton:menu_colorRipple="#AF2488C6"
+        floatingMenuActionButton:menu_openDirection="down"
+        android:alpha="0.4"
+        >
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fam_ctr_bt1"
+            style="@style/FabMenu.Buttons"
+            android:src="@drawable/ic_fab_loading" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fam_ctr_bt2"
+            style="@style/FabMenu.Buttons"
+            android:src="@drawable/ic_fab_empty"
+            />
+<!--        floatingMenuActionButton:fab_label="显示空视图"-->
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fam_ctr_bt3"
+            style="@style/FabMenu.Buttons"
+            android:src="@drawable/ic_fab_error"
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fam_ctr_bt4"
+            style="@style/FabMenu.Buttons"
+            android:src="@drawable/ic_fab_no_network"
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fam_ctr_bt5"
+            style="@style/FabMenu.Buttons"
+            android:src="@drawable/ic_fab_content"
+            />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+    <rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton
+        android:id="@+id/fmb_ctr_l"
+        android:layout_width="@dimen/FloatingMenuButton_size"
+        android:layout_height="@dimen/FloatingMenuButton_size"
+        android:alpha="0.4"
+        android:layout_marginLeft="6dp"
+        android:background="@mipmap/ctr_mutual_round"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+
+        android:scaleType="centerInside"
+        floatingMenuActionButton:animationType="radial"
+        floatingMenuActionButton:dispositionEndAngle="360"
+        floatingMenuActionButton:dispositionStartAngle="0"
+        floatingMenuActionButton:layout_constraintBottom_toBottomOf="parent"
+        floatingMenuActionButton:layout_constraintLeft_toLeftOf="parent"
+        floatingMenuActionButton:layout_constraintRight_toRightOf="parent"
+        floatingMenuActionButton:layout_constraintTop_toTopOf="parent"
+        floatingMenuActionButton:subActionButtonRadius="150">
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_l_bt1"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/one" />
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_l_bt2"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/two" />
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_l_bt3"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/three" />
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_l_bt4"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/four" />
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_l_bt5"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/five" />
+
+    </rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton>
+
+    <rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton
+        android:id="@+id/fmb_ctr_r"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="6dp"
+        android:layout_width="@dimen/FloatingMenuButton_size"
+        android:layout_height="@dimen/FloatingMenuButton_size"
+        android:alpha="0.4"
+
+        android:background="@mipmap/ctr_bt_round"
+        android:scaleType="centerInside"
+        floatingMenuActionButton:animationType="radial"
+        floatingMenuActionButton:dispositionEndAngle="360"
+        floatingMenuActionButton:dispositionStartAngle="0"
+        floatingMenuActionButton:layout_constraintBottom_toBottomOf="parent"
+        floatingMenuActionButton:layout_constraintLeft_toLeftOf="parent"
+        floatingMenuActionButton:layout_constraintRight_toRightOf="parent"
+        floatingMenuActionButton:layout_constraintTop_toTopOf="parent"
+        floatingMenuActionButton:subActionButtonRadius="150">
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_r_bt1"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/one" />
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_r_bt2"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/two" />
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_r_bt3"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/three" />
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_r_bt4"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/four" />
+
+        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
+            android:id="@+id/fmb_ctr_r_bt5"
+            android:layout_width="@dimen/FloatingSubButton_size"
+            android:layout_height="@dimen/FloatingSubButton_size"
+            android:background="@drawable/five" />
+
+    </rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton>
+
+
+</RelativeLayout>

@@ -21,7 +21,7 @@ public class Help4SharedPreferences {
         sp = XUI.getContext().getSharedPreferences(key_sp, 0);
     }
 
-    public DataMain getMainSet() {
+    public DataMain getMainCfg() {
         float v_ctr_size_ratio = sp.getFloat(FCFGBusiness.SPSet.SIZE_RATIO, 0.6F);
         int v_ctr_bitrate = sp.getInt(FCFGBusiness.SPSet.BITRATE, 1024000);
         int v_ctr_display_mode = sp.getInt(FCFGBusiness.SPSet.DISPLAY_MODE, 0); // 0是拉伸屏幕

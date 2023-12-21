@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
@@ -17,6 +18,8 @@ import android.view.ViewConfiguration;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.xuexiang.xui.utils.XToastUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,6 +34,9 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.security.MessageDigest;
 import java.util.Enumeration;
+
+import top.feadre.faictr.R;
+import top.feadre.faictr.cfg.FCFGBusiness;
 
 public class FToolsAndroid {
     private static final String TAG = "FToolsAndroid";
@@ -274,6 +280,26 @@ public class FToolsAndroid {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     tts.speak(ttsText, TextToSpeech.QUEUE_FLUSH, null, null);
                 }
+            }
+        }
+
+        public static void fOnBackPressed(Activity activity, int res_string_id) {
+            // 两次返回退回
+            if (FCFGBusiness.Temp.on_back_pressed_temp_time == 0) {
+                FCFGBusiness.Temp.on_back_pressed_temp_time = SystemClock.uptimeMillis();
+                CharSequence text = activity.getResources().getText(res_string_id);
+                XToastUtils.info(String.valueOf(text));
+            } else {
+                long now = SystemClock.uptimeMillis();
+                if (now < FCFGBusiness.Temp.on_back_pressed_temp_time + 1000) {
+                    FCFGBusiness.Temp.on_back_pressed_temp_time = 0;
+                    //                if (is_service_bound) {
+////                    MainActivity.service_scrcpy.stop_service();
+////                    unbindService(serviceConnection);
+//                }
+                    activity.finish();
+                }
+                FCFGBusiness.Temp.on_back_pressed_temp_time = 0;
             }
         }
     }

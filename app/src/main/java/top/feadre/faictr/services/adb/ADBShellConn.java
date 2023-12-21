@@ -37,7 +37,7 @@ public class ADBShellConn extends FServiceConn<ADBShellService> {
     private int controlPort;
     private Thread2Main.OnThread2MainCallback<String, String, String> onThread2MainCallback;
     private ADBShellService.OnADBShellResListener onADBShellResListener;
-    private boolean isAdbRunJar = false;//是否执行JAR
+    private boolean isAdbRunJar = false;//是否执行JAR 用于中转，启动时传入服务中
 
     public void setOnThread2MainCallback(Thread2Main.OnThread2MainCallback<String, String, String> onThread2MainCallback) {
         this.onThread2MainCallback = onThread2MainCallback;

@@ -42,6 +42,7 @@ public class AdbHelp4FProgressDialog extends FProgressDialog implements FProgres
 
     @Override
     public void on_dialog_success(String id, DialogInterface di) {
+        // 当进度 100 时
         FTools.log_d(TAG, "任务成功 id = " + id);
     }
 

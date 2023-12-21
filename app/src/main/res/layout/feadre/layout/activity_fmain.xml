@@ -155,6 +155,13 @@
 
         </LinearLayout>
 
+        <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
+            android:visibility="gone"
+            android:id="@+id/ftl_debug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.xuexiang.xui.widget.flowlayout.FlowTagLayout>
 
         <!--        <TextView-->
         <!--            android:layout_width="match_parent"-->

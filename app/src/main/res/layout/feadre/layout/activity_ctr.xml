@@ -5,19 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
+    >
+    <SurfaceView
+        android:id="@+id/sv_decoder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CTR" />
+        android:layout_height="match_parent"
+        />
 
 <!--    36 x 36-->
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fam_ctr"
         style="@style/FabMenu"
-        android:layout_width="@dimen/FloatingSubButton_size"
-        android:layout_height="@dimen/FloatingSubButton_size"
+        android:layout_width="@dimen/FloatingActionMenu_size"
+        android:layout_height="@dimen/FloatingActionMenu_size"
         android:layout_marginTop="6dp"
         android:layout_alignParentRight="true"
         floatingMenuActionButton:menu_icon="@drawable/ctr_mode"
@@ -69,7 +69,7 @@
         android:layout_marginLeft="6dp"
         android:background="@mipmap/ctr_mutual_round"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="130dp"
 
         android:scaleType="centerInside"
         floatingMenuActionButton:animationType="radial"
@@ -115,12 +115,12 @@
 
     <rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton
         android:id="@+id/fmb_ctr_r"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="100dp"
-        android:layout_marginRight="6dp"
         android:layout_width="@dimen/FloatingMenuButton_size"
         android:layout_height="@dimen/FloatingMenuButton_size"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="130dp"
         android:alpha="0.4"
 
         android:background="@mipmap/ctr_bt_round"

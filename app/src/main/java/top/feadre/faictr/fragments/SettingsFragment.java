@@ -67,7 +67,7 @@ public class SettingsFragment extends BaseFragment {
     @Override
     protected void initViews() {
         Help4SharedPreferences h = new Help4SharedPreferences(FCFGBusiness.SPSet.KEY_MAIN);
-        Help4SharedPreferences.DataMain dataMain = h.getMainSet();
+        Help4SharedPreferences.DataMain dataMain = h.getMainCfg();
         v_ctr_size_ratio = dataMain.v_ctr_size_ratio;
         v_ctr_bitrate = dataMain.v_ctr_bitrate;
         v_ctr_display_mode = dataMain.v_ctr_display_mode;

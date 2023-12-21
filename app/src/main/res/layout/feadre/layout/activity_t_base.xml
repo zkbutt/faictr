@@ -101,27 +101,6 @@
         android:paddingHorizontal="5dp">
 
         <Button
-            android:id="@+id/bt_start_adb_fast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/test_lr"
-            android:text="快速ADB" />
-
-        <Button
-            android:id="@+id/bt_start_scrcpy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/test_lr"
-            android:text="开启服务" />
-
-        <Button
-            android:id="@+id/bt_start_transmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/test_lr"
-            android:text="开启传输" />
-
-        <Button
             android:id="@+id/bt_debug_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -84,4 +84,8 @@
 
     <color name="config_color_select_bg">#FFF1F1F1</color>
 
+    <!-- ctr -->
+    <color name="ctr_bt_checked_color">#f26d7d</color>
+    <color name="ctr_bt_normal_color">#ffffffff</color>
+
 </resources>

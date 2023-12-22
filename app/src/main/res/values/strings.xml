@@ -505,6 +505,10 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
 
     <!--  CtrActivity  -->
     <string name="ctr_on_back_pressed">再次回退将退出控制</string>
+    <string name="bt_appswitch">□</string>
+    <string name="bt_home">○</string>
+    <string name="bt_back">△</string>
+    <string name="bt_exit">×</string>
 
     <!--自动更新-->
     <string name="au_dialog_title">正在更新，%s版本！</string>
@@ -516,10 +520,12 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <string name="au_update_cancel">以后再说</string>
 
     <!--    SettingsFragment-->
-    <string name="set_title_1">控制参数配置</string>
-    <string name="set_label_ctr_size_ratio">传输尺寸比例</string>
+    <string name="set_title_1">传输参数配置</string>
+    <string name="set_title_2">本机参数配置</string>
+    <string name="set_label_ctr_quality_ratio">传输画质比例</string>
     <string name="set_label_ctr_bitrate">传输码率</string>
-    <string name="set_label_ctr_display_mode">显示模式</string>
+    <string name="set_label_ctr_display_mode">本机显示模式</string>
+    <string name="set_label_ctr_show_ratio">本机显示比例</string>
 
     <!--    控件-->
     <string name="FSwipeRecyclerView_bt_add">添加</string>

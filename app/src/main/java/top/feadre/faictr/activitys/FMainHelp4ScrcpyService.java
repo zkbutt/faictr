@@ -2,15 +2,11 @@ package top.feadre.faictr.activitys;
 
 
 import android.content.ComponentName;
-import android.graphics.Color;
 import android.os.IBinder;
-import android.util.Log;
 
-import com.xuexiang.xtask.logger.TaskLogger;
 import com.xuexiang.xui.utils.XToastUtils;
 
 import top.feadre.faictr.flib.FTools;
-import top.feadre.faictr.flib.FToolsAndroid;
 import top.feadre.faictr.flib.base.FServiceConn;
 import top.feadre.faictr.services.scrcpy.ScrcpyService;
 
@@ -40,16 +36,6 @@ public class FMainHelp4ScrcpyService extends FServiceConn<ScrcpyService> impleme
 
 
     @Override
-    public void on_remote_resolution_gain(int[] remote_resolution_wh) {
-        // 这个在子进程不能更新 UI
-        FTools.log_d(TAG, "on_remote_resolution_change: ---w: "
-                + remote_resolution_wh[0] + "  h: " + remote_resolution_wh[1]);
-        fmainActivity.remote_ctr_resolution_wh[0] = remote_resolution_wh[0];
-        fmainActivity.remote_ctr_resolution_wh[1] = remote_resolution_wh[1];
-        // 成功后更新 s _resolution 和UI
-    }
-
-    @Override
     public void on_fun_running4scrcpy(int status_run, String text) {
         FTools.log_d(TAG, "on_fun_running4scrcpy: text = " + text);
         fmainActivity.fMainHelp4FProgressDialog.updateProgress(60, text);
@@ -68,11 +54,13 @@ public class FMainHelp4ScrcpyService extends FServiceConn<ScrcpyService> impleme
 
     @Override
     public void on_fun_success4scrcpy(int statusRun, String text) {
-        int[] remoteDeviceResolution = serviceScrcpy.get_remote_resolution_wh();
-        fmainActivity.remote_ctr_resolution_wh[0] = remoteDeviceResolution[0];
-        fmainActivity.remote_ctr_resolution_wh[1] = remoteDeviceResolution[1];
-        FTools.log_d(TAG, "on_fun_success4scrcpy: ---w: "
-                + fmainActivity.remote_ctr_resolution_wh[0] + " h: " +  fmainActivity.remote_ctr_resolution_wh[1]);
+        // start_services4thread 运行完成
+//        int[] remoteDeviceResolution = serviceScrcpy.get_remote_resolution_wh();
+//        fmainActivity.remote_ctr_resolution_wh[0] = remoteDeviceResolution[0];
+//        fmainActivity.remote_ctr_resolution_wh[1] = remoteDeviceResolution[1];
+//        FTools.log_d(TAG, "on_fun_success4scrcpy: ---"
+//                + " w: " + fmainActivity.remote_ctr_resolution_wh[0]
+//                + " h: " + fmainActivity.remote_ctr_resolution_wh[1]);
         isServiceBound = true;
 
         fmainActivity.update_surface_resolution();
@@ -84,5 +72,16 @@ public class FMainHelp4ScrcpyService extends FServiceConn<ScrcpyService> impleme
             XToastUtils.success(text + ",可以开始传输");
             fmainActivity.fMainHelp4FProgressDialog.updateProgress(100, text);
         }
+    }
+
+    @Override
+    public void on_remote_resolution_gain(int[] remote_resolution_wh) {
+        // 当7007连接成功时反馈， 远程屏分辨率时 这个在子进程不能更新 UI
+        fmainActivity.remote_wh[0] = remote_resolution_wh[0];
+        fmainActivity.remote_wh[1] = remote_resolution_wh[1];
+        FTools.log_d(TAG, "on_remote_resolution_gain: ---"
+                + " w: " + fmainActivity.remote_wh[0]
+                + " h: " + fmainActivity.remote_wh[1]);
+        // 成功后更新 s _resolution 和UI
     }
 }

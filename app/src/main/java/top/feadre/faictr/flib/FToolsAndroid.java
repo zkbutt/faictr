@@ -302,6 +302,15 @@ public class FToolsAndroid {
                 FCFGBusiness.Temp.on_back_pressed_temp_time = 0;
             }
         }
+
+
+        public static int[] getDisplaySize(Context context) {
+            DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+            int[] res_wh = new int[2];
+            res_wh[0] = displayMetrics.widthPixels;
+            res_wh[1] = displayMetrics.heightPixels;
+            return res_wh;
+        }
     }
 
 }

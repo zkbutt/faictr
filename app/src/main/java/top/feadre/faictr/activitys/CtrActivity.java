@@ -1,7 +1,6 @@
 package top.feadre.faictr.activitys;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,16 +8,19 @@ import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.xuexiang.xui.utils.XToastUtils;
 
-import butterknife.BindView;
 import rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton;
 import rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton;
 import top.feadre.faictr.R;
+import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.FTools;
+import top.feadre.faictr.flib.FToolsAndroid;
+import top.feadre.faictr.flib.fviews.FShineLayout;
 import top.feadre.faictr.services.scrcpy.ScrcpyService;
 
 public class CtrActivity extends Activity implements
@@ -28,7 +30,7 @@ public class CtrActivity extends Activity implements
     private boolean is_landscape = false; //是否横屏 只影响 setRequestedOrientation 用于触发
     private boolean is_first_run = true; //消失后重新计算
     private boolean is_control = true;
-    private final int[] surface_wh = new int[2];
+    private final int[] transmit_wh = new int[2]; //传输分辨率
 
     private FloatingSubButton fmb_ctr_l_bt1;
     private FloatingSubButton fmb_ctr_l_bt2;
@@ -54,6 +56,8 @@ public class CtrActivity extends Activity implements
     private SurfaceView sv_decoder;
     private Surface obj_surface;
     private CtrHandler handler_ctr;
+    private Help4SharedPreferences.DataMain spMainCfg;
+    private FShineLayout bt_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +68,14 @@ public class CtrActivity extends Activity implements
          * */
         super.onCreate(savedInstanceState);
         FTools.log_d(TAG, "onCreate: ------ is_first_run = " + is_first_run);
-        surface_wh[0] = FMainActivity.surface_resolution_wh[0];
-        surface_wh[1] = FMainActivity.surface_resolution_wh[1];
-        is_landscape = surface_wh[0] > surface_wh[1];
+        // 计算显示分辨率
+        int[] displaySize = FToolsAndroid.SYS.getDisplaySize(this);
+        spMainCfg = new Help4SharedPreferences(FCFGBusiness.SPSet.KEY_MAIN).getMainCfg();
+//        spMainCfg.v_ctr_bt_bottom
+
+        transmit_wh[0] = FMainActivity.transmit_wh[0];
+        transmit_wh[1] = FMainActivity.transmit_wh[1];
+        is_landscape = transmit_wh[0] > transmit_wh[1];
         if (is_landscape) {
             FTools.log_d(TAG, "onCreate: 启动横屏状态---------------");
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//设置为竖屏
@@ -81,8 +90,8 @@ public class CtrActivity extends Activity implements
 
         initSer(); //这个在 onConfigurationChanged 中复用
 
-        FTools.log_d(TAG, "onCreate: 运行完成---------------- surface_wh = " + surface_wh[0]
-                + " x " + surface_wh[1]);
+        FTools.log_d(TAG, "onCreate: 运行完成---------------- surface_wh = " + transmit_wh[0]
+                + " x " + transmit_wh[1]);
     }
 
     private void initSer() {
@@ -90,10 +99,15 @@ public class CtrActivity extends Activity implements
 
         //开启传输
         FMainActivity.service_scrcpy.start_ser(obj_surface, handler_ctr,
-                surface_wh[0], surface_wh[1]);
+                transmit_wh[0], transmit_wh[1]);
     }
 
     private void initViews() {
+
+        bt_back = findViewById(R.id.bt_back);
+        bt_back.setOnClickListener(this);
+
+
         fam_ctr = findViewById(R.id.fam_ctr);
         fmb_ctr_r = findViewById(R.id.fmb_ctr_r);
         fmb_ctr_l = findViewById(R.id.fmb_ctr_l);
@@ -153,6 +167,10 @@ public class CtrActivity extends Activity implements
                 return false;
             }
         });
+        ViewGroup.LayoutParams layoutParams = sv_decoder.getLayoutParams();
+        layoutParams.width = 500;
+        layoutParams.height = 1100;
+        sv_decoder.setLayoutParams(layoutParams);
     }
 
     @Override
@@ -165,6 +183,11 @@ public class CtrActivity extends Activity implements
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.bt_back:
+                bt_back.callOnClick();
+                XToastUtils.info("bt_back");
+                break;
+
             case R.id.fmb_ctr_l_bt1:
                 XToastUtils.info("fmb_ctr_l_bt1");
                 break;
@@ -250,9 +273,9 @@ public class CtrActivity extends Activity implements
 
 
     private void swap_surface_wh() {
-        int _t = surface_wh[0];
-        surface_wh[0] = surface_wh[1];
-        surface_wh[1] = _t;
+        int _t = transmit_wh[0];
+        transmit_wh[0] = transmit_wh[1];
+        transmit_wh[1] = _t;
     }
 
 

@@ -46,12 +46,12 @@ import java.lang.ref.WeakReference;
  * @since 2020-01-06 13:16
  */
 public class ShineButton extends PorterShapeImageView implements Checkable {
-    private boolean mIsChecked = false;
+    protected boolean mIsChecked = false;
 
-    private int mNormalColor;
-    private int mCheckedColor;
+    protected int mNormalColor;
+    protected int mCheckedColor;
 
-    private ValueAnimator mShakeAnimator;
+    protected ValueAnimator mShakeAnimator;
     private ShineView.ShineParams mShineParams = new ShineView.ShineParams();
 
     private OnCheckedChangeListener mOnCheckedChangeListener;
@@ -138,7 +138,7 @@ public class ShineButton extends PorterShapeImageView implements Checkable {
         setChecked(checked, anim, true);
     }
 
-    private void setChecked(boolean checked, boolean anim, boolean callBack) {
+    protected void setChecked(boolean checked, boolean anim, boolean callBack) {
         mIsChecked = checked;
         if (checked) {
             setTintColor(mCheckedColor);
@@ -163,7 +163,7 @@ public class ShineButton extends PorterShapeImageView implements Checkable {
         setChecked(checked, false, false);
     }
 
-    private void onCheckedChanged(boolean checked) {
+    protected void onCheckedChanged(boolean checked) {
         if (mOnCheckedChangeListener != null) {
             mOnCheckedChangeListener.onCheckedChanged(this, checked);
         }
@@ -289,7 +289,7 @@ public class ShineButton extends PorterShapeImageView implements Checkable {
         return this;
     }
 
-    private void doShareAnim() {
+    protected void doShareAnim() {
         mShakeAnimator = ValueAnimator.ofFloat(0.4f, 1f, 0.9f, 1f);
         mShakeAnimator.setInterpolator(new LinearInterpolator());
         mShakeAnimator.setDuration(500);

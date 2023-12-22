@@ -3,7 +3,6 @@ package top.feadre.faictr.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -19,6 +18,7 @@ import com.xuexiang.xui.widget.edittext.materialedittext.validation.RegexpValida
 import com.xuexiang.xutil.app.ActivityUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -68,15 +68,21 @@ public class FMainActivity extends FBaseActivity implements
     protected int state_dialog_run = 0;//0未启动 1网络启动 2ADB已启动 3scrcpy服务开始
     protected boolean is_bt_one_link = false;
     protected String control_ip_str;
-    public int remote_device_width;//远程屏幕真实尺寸
+    public int remote_device_width;//远程屏幕真实尺寸 在ADB时获取 用于executeRunJar时取最大的运行，和提前显示
     public int remote_device_height;
     protected String remote_device_name;
     protected Help4SharedPreferences.DataMain spMainCfg;//配置更新
     private boolean is_start_ctr_activity;
     public static ScrcpyService service_scrcpy;
-    protected static final int[] surface_resolution_wh = new int[2];//用于CTR 显示的分辨率
-    public static final int[] remote_ctr_resolution_wh = new int[2]; //远程控制分辨率
-
+    /*
+     * 由 remote_ctr_resolution_wh 结合配置 spMainCfg.v_ctr_size_ratio
+     * 用于横屏坚屏， *** 指定远程传输尺寸 ***
+     * */
+//    protected static int[] local_wh;//本机 的分辨率 oncreate 初始化
+//    protected static final int[] surface_wh = new int[2];//surface 的分辨率 对应
+    protected static final int[] transmit_wh = new int[2]; //传输的分辨率
+    //远程屏幕分辨率：1.在 7007获取 用于求 surface_resolution_wh
+    public static final int[] remote_wh = new int[2];//远程屏幕的分辨率
 
     @Override
     protected int getLayoutId() {
@@ -87,6 +93,7 @@ public class FMainActivity extends FBaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FTools.log_d(TAG, "onCreate");
+//        local_wh = FToolsAndroid.SYS.getDisplaySize(this);
 
         //自动更新
         fMainHelp4AutoUpdater = new FMainHelp4AutoUpdater(this,
@@ -145,6 +152,7 @@ public class FMainActivity extends FBaseActivity implements
                 return false;
             }
         });
+
 
         FMainDebug fMainDebug = new FMainDebug(this);
         fMainDebug.debug_init();
@@ -337,8 +345,20 @@ public class FMainActivity extends FBaseActivity implements
     }
 
     public void update_surface_resolution() {
-        surface_resolution_wh[0] = (int) (remote_ctr_resolution_wh[0] * spMainCfg.v_ctr_size_ratio);
-        surface_resolution_wh[1] = (int) (remote_ctr_resolution_wh[1] * spMainCfg.v_ctr_size_ratio);
+        // 由 FMainHelp4ScrcpyService on_fun_success4scrcpy  运行成功时赋值
+        transmit_wh[0] = (int) (remote_wh[0] * spMainCfg.v_ctr_quality_ratio);
+        transmit_wh[1] = (int) (remote_wh[1] * spMainCfg.v_ctr_quality_ratio);
+
+
+        // update_surface_resolution
+        //       本机屏幕尺寸：[1080, 2030]
+        //       远程屏幕尺寸：720x1520
+        //       传输尺寸：432x912:
+        FTools.log_d(TAG, "update_surface_resolution "
+                + "\n 本机屏幕尺寸：" + Arrays.toString(FToolsAndroid.SYS.getDisplaySize(this))
+                + "\n 远程屏幕尺寸：" + remote_device_width + "x" + remote_device_height
+                + "\n 传输尺寸：" + transmit_wh[0] + "x" + transmit_wh[1]
+        );
     }
 
     public void start_ctr_activity() {

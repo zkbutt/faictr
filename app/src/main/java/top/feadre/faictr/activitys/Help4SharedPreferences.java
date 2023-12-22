@@ -21,11 +21,37 @@ public class Help4SharedPreferences {
         sp = XUI.getContext().getSharedPreferences(key_sp, 0);
     }
 
+    public class DataMain {
+        public float v_ctr_quality_ratio;
+        public int v_ctr_bitrate;
+        public int v_ctr_display_mode; // 拉伸尺寸-0  保持比例-1
+        public Float v_ctr_show_ratio;
+        public boolean v_ctr_bt_bottom;
+
+        public DataMain(float v_ctr_quality_ratio,float v_ctr_show_ratio,
+                        int v_ctr_bitrate, int v_ctr_display_mode,boolean v_ctr_bt_bottom) {
+            this.v_ctr_quality_ratio = v_ctr_quality_ratio;
+            this.v_ctr_show_ratio = v_ctr_show_ratio;
+            this.v_ctr_bitrate = v_ctr_bitrate;
+            this.v_ctr_display_mode = v_ctr_display_mode;
+            this.v_ctr_bt_bottom = v_ctr_bt_bottom;
+        }
+
+    }
+
     public DataMain getMainCfg() {
-        float v_ctr_size_ratio = sp.getFloat(FCFGBusiness.SPSet.SIZE_RATIO, 0.6F);
+        float v_ctr_size_ratio = sp.getFloat(FCFGBusiness.SPSet.QUALITY_RATIO, 0.6F);
+        float v_ctr_show_ratio = sp.getFloat(FCFGBusiness.SPSet.SHOW_RATIO, 1.0F); // 0是拉伸屏幕
         int v_ctr_bitrate = sp.getInt(FCFGBusiness.SPSet.BITRATE, 1024000);
         int v_ctr_display_mode = sp.getInt(FCFGBusiness.SPSet.DISPLAY_MODE, 0); // 0是拉伸屏幕
-        DataMain dataMain = new DataMain(v_ctr_size_ratio, v_ctr_bitrate, v_ctr_display_mode);
+        boolean v_ctr_bt_bottom = sp.getBoolean(FCFGBusiness.SPSet.BT_BOTTOM, true);
+        DataMain dataMain = new DataMain(
+                v_ctr_size_ratio,
+                v_ctr_show_ratio,
+                v_ctr_bitrate,
+                v_ctr_display_mode,
+                v_ctr_bt_bottom
+        );
         return dataMain;
     }
 
@@ -37,16 +63,7 @@ public class Help4SharedPreferences {
         sp.edit().putString(FCFGBusiness.SPSet.LINK_IP, ip).apply();
     }
 
-    public class DataMain {
-        public float v_ctr_size_ratio;
-        public int v_ctr_bitrate;
-        public int v_ctr_display_mode;
-
-        public DataMain(float v_ctr_size_ratio, int v_ctr_bitrate, int v_ctr_display_mode) {
-            this.v_ctr_size_ratio = v_ctr_size_ratio;
-            this.v_ctr_bitrate = v_ctr_bitrate;
-            this.v_ctr_display_mode = v_ctr_display_mode;
-        }
+    public SharedPreferences getSp() {
+        return sp;
     }
-
 }

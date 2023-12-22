@@ -66,6 +66,9 @@
     <dimen name="FloatingMenuButton_size">35dp</dimen>
     <dimen name="FloatingSubButton_size">30dp</dimen>
     <dimen name="FloatingActionMenu_size">35dp</dimen>
+    <dimen name="CtrActivity_bt_ctr_base">30dp</dimen>
+    <dimen name="CtrActivity_bt_ctr_back">37dp</dimen>
+    <dimen name="CtrActivity_nav_bar_wh">40dp</dimen>
 
 
 </resources>

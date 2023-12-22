@@ -59,7 +59,7 @@ public class ScrcpyService extends Service {
     private AtomicBoolean is_receive_update_video = new AtomicBoolean(false); //阻塞 视频管道
     //    private Handler handler4link; //通过接口回调
     private Handler handler4ser;
-    private Surface surface;
+    private Surface surface; //这个的用来接收图像的大小
     private int surface_resolution_w;
     private int surface_resolution_h;
     private Socket socket = null;
@@ -98,7 +98,7 @@ public class ScrcpyService extends Service {
                 //获取控制机分辨率  及设置显示的分辨率
                 byte[] buf = new byte[16];
                 dataInputStream.read(buf, 0, 16);//拿到远程分辨率
-
+                // 由 sever 端解析到结果
                 for (int i = 0; i < remote_resolution_wh.length; i++) {
                     remote_resolution_wh[i] = (((int) (buf[i * 4]) << 24) & 0xFF000000) | (((int) (buf[i * 4 + 1]) << 16) & 0xFF0000) | (((int) (buf[i * 4 + 2]) << 8) & 0xFF00) | ((int) (buf[i * 4 + 3]) & 0xFF);
                 }
@@ -196,7 +196,10 @@ public class ScrcpyService extends Service {
                              * 第一次运行----videoPacket.flag = CONFIG
                              * 第一次运行----videoPacket.flag = FRAME
                              * */
-                            Log.d(TAG, "_show_video: 第一次运行----videoPacket.flag = " + videoPacket.flag + " surface_resolution_w =" + surface_resolution_w + " surface_resolution_h =" + surface_resolution_h);
+                            Log.d(TAG, "_show_video: 第一次运行----"
+                                    + " videoPacket.flag = " + videoPacket.flag
+                                    + " surface_resolution_w =" + surface_resolution_w
+                                    + " surface_resolution_h =" + surface_resolution_h);
 
                             if (videoPacket.flag == VideoPacket.Flag.CONFIG) {
                                 //第一次连通后数据， 中间锁屏 关闭后不再运行---复用 旋转时需重建这个
@@ -206,7 +209,9 @@ public class ScrcpyService extends Service {
 
                             try {
                                 //内部出错不中止 7007 端口
-                                videoDecoder.configure_worker4surface(surface, surface_resolution_w, surface_resolution_h, streamSettings.sps, streamSettings.pps);
+                                videoDecoder.configure_worker4surface(surface,
+                                        surface_resolution_w, surface_resolution_h,
+                                        streamSettings.sps, streamSettings.pps);
                             } catch (Exception e) {
                                 Log.e(TAG, "_show_video: 第一次运行 configure 出错" + e.getMessage());
                                 if (handler4ser != null) {
@@ -301,7 +306,8 @@ public class ScrcpyService extends Service {
         is_socket_success.set(true);
     }
 
-    public void start_ser(Surface surface, Handler handler, int surface_resolution_w, int surface_resolution_h) {
+    public void start_ser(Surface surface, Handler handler,
+                          int surface_resolution_w, int surface_resolution_h) {
         Log.d(TAG, "start_ser: ---");
         this.surface = surface;
         this.handler4ser = handler;
@@ -316,10 +322,13 @@ public class ScrcpyService extends Service {
     }
 
     public boolean touch_event(MotionEvent touch_event, int displayW, int displayH) {
-        //触模在这里
+        /**
+         * 用于 sv_decoder setOnTouchListener 联动调用
+         * displayW = sv_decoder.getWidth()
+         * */
         if (is_service_running.get()) {
             //这里需要真实的屏幕尺寸
-            int x = (int) touch_event.getX();
+            int x = (int) touch_event.getX(); //这个是获取 sv_decoder 的分辨率
             int y = (int) touch_event.getY();
             // 这里获取的是实际设置的分辨率的点击位置
             int _x = x * surface_resolution_w / displayW;
@@ -334,7 +343,7 @@ public class ScrcpyService extends Service {
                 array[j * 4 + 2] = (byte) ((c & 0xFF00) >> 8);
                 array[j * 4 + 3] = (byte) (c & 0xFF);
             }
-            Log.d(TAG, "touch_event: array=" + Arrays.toString(array));
+//            Log.d(TAG, "touch_event: array=" + Arrays.toString(array));
             event_val_bytes = array;
             return true;
         } else {

@@ -237,6 +237,13 @@ public class XUIGroupListView extends LinearLayout {
             mItemViews = new SparseArray<>();
         }
 
+        /**  */
+        public Section faddItemView(XUICommonListItemView itemView) {
+
+            mItemViews.append(mItemViews.size(), itemView);
+            return this;
+        }
+
         /**
          * 对 Section 添加一个 {@link XUICommonListItemView}
          *

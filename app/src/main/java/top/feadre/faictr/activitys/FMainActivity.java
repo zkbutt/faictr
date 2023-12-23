@@ -32,7 +32,7 @@ import top.feadre.faictr.flib.base.Thread2Main;
 import top.feadre.faictr.flib.fviews.dialog_edit.EntityItem4SimpleRecyclerAdapter;
 import top.feadre.faictr.flib.net.FNetTools;
 import top.feadre.faictr.fragments.HelpFragment;
-import top.feadre.faictr.fragments.SettingsFragment;
+import top.feadre.faictr.fragments.setting_page.SettingsFragment;
 import top.feadre.faictr.services.adb.ADBShellService;
 import top.feadre.faictr.services.scrcpy.ScrcpyService;
 
@@ -346,8 +346,8 @@ public class FMainActivity extends FBaseActivity implements
 
     public void update_surface_resolution() {
         // 由 FMainHelp4ScrcpyService on_fun_success4scrcpy  运行成功时赋值
-        transmit_wh[0] = (int) (remote_wh[0] * spMainCfg.v_ctr_quality_ratio);
-        transmit_wh[1] = (int) (remote_wh[1] * spMainCfg.v_ctr_quality_ratio);
+        transmit_wh[0] = (int) (remote_wh[0] * spMainCfg.vf_ctr_remote_ratio);
+        transmit_wh[1] = (int) (remote_wh[1] * spMainCfg.vf_ctr_remote_ratio);
 
 
         // update_surface_resolution

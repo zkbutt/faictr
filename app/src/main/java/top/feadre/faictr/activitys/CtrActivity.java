@@ -68,10 +68,6 @@ public class CtrActivity extends Activity implements
          * */
         super.onCreate(savedInstanceState);
         FTools.log_d(TAG, "onCreate: ------ is_first_run = " + is_first_run);
-        // 计算显示分辨率
-        int[] displaySize = FToolsAndroid.SYS.getDisplaySize(this);
-        spMainCfg = new Help4SharedPreferences(FCFGBusiness.SPSet.KEY_MAIN).getMainCfg();
-//        spMainCfg.v_ctr_bt_bottom
 
         transmit_wh[0] = FMainActivity.transmit_wh[0];
         transmit_wh[1] = FMainActivity.transmit_wh[1];
@@ -88,10 +84,54 @@ public class CtrActivity extends Activity implements
         handler_ctr = new CtrHandler(this);
         FMainActivity.service_scrcpy.setOnScrcpyServiceRotationCallbacks(this);
 
+        initSurfaceView();
+
         initSer(); //这个在 onConfigurationChanged 中复用
 
         FTools.log_d(TAG, "onCreate: 运行完成---------------- surface_wh = " + transmit_wh[0]
                 + " x " + transmit_wh[1]);
+    }
+
+    private void initSurfaceView() {
+        // 更新sp
+        spMainCfg = new Help4SharedPreferences(FCFGBusiness.SPSet.KEY_MAIN).getMainCfg();
+//        spMainCfg.v_ctr_bt_bottom
+
+        sv_decoder = (SurfaceView) findViewById(R.id.sv_decoder);
+        obj_surface = sv_decoder.getHolder().getSurface();
+        sv_decoder.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (is_control) {
+                    int width = sv_decoder.getWidth();
+                    int height = sv_decoder.getHeight();
+                    FTools.log_d(TAG, "init_ui_listener:sv_decoder Touch x="
+                            + motionEvent.getX() + " x height=" + motionEvent.getY());
+                    if (FMainActivity.service_scrcpy != null) {
+                        return FMainActivity.service_scrcpy.touch_event(motionEvent, width, height);
+                    } else {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+
+        if (spMainCfg.vi_ctr_display_mode == 0) { //这个是 拉伸尺寸
+            int[] local_wh = FToolsAndroid.SYS.getDisplaySize(this);
+            if (!(Math.abs(spMainCfg.vf_ctr_local_ratio - 1.0f) < 0.000001f)) {
+                //拉伸 小于1 需要处理
+                ViewGroup.LayoutParams layoutParams = sv_decoder.getLayoutParams();
+                layoutParams.width = (int) (spMainCfg.vf_ctr_local_ratio * local_wh[0]);
+                layoutParams.height = (int) (spMainCfg.vf_ctr_local_ratio * local_wh[1]);
+                sv_decoder.setLayoutParams(layoutParams);
+            }
+            float v = spMainCfg.vf_ctr_local_ratio * local_wh[0];
+
+        } else if (spMainCfg.vi_ctr_display_mode == 1) {//这个是 保持比例
+
+        }
     }
 
     private void initSer() {
@@ -148,29 +188,6 @@ public class CtrActivity extends Activity implements
         fam_ctr_bt4.setOnClickListener(this);
         fam_ctr_bt5.setOnClickListener(this);
 
-        sv_decoder = (SurfaceView) findViewById(R.id.sv_decoder);
-        obj_surface = sv_decoder.getHolder().getSurface();
-        sv_decoder.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (is_control) {
-                    int width = sv_decoder.getWidth();
-                    int height = sv_decoder.getHeight();
-                    FTools.log_d(TAG, "init_ui_listener:sv_decoder Touch x="
-                            + motionEvent.getX() + " x height=" + motionEvent.getY());
-                    if (FMainActivity.service_scrcpy != null) {
-                        return FMainActivity.service_scrcpy.touch_event(motionEvent, width, height);
-                    } else {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-        ViewGroup.LayoutParams layoutParams = sv_decoder.getLayoutParams();
-        layoutParams.width = 500;
-        layoutParams.height = 1100;
-        sv_decoder.setLayoutParams(layoutParams);
     }
 
     @Override

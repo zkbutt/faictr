@@ -242,10 +242,10 @@ public class FMainHelp4ADBShellService extends ADBShellConn implements
     private void executeRunJar() {
         String temp_str;
         // 联动文件复制
-        long _size = (long) (Math.max(fMainActivity.remote_device_width, fMainActivity.remote_device_height) * fMainActivity.spMainCfg.v_ctr_quality_ratio);
+        long _size = (long) (Math.max(fMainActivity.remote_device_width, fMainActivity.remote_device_height) * fMainActivity.spMainCfg.vf_ctr_remote_ratio);
 //                temp_str = String.format(" CLASSPATH=/data/local/tmp/scrcpy-server.jar >aaa app_process / top.feadre.fctr.Server ");
         temp_str = String.format(" CLASSPATH=%s/%s app_process >>%s / %s ", FILE_PATH, FILE_NAME_JAR, FILE_LOG, PACKAGE_NAME_SERVER);
-        temp_str += "/" + "199.199.199.199" + " " + _size + " " + Long.toString(fMainActivity.spMainCfg.v_ctr_bitrate) + ";" + "\n";
+        temp_str += "/" + "199.199.199.199" + " " + _size + " " + Long.toString(fMainActivity.spMainCfg.vi_ctr_bitrate) + ";" + "\n";
         FTools.log_d(TAG, "onResText: RUN_JAR命令 = " + temp_str);
         serviceAdbShell.executeCommand(temp_str, ID_ORDER_MainActivity_RUN_JAR, true);
 

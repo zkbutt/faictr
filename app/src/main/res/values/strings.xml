@@ -522,10 +522,10 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <!--    SettingsFragment-->
     <string name="set_title_1">传输参数配置</string>
     <string name="set_title_2">本机参数配置</string>
-    <string name="set_label_ctr_quality_ratio">传输画质比例</string>
+    <string name="set_label_ctr_remote_ratio">传输画质比例</string>
     <string name="set_label_ctr_bitrate">传输码率</string>
     <string name="set_label_ctr_display_mode">本机显示模式</string>
-    <string name="set_label_ctr_show_ratio">本机显示比例</string>
+    <string name="set_label_ctr_local_ratio">本机显示比例</string>
 
     <!--    控件-->
     <string name="FSwipeRecyclerView_bt_add">添加</string>

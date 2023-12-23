@@ -20,12 +20,18 @@ public final class FCFGBusiness {
 
     public static final class SPSet {
         public final static String KEY_MAIN = "FMainActivity"; //哪个页面用哪个命名
-        public final static String QUALITY_RATIO = "quality_ratio";
-        public final static String SHOW_RATIO = "show_ratio";
-        public final static String BT_BOTTOM = "bt_bottom";
+        //传输参数配置
+        public final static String SPD_REMOTE_RATIO = "spd_remote_ratio";
+        public final static String SPD_BITRATE = "spd_bitrate";
 
-        public final static String BITRATE = "bitrate";
-        public final static String DISPLAY_MODE = "display_mode";
+        //本机参数配置
+        public final static String SPD_DISPLAY_MODE = "spd_display_mode";
+        public static final String SS_SIZE = "ss_size";
+        public static final String SPD_LOCAL_RATIO = "spd_local_ratio";
+        public final static String SS_BOTTOM = "ss_bottom";
+        public static final String SI_SIZE_W = "si_size_w";
+        public static final String SI_SIZE_H = "si_size_h";
+
         public final static String LINK_IP = "link_ip";
 
         public final static String KEY_ADB = "AdbActivity";

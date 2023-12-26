@@ -7,238 +7,245 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <SurfaceView
-        android:id="@+id/sv_decoder"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        >
 
-    <LinearLayout
-        android:id="@+id/ll_nav_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/CtrActivity_nav_bar_wh"
-        android:layout_alignParentBottom="true"
-        android:background="@color/black"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/ll_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/CtrActivity_nav_bar_wh"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black"
+            android:orientation="horizontal">
 
-        <top.feadre.faictr.flib.fviews.FShineLayout
-            android:id="@+id/bt_back"
-            android:layout_width="wrap_content"
+            <top.feadre.faictr.flib.fviews.FShineLayout
+                android:id="@+id/bt_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <top.feadre.faictr.flib.fviews.FShineButton
+                    android:layout_width="@dimen/CtrActivity_bt_ctr_back"
+                    android:layout_height="@dimen/CtrActivity_bt_ctr_back"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/ctr_bt_checked_color"
+                    app:sb_icon_image="@drawable/ctr_bt_bottom_back"
+                    app:sb_normal_color="@color/ctr_bt_normal_color" />
+            </top.feadre.faictr.flib.fviews.FShineLayout>
+
+
+            <top.feadre.faictr.flib.fviews.FShineLayout
+                android:id="@+id/bt_home"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <top.feadre.faictr.flib.fviews.FShineButton
+                    android:layout_width="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_height="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/ctr_bt_checked_color"
+                    app:sb_icon_image="@drawable/ctr_bt_bottom_home"
+                    app:sb_normal_color="@color/ctr_bt_normal_color" />
+            </top.feadre.faictr.flib.fviews.FShineLayout>
+
+            <top.feadre.faictr.flib.fviews.FShineLayout
+                android:id="@+id/bt_appswitch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <top.feadre.faictr.flib.fviews.FShineButton
+                    android:layout_width="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_height="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/ctr_bt_checked_color"
+                    app:sb_icon_image="@drawable/ctr_bt_bottom_appswicth"
+                    app:sb_normal_color="@color/ctr_bt_normal_color" />
+            </top.feadre.faictr.flib.fviews.FShineLayout>
+
+
+            <top.feadre.faictr.flib.fviews.FShineLayout
+                android:id="@+id/bt_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <top.feadre.faictr.flib.fviews.FShineButton
+                    android:layout_width="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_height="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/ctr_bt_checked_color"
+                    app:sb_icon_image="@drawable/ctr_bt_bottom_exit"
+                    app:sb_normal_color="@color/ctr_bt_normal_color" />
+            </top.feadre.faictr.flib.fviews.FShineLayout>
+
+
+        </LinearLayout>
+        <SurfaceView
+            android:id="@+id/sv_decoder"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
 
-            <top.feadre.faictr.flib.fviews.FShineButton
-                android:layout_width="@dimen/CtrActivity_bt_ctr_back"
-                android:layout_height="@dimen/CtrActivity_bt_ctr_back"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                app:sb_checked_color="@color/ctr_bt_checked_color"
-                app:sb_icon_image="@drawable/ctr_bt_bottom_back"
-                app:sb_normal_color="@color/ctr_bt_normal_color" />
-        </top.feadre.faictr.flib.fviews.FShineLayout>
-
-
-        <top.feadre.faictr.flib.fviews.FShineLayout
-            android:id="@+id/bt_home"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <top.feadre.faictr.flib.fviews.FShineButton
-                android:layout_width="@dimen/CtrActivity_bt_ctr_base"
-                android:layout_height="@dimen/CtrActivity_bt_ctr_base"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                app:sb_checked_color="@color/ctr_bt_checked_color"
-                app:sb_icon_image="@drawable/ctr_bt_bottom_home"
-                app:sb_normal_color="@color/ctr_bt_normal_color" />
-        </top.feadre.faictr.flib.fviews.FShineLayout>
-
-        <top.feadre.faictr.flib.fviews.FShineLayout
-            android:id="@+id/bt_appswitch"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <top.feadre.faictr.flib.fviews.FShineButton
-                android:layout_width="@dimen/CtrActivity_bt_ctr_base"
-                android:layout_height="@dimen/CtrActivity_bt_ctr_base"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                app:sb_checked_color="@color/ctr_bt_checked_color"
-                app:sb_icon_image="@drawable/ctr_bt_bottom_appswicth"
-                app:sb_normal_color="@color/ctr_bt_normal_color" />
-        </top.feadre.faictr.flib.fviews.FShineLayout>
-
-
-        <top.feadre.faictr.flib.fviews.FShineLayout
-            android:id="@+id/bt_exit"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <top.feadre.faictr.flib.fviews.FShineButton
-                android:layout_width="@dimen/CtrActivity_bt_ctr_base"
-                android:layout_height="@dimen/CtrActivity_bt_ctr_base"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                app:sb_checked_color="@color/ctr_bt_checked_color"
-                app:sb_icon_image="@drawable/ctr_bt_bottom_exit"
-                app:sb_normal_color="@color/ctr_bt_normal_color" />
-        </top.feadre.faictr.flib.fviews.FShineLayout>
-
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <!--    36 x 36-->
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/fam_ctr"
-        style="@style/FabMenu"
-        android:layout_width="@dimen/FloatingActionMenu_size"
-        android:layout_height="@dimen/FloatingActionMenu_size"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="6dp"
-        android:alpha="0.4"
-        floatingMenuActionButton:menu_buttonSpacing="-5dp"
-        floatingMenuActionButton:menu_colorNormal="#3E99D2"
-        floatingMenuActionButton:menu_colorPressed="#2488C6"
-        floatingMenuActionButton:menu_colorRipple="#AF2488C6"
-        floatingMenuActionButton:menu_icon="@drawable/ctr_mode"
-        floatingMenuActionButton:menu_openDirection="down">
+<!--    <com.github.clans.fab.FloatingActionMenu-->
+<!--        android:id="@+id/fam_ctr"-->
+<!--        style="@style/FabMenu"-->
+<!--        android:layout_width="@dimen/FloatingActionMenu_size"-->
+<!--        android:layout_height="@dimen/FloatingActionMenu_size"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginTop="6dp"-->
+<!--        android:alpha="0.4"-->
+<!--        floatingMenuActionButton:menu_buttonSpacing="-5dp"-->
+<!--        floatingMenuActionButton:menu_colorNormal="#3E99D2"-->
+<!--        floatingMenuActionButton:menu_colorPressed="#2488C6"-->
+<!--        floatingMenuActionButton:menu_colorRipple="#AF2488C6"-->
+<!--        floatingMenuActionButton:menu_icon="@drawable/ctr_mode"-->
+<!--        floatingMenuActionButton:menu_openDirection="down">-->
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fam_ctr_bt1"
-            style="@style/FabMenu.Buttons"
-            android:src="@drawable/ic_fab_loading" />
+<!--        <com.github.clans.fab.FloatingActionButton-->
+<!--            android:id="@+id/fam_ctr_bt1"-->
+<!--            style="@style/FabMenu.Buttons"-->
+<!--            android:src="@drawable/ic_fab_loading" />-->
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fam_ctr_bt2"
-            style="@style/FabMenu.Buttons"
-            android:src="@drawable/ic_fab_empty" />
-        <!--        floatingMenuActionButton:fab_label="显示空视图"-->
+<!--        <com.github.clans.fab.FloatingActionButton-->
+<!--            android:id="@+id/fam_ctr_bt2"-->
+<!--            style="@style/FabMenu.Buttons"-->
+<!--            android:src="@drawable/ic_fab_empty" />-->
+<!--        &lt;!&ndash;        floatingMenuActionButton:fab_label="显示空视图"&ndash;&gt;-->
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fam_ctr_bt3"
-            style="@style/FabMenu.Buttons"
-            android:src="@drawable/ic_fab_error" />
+<!--        <com.github.clans.fab.FloatingActionButton-->
+<!--            android:id="@+id/fam_ctr_bt3"-->
+<!--            style="@style/FabMenu.Buttons"-->
+<!--            android:src="@drawable/ic_fab_error" />-->
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fam_ctr_bt4"
-            style="@style/FabMenu.Buttons"
-            android:src="@drawable/ic_fab_no_network" />
+<!--        <com.github.clans.fab.FloatingActionButton-->
+<!--            android:id="@+id/fam_ctr_bt4"-->
+<!--            style="@style/FabMenu.Buttons"-->
+<!--            android:src="@drawable/ic_fab_no_network" />-->
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fam_ctr_bt5"
-            style="@style/FabMenu.Buttons"
-            android:src="@drawable/ic_fab_content" />
+<!--        <com.github.clans.fab.FloatingActionButton-->
+<!--            android:id="@+id/fam_ctr_bt5"-->
+<!--            style="@style/FabMenu.Buttons"-->
+<!--            android:src="@drawable/ic_fab_content" />-->
 
-    </com.github.clans.fab.FloatingActionMenu>
+<!--    </com.github.clans.fab.FloatingActionMenu>-->
 
-    <rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton
-        android:id="@+id/fmb_ctr_l"
-        android:layout_width="@dimen/FloatingMenuButton_size"
-        android:layout_height="@dimen/FloatingMenuButton_size"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="6dp"
-        android:layout_marginBottom="130dp"
-        android:alpha="0.4"
-        android:background="@mipmap/ctr_mutual_round"
+<!--    <rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton-->
+<!--        android:id="@+id/fmb_ctr_l"-->
+<!--        android:layout_width="@dimen/FloatingMenuButton_size"-->
+<!--        android:layout_height="@dimen/FloatingMenuButton_size"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginLeft="6dp"-->
+<!--        android:layout_marginBottom="130dp"-->
+<!--        android:alpha="0.4"-->
+<!--        android:background="@mipmap/ctr_mutual_round"-->
 
-        android:scaleType="centerInside"
-        floatingMenuActionButton:animationType="radial"
-        floatingMenuActionButton:dispositionEndAngle="360"
-        floatingMenuActionButton:dispositionStartAngle="0"
-        floatingMenuActionButton:layout_constraintBottom_toBottomOf="parent"
-        floatingMenuActionButton:layout_constraintLeft_toLeftOf="parent"
-        floatingMenuActionButton:layout_constraintRight_toRightOf="parent"
-        floatingMenuActionButton:layout_constraintTop_toTopOf="parent"
-        floatingMenuActionButton:subActionButtonRadius="150">
+<!--        android:scaleType="centerInside"-->
+<!--        floatingMenuActionButton:animationType="radial"-->
+<!--        floatingMenuActionButton:dispositionEndAngle="360"-->
+<!--        floatingMenuActionButton:dispositionStartAngle="0"-->
+<!--        floatingMenuActionButton:layout_constraintBottom_toBottomOf="parent"-->
+<!--        floatingMenuActionButton:layout_constraintLeft_toLeftOf="parent"-->
+<!--        floatingMenuActionButton:layout_constraintRight_toRightOf="parent"-->
+<!--        floatingMenuActionButton:layout_constraintTop_toTopOf="parent"-->
+<!--        floatingMenuActionButton:subActionButtonRadius="150">-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_l_bt1"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/one" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_l_bt1"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/one" />-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_l_bt2"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/two" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_l_bt2"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/two" />-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_l_bt3"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/three" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_l_bt3"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/three" />-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_l_bt4"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/four" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_l_bt4"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/four" />-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_l_bt5"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/five" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_l_bt5"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/five" />-->
 
-    </rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton>
+<!--    </rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton>-->
 
-    <rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton
-        android:id="@+id/fmb_ctr_r"
-        android:layout_width="@dimen/FloatingMenuButton_size"
-        android:layout_height="@dimen/FloatingMenuButton_size"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="6dp"
-        android:layout_marginBottom="130dp"
-        android:alpha="0.4"
+<!--    <rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton-->
+<!--        android:id="@+id/fmb_ctr_r"-->
+<!--        android:layout_width="@dimen/FloatingMenuButton_size"-->
+<!--        android:layout_height="@dimen/FloatingMenuButton_size"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginRight="6dp"-->
+<!--        android:layout_marginBottom="130dp"-->
+<!--        android:alpha="0.4"-->
 
-        android:background="@mipmap/ctr_bt_round"
-        android:scaleType="centerInside"
-        floatingMenuActionButton:animationType="radial"
-        floatingMenuActionButton:dispositionEndAngle="360"
-        floatingMenuActionButton:dispositionStartAngle="0"
-        floatingMenuActionButton:layout_constraintBottom_toBottomOf="parent"
-        floatingMenuActionButton:layout_constraintLeft_toLeftOf="parent"
-        floatingMenuActionButton:layout_constraintRight_toRightOf="parent"
-        floatingMenuActionButton:layout_constraintTop_toTopOf="parent"
-        floatingMenuActionButton:subActionButtonRadius="150">
+<!--        android:background="@mipmap/ctr_bt_round"-->
+<!--        android:scaleType="centerInside"-->
+<!--        floatingMenuActionButton:animationType="radial"-->
+<!--        floatingMenuActionButton:dispositionEndAngle="360"-->
+<!--        floatingMenuActionButton:dispositionStartAngle="0"-->
+<!--        floatingMenuActionButton:layout_constraintBottom_toBottomOf="parent"-->
+<!--        floatingMenuActionButton:layout_constraintLeft_toLeftOf="parent"-->
+<!--        floatingMenuActionButton:layout_constraintRight_toRightOf="parent"-->
+<!--        floatingMenuActionButton:layout_constraintTop_toTopOf="parent"-->
+<!--        floatingMenuActionButton:subActionButtonRadius="150">-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_r_bt1"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/one" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_r_bt1"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/one" />-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_r_bt2"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/two" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_r_bt2"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/two" />-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_r_bt3"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/three" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_r_bt3"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/three" />-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_r_bt4"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/four" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_r_bt4"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/four" />-->
 
-        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton
-            android:id="@+id/fmb_ctr_r_bt5"
-            android:layout_width="@dimen/FloatingSubButton_size"
-            android:layout_height="@dimen/FloatingSubButton_size"
-            android:background="@drawable/five" />
+<!--        <rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton-->
+<!--            android:id="@+id/fmb_ctr_r_bt5"-->
+<!--            android:layout_width="@dimen/FloatingSubButton_size"-->
+<!--            android:layout_height="@dimen/FloatingSubButton_size"-->
+<!--            android:background="@drawable/five" />-->
 
-    </rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton>
+<!--    </rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton>-->
 
 
 </RelativeLayout>

@@ -30,7 +30,7 @@ public class FShineLayout extends RelativeLayout {
     public boolean callOnClick() {
         View childAt = getChildAt(0);
         childAt.callOnClick();
-        FTools.log_d("FRLShineButton", "callOnClick childAt = " + childAt.getId());
+        FTools.log_d("FShineLayout", "callOnClick childAt = " + childAt.getId());
         return false;
     }
 

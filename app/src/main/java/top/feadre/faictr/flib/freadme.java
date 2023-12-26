@@ -1,6 +1,13 @@
 package top.feadre.faictr.flib;
 
 /**
+ * scrcpy命令
+ * scrcpy --max-size=1024 //限制宽度和高度
+ * scrcpy -m 1024  # 简写
+ * scrcpy --bit-rate=2M //视频码率
+ * scrcpy -b 2M  # 简写
+ * scrcpy --max-fps=15
+ *
  *
  * 新增时有注释如何解决
  *

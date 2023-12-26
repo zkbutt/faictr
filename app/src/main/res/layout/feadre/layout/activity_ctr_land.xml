@@ -2,15 +2,103 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:floatingMenuActionButton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <SurfaceView
-        android:id="@+id/sv_decoder"
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        >
+        <LinearLayout
+            android:id="@+id/ll_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/CtrActivity_nav_bar_wh"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black"
+            android:orientation="horizontal">
+
+            <top.feadre.faictr.flib.fviews.FShineLayout
+                android:id="@+id/bt_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <top.feadre.faictr.flib.fviews.FShineButton
+                    android:layout_width="@dimen/CtrActivity_bt_ctr_back"
+                    android:layout_height="@dimen/CtrActivity_bt_ctr_back"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/ctr_bt_checked_color"
+                    app:sb_icon_image="@drawable/ctr_bt_bottom_back"
+                    app:sb_normal_color="@color/ctr_bt_normal_color" />
+            </top.feadre.faictr.flib.fviews.FShineLayout>
+
+
+            <top.feadre.faictr.flib.fviews.FShineLayout
+                android:id="@+id/bt_home"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <top.feadre.faictr.flib.fviews.FShineButton
+                    android:layout_width="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_height="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/ctr_bt_checked_color"
+                    app:sb_icon_image="@drawable/ctr_bt_bottom_home"
+                    app:sb_normal_color="@color/ctr_bt_normal_color" />
+            </top.feadre.faictr.flib.fviews.FShineLayout>
+
+            <top.feadre.faictr.flib.fviews.FShineLayout
+                android:id="@+id/bt_appswitch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <top.feadre.faictr.flib.fviews.FShineButton
+                    android:layout_width="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_height="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/ctr_bt_checked_color"
+                    app:sb_icon_image="@drawable/ctr_bt_bottom_appswicth"
+                    app:sb_normal_color="@color/ctr_bt_normal_color" />
+            </top.feadre.faictr.flib.fviews.FShineLayout>
+
+
+            <top.feadre.faictr.flib.fviews.FShineLayout
+                android:id="@+id/bt_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <top.feadre.faictr.flib.fviews.FShineButton
+                    android:layout_width="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_height="@dimen/CtrActivity_bt_ctr_base"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:sb_checked_color="@color/ctr_bt_checked_color"
+                    app:sb_icon_image="@drawable/ctr_bt_bottom_exit"
+                    app:sb_normal_color="@color/ctr_bt_normal_color" />
+            </top.feadre.faictr.flib.fviews.FShineLayout>
+
+
+        </LinearLayout>
+
+        <SurfaceView
+            android:id="@+id/sv_decoder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
 
 <!--    36 x 36-->
     <com.github.clans.fab.FloatingActionMenu

@@ -80,7 +80,7 @@ public class FMainActivity extends FBaseActivity implements
      * */
 //    protected static int[] local_wh;//本机 的分辨率 oncreate 初始化
 //    protected static final int[] surface_wh = new int[2];//surface 的分辨率 对应
-    protected static final int[] transmit_wh = new int[2]; //传输的分辨率
+    protected static final int[] transmit_wh = new int[2]; //传输的分辨率 是根据被控机屏幕尺寸来的
     //远程屏幕分辨率：1.在 7007获取 用于求 surface_resolution_wh
     public static final int[] remote_wh = new int[2];//远程屏幕的分辨率
 

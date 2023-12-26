@@ -1,18 +1,23 @@
 package top.feadre.faictr.activitys;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.xuexiang.xui.utils.XToastUtils;
+
+import java.util.Arrays;
 
 import rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton;
 import rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton;
@@ -57,7 +62,11 @@ public class CtrActivity extends Activity implements
     private Surface obj_surface;
     private CtrHandler handler_ctr;
     private Help4SharedPreferences.DataMain spMainCfg;
+    private LinearLayout ll_nav_bar;
     private FShineLayout bt_back;
+    private FShineLayout bt_home;
+    private FShineLayout bt_appswitch;
+    private FShineLayout bt_exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +78,7 @@ public class CtrActivity extends Activity implements
         super.onCreate(savedInstanceState);
         FTools.log_d(TAG, "onCreate: ------ is_first_run = " + is_first_run);
 
+        //判断横竖屏
         transmit_wh[0] = FMainActivity.transmit_wh[0];
         transmit_wh[1] = FMainActivity.transmit_wh[1];
         is_landscape = transmit_wh[0] > transmit_wh[1];
@@ -84,8 +94,8 @@ public class CtrActivity extends Activity implements
         handler_ctr = new CtrHandler(this);
         FMainActivity.service_scrcpy.setOnScrcpyServiceRotationCallbacks(this);
 
+        initViews();
         initSurfaceView();
-
         initSer(); //这个在 onConfigurationChanged 中复用
 
         FTools.log_d(TAG, "onCreate: 运行完成---------------- surface_wh = " + transmit_wh[0]
@@ -93,12 +103,38 @@ public class CtrActivity extends Activity implements
     }
 
     private void initSurfaceView() {
+
+        sv_decoder = (SurfaceView) findViewById(R.id.sv_decoder);
+        ll_nav_bar = (LinearLayout) findViewById(R.id.ll_nav_bar);
+        obj_surface = sv_decoder.getHolder().getSurface();
+
+
         // 更新sp
         spMainCfg = new Help4SharedPreferences(FCFGBusiness.SPSet.KEY_MAIN).getMainCfg();
 //        spMainCfg.v_ctr_bt_bottom
 
-        sv_decoder = (SurfaceView) findViewById(R.id.sv_decoder);
-        obj_surface = sv_decoder.getHolder().getSurface();
+        if (spMainCfg.vi_ctr_display_mode == 0) { //这个是 拉伸尺寸
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) sv_decoder.getLayoutParams();//根据不同的参数获取值
+            int[] display_wh = FToolsAndroid.SYS.getDisplaySize(this);
+            FTools.log_d(TAG, "initSurfaceView "
+                    + " is_landscape = " + is_landscape
+                    + " display_wh = " + Arrays.toString(display_wh)
+            );
+            if (!(Math.abs(spMainCfg.vf_ctr_local_ratio - 1.0f) < 0.000001f)) {
+                //拉伸 小于1 需要处理
+                layoutParams.width = (int) (spMainCfg.vf_ctr_local_ratio * display_wh[0]);
+                layoutParams.height = (int) (spMainCfg.vf_ctr_local_ratio * display_wh[1]);
+                sv_decoder.setLayoutParams(layoutParams);
+            } else {
+                layoutParams.addRule(RelativeLayout.ABOVE, R.id.ll_nav_bar);
+                //参数已设置不需要处理
+                sv_decoder.setLayoutParams(layoutParams);
+            }
+        } else if (spMainCfg.vi_ctr_display_mode == 1) {//这个是 保持比例
+
+        }
+
+        //这里要先设置再侦听
         sv_decoder.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -116,78 +152,12 @@ public class CtrActivity extends Activity implements
                 return false;
             }
         });
-
-
-        if (spMainCfg.vi_ctr_display_mode == 0) { //这个是 拉伸尺寸
-            int[] local_wh = FToolsAndroid.SYS.getDisplaySize(this);
-            if (!(Math.abs(spMainCfg.vf_ctr_local_ratio - 1.0f) < 0.000001f)) {
-                //拉伸 小于1 需要处理
-                ViewGroup.LayoutParams layoutParams = sv_decoder.getLayoutParams();
-                layoutParams.width = (int) (spMainCfg.vf_ctr_local_ratio * local_wh[0]);
-                layoutParams.height = (int) (spMainCfg.vf_ctr_local_ratio * local_wh[1]);
-                sv_decoder.setLayoutParams(layoutParams);
-            }
-            float v = spMainCfg.vf_ctr_local_ratio * local_wh[0];
-
-        } else if (spMainCfg.vi_ctr_display_mode == 1) {//这个是 保持比例
-
-        }
     }
 
     private void initSer() {
-        initViews();
-
         //开启传输
         FMainActivity.service_scrcpy.start_ser(obj_surface, handler_ctr,
                 transmit_wh[0], transmit_wh[1]);
-    }
-
-    private void initViews() {
-
-        bt_back = findViewById(R.id.bt_back);
-        bt_back.setOnClickListener(this);
-
-
-        fam_ctr = findViewById(R.id.fam_ctr);
-        fmb_ctr_r = findViewById(R.id.fmb_ctr_r);
-        fmb_ctr_l = findViewById(R.id.fmb_ctr_l);
-
-        fmb_ctr_l_bt5 = findViewById(R.id.fmb_ctr_l_bt5);
-        fmb_ctr_l_bt4 = findViewById(R.id.fmb_ctr_l_bt4);
-        fmb_ctr_l_bt3 = findViewById(R.id.fmb_ctr_l_bt3);
-        fmb_ctr_l_bt2 = findViewById(R.id.fmb_ctr_l_bt2);
-        fmb_ctr_l_bt1 = findViewById(R.id.fmb_ctr_l_bt1);
-
-        fmb_ctr_r_bt5 = findViewById(R.id.fmb_ctr_r_bt5);
-        fmb_ctr_r_bt4 = findViewById(R.id.fmb_ctr_r_bt4);
-        fmb_ctr_r_bt3 = findViewById(R.id.fmb_ctr_r_bt3);
-        fmb_ctr_r_bt2 = findViewById(R.id.fmb_ctr_r_bt2);
-        fmb_ctr_r_bt1 = findViewById(R.id.fmb_ctr_r_bt1);
-
-        fam_ctr_bt1 = findViewById(R.id.fam_ctr_bt1);
-        fam_ctr_bt2 = findViewById(R.id.fam_ctr_bt2);
-        fam_ctr_bt3 = findViewById(R.id.fam_ctr_bt3);
-        fam_ctr_bt4 = findViewById(R.id.fam_ctr_bt4);
-        fam_ctr_bt5 = findViewById(R.id.fam_ctr_bt5);
-
-        fmb_ctr_l_bt5.setOnClickListener(this);
-        fmb_ctr_l_bt4.setOnClickListener(this);
-        fmb_ctr_l_bt3.setOnClickListener(this);
-        fmb_ctr_l_bt2.setOnClickListener(this);
-        fmb_ctr_l_bt1.setOnClickListener(this);
-
-        fmb_ctr_r_bt5.setOnClickListener(this);
-        fmb_ctr_r_bt4.setOnClickListener(this);
-        fmb_ctr_r_bt3.setOnClickListener(this);
-        fmb_ctr_r_bt2.setOnClickListener(this);
-        fmb_ctr_r_bt1.setOnClickListener(this);
-
-        fam_ctr_bt1.setOnClickListener(this);
-        fam_ctr_bt2.setOnClickListener(this);
-        fam_ctr_bt3.setOnClickListener(this);
-        fam_ctr_bt4.setOnClickListener(this);
-        fam_ctr_bt5.setOnClickListener(this);
-
     }
 
     @Override
@@ -201,8 +171,35 @@ public class CtrActivity extends Activity implements
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_back:
-                bt_back.callOnClick();
-                XToastUtils.info("bt_back");
+                Log.d(TAG, "bt_back onClick: ");
+                if (FMainActivity.service_scrcpy != null) {
+                    FMainActivity.service_scrcpy.send_keyevent(4);
+                }
+                break;
+            case R.id.bt_home:
+                Log.d(TAG, "bt_home onClick: ");
+                if (FMainActivity.service_scrcpy != null) {
+                    FMainActivity.service_scrcpy.send_keyevent(3);
+                }
+                break;
+            case R.id.bt_appswitch:
+                Log.d(TAG, "bt_appswitch onClick: ");
+                if (FMainActivity.service_scrcpy != null) {
+                    FMainActivity.service_scrcpy.send_keyevent(187);
+                }
+                break;
+            case R.id.bt_exit:
+                Log.d(TAG, "bt_exit onClick: is_first_run = " + is_first_run);
+                // 这里有个网络主进程问题 图像也是仍然在传输
+                if (FMainActivity.service_scrcpy != null) {
+                    FMainActivity.service_scrcpy.pause();
+                }
+
+                Intent intent = new Intent(); //还是用Intent传递数据，这里用的是Intent的空参构造器，不需要指定跳转的界面，因为按下返回按钮会返回到上一个Activity.
+//                intent.putExtra("user",user.getText().toString());
+//                intent.putExtra("password",password.getText().toString());
+                setResult(RESULT_OK, intent);//使用该方法向上一个Activity返回数据。第一个参数是处理结果，第二个参数是将带有数据的intent传递回去。
+                finish();
                 break;
 
             case R.id.fmb_ctr_l_bt1:
@@ -272,31 +269,6 @@ public class CtrActivity extends Activity implements
     }
 
     @Override
-    public void on_remote_rotation() {
-        //子线程触发旋转 onConfigurationChanged
-        FTools.log_d(TAG, "on_remote_rotation: ----");
-        is_landscape = !is_landscape;
-        swap_surface_wh();
-//        MainActivity.service_scrcpy.stop_service();
-        if (is_landscape) {
-            FTools.log_d(TAG, "on_remote_rotation: 启动横屏状态---------------");
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//设置为竖屏
-//            setContentView(R.layout.activity_ctr_land); //子线程获取不了
-        } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//设置为竖屏
-//            setContentView(R.layout.activity_ctr);
-        }
-    }
-
-
-    private void swap_surface_wh() {
-        int _t = transmit_wh[0];
-        transmit_wh[0] = transmit_wh[1];
-        transmit_wh[1] = _t;
-    }
-
-
-    @Override
     public void onBackPressed() {
         //不作反应
 //        FToolsAndroid.SYS.fOnBackPressed(this, R.string.ctr_on_back_pressed);
@@ -320,14 +292,21 @@ public class CtrActivity extends Activity implements
         } else {
             is_first_run = false;
         }
-//        if (!is_first_time && !is_rotation) {
-//            FToolsAndroid.fset_sys_UI(that);
-//            if (is_service_bound) {
-//                ll_container = findViewById(R.id.ll_container);
-////                MainActivity.service_scrcpy.resume();
-//            }
-//        }
-//        is_remote_rotate = false;
+    }
+
+
+    @Override
+    public void on_remote_rotation() {
+        //子线程触发旋转 onConfigurationChanged
+        FTools.log_d(TAG, "on_remote_rotation: ----");
+        is_landscape = !is_landscape;//每一次直接交换
+        swap_transmit_wh();
+        if (is_landscape) {
+            FTools.log_d(TAG, "on_remote_rotation: 启动横屏状态---------------");
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//设置为竖屏
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//设置为竖屏
+        }
     }
 
     @Override
@@ -341,8 +320,67 @@ public class CtrActivity extends Activity implements
             } else {
                 setContentView(R.layout.activity_ctr);
             }
+            initViews();
+            initSurfaceView();
             initSer(); //相当于半个 onCreate
         }
     }
 
+    private void swap_transmit_wh() {
+        int _t = transmit_wh[0];
+        transmit_wh[0] = transmit_wh[1];
+        transmit_wh[1] = _t;
+    }
+
+    private void initViews() {
+        bt_back = (FShineLayout) findViewById(R.id.bt_back);
+        bt_home = (FShineLayout) findViewById(R.id.bt_home);
+        bt_appswitch = (FShineLayout) findViewById(R.id.bt_appswitch);
+        bt_exit = (FShineLayout) findViewById(R.id.bt_exit);
+        bt_back.setOnClickListener(this);
+        bt_home.setOnClickListener(this);
+        bt_appswitch.setOnClickListener(this);
+        bt_exit.setOnClickListener(this);
+
+
+//        fam_ctr = findViewById(R.id.fam_ctr);
+//        fmb_ctr_r = findViewById(R.id.fmb_ctr_r);
+//        fmb_ctr_l = findViewById(R.id.fmb_ctr_l);
+//
+//        fmb_ctr_l_bt5 = findViewById(R.id.fmb_ctr_l_bt5);
+//        fmb_ctr_l_bt4 = findViewById(R.id.fmb_ctr_l_bt4);
+//        fmb_ctr_l_bt3 = findViewById(R.id.fmb_ctr_l_bt3);
+//        fmb_ctr_l_bt2 = findViewById(R.id.fmb_ctr_l_bt2);
+//        fmb_ctr_l_bt1 = findViewById(R.id.fmb_ctr_l_bt1);
+//
+//        fmb_ctr_r_bt5 = findViewById(R.id.fmb_ctr_r_bt5);
+//        fmb_ctr_r_bt4 = findViewById(R.id.fmb_ctr_r_bt4);
+//        fmb_ctr_r_bt3 = findViewById(R.id.fmb_ctr_r_bt3);
+//        fmb_ctr_r_bt2 = findViewById(R.id.fmb_ctr_r_bt2);
+//        fmb_ctr_r_bt1 = findViewById(R.id.fmb_ctr_r_bt1);
+//
+//        fam_ctr_bt1 = findViewById(R.id.fam_ctr_bt1);
+//        fam_ctr_bt2 = findViewById(R.id.fam_ctr_bt2);
+//        fam_ctr_bt3 = findViewById(R.id.fam_ctr_bt3);
+//        fam_ctr_bt4 = findViewById(R.id.fam_ctr_bt4);
+//        fam_ctr_bt5 = findViewById(R.id.fam_ctr_bt5);
+//
+//        fmb_ctr_l_bt5.setOnClickListener(this);
+//        fmb_ctr_l_bt4.setOnClickListener(this);
+//        fmb_ctr_l_bt3.setOnClickListener(this);
+//        fmb_ctr_l_bt2.setOnClickListener(this);
+//        fmb_ctr_l_bt1.setOnClickListener(this);
+//
+//        fmb_ctr_r_bt5.setOnClickListener(this);
+//        fmb_ctr_r_bt4.setOnClickListener(this);
+//        fmb_ctr_r_bt3.setOnClickListener(this);
+//        fmb_ctr_r_bt2.setOnClickListener(this);
+//        fmb_ctr_r_bt1.setOnClickListener(this);
+//
+//        fam_ctr_bt1.setOnClickListener(this);
+//        fam_ctr_bt2.setOnClickListener(this);
+//        fam_ctr_bt3.setOnClickListener(this);
+//        fam_ctr_bt4.setOnClickListener(this);
+//        fam_ctr_bt5.setOnClickListener(this);
+    }
 }

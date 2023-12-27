@@ -34,7 +34,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Theme_FullScreen" parent="android:Theme.Black.NoTitleBar.Fullscreen">
+<!--    <style name="Theme_FullScreen" parent="android:Theme.Black.NoTitleBar.Fullscreen">-->
+    <style name="Theme_FullScreen" parent="AppTheme">
+        <item name="xui_config_color_background">@color/xui_config_color_pure_black</item>
+        <item name="android:windowNoTitle">true</item>　　　　　
         <item name="android:windowFullscreen">true</item>
     </style>
 

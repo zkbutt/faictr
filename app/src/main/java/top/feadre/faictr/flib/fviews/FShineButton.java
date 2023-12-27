@@ -5,9 +5,12 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.animation.LinearInterpolator;
 
 import com.xuexiang.xui.widget.button.shinebutton.ShineButton;
+
+import top.feadre.faictr.flib.FTools;
 
 /**
  * @projectName faictr
@@ -41,11 +44,21 @@ public class FShineButton extends ShineButton {
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        boolean b = super.onTouchEvent(event);
+        int deviceId = event.getDeviceId();
+        FTools.log_d("FShineButton", "onTouchEvent "
+                + " super.onTouchEvent(event) = " + super.onTouchEvent(event)
+                + " deviceId = " + deviceId);
+        return b;
+    }
+
+    @Override
     protected void doShareAnim() {
         mShakeAnimator = ValueAnimator.ofFloat(0.4f, 1f, 0.9f, 1f);
         mShakeAnimator.setInterpolator(new LinearInterpolator());
-        mShakeAnimator.setDuration(500);
-        mShakeAnimator.setStartDelay(180);
+        mShakeAnimator.setDuration(300);
+        mShakeAnimator.setStartDelay(60);
         invalidate();
         mShakeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override

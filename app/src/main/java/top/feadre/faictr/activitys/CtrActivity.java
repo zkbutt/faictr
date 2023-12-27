@@ -1,9 +1,11 @@
 package top.feadre.faictr.activitys;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,9 +15,15 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.xuexiang.xui.XUI;
 import com.xuexiang.xui.utils.XToastUtils;
+import com.xuexiang.xui.widget.dialog.DialogLoader;
+import com.xuexiang.xui.widget.dialog.materialdialog.DialogAction;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
 import java.util.Arrays;
 
@@ -190,16 +198,24 @@ public class CtrActivity extends Activity implements
                 break;
             case R.id.bt_exit:
                 Log.d(TAG, "bt_exit onClick: is_first_run = " + is_first_run);
-                // 这里有个网络主进程问题 图像也是仍然在传输
-                if (FMainActivity.service_scrcpy != null) {
-                    FMainActivity.service_scrcpy.pause();
-                }
-
-                Intent intent = new Intent(); //还是用Intent传递数据，这里用的是Intent的空参构造器，不需要指定跳转的界面，因为按下返回按钮会返回到上一个Activity.
-//                intent.putExtra("user",user.getText().toString());
-//                intent.putExtra("password",password.getText().toString());
-                setResult(RESULT_OK, intent);//使用该方法向上一个Activity返回数据。第一个参数是处理结果，第二个参数是将带有数据的intent传递回去。
-                finish();
+                new MaterialDialog.Builder(this)
+                        .content("确认需要退出控制")
+                        .onPositive((dialog, which) -> {
+                            // 这里有个网络主进程问题 图像也是仍然在传输
+                            if (FMainActivity.service_scrcpy != null) {
+                                FMainActivity.service_scrcpy.pause();
+                            }
+//                            Intent intent = new Intent(); //还是用Intent传递数据，这里用的是Intent的空参构造器，不需要指定跳转的界面，因为按下返回按钮会返回到上一个Activity.
+//                            intent.putExtra("user", user.getText().toString());
+//                            intent.putExtra("password", password.getText().toString());
+//                            setResult(RESULT_OK, intent);//使用该方法向上一个Activity返回数据。第一个参数是处理结果，第二个参数是将带有数据的intent传递回去。
+                            finish();
+                            dialog.dismiss();
+                        })
+                        .positiveText(R.string.lab_yes)
+                        .positiveColor(Color.RED)
+                        .negativeText(R.string.lab_no)
+                        .show();
                 break;
 
             case R.id.fmb_ctr_l_bt1:

@@ -2,6 +2,7 @@ package top.feadre.faictr.flib.fviews;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -29,9 +30,35 @@ public class FShineLayout extends RelativeLayout {
     @Override
     public boolean callOnClick() {
         View childAt = getChildAt(0);
-        childAt.callOnClick();
-        FTools.log_d("FShineLayout", "callOnClick childAt = " + childAt.getId());
-        return false;
+        childAt.callOnClick();//起效果
+        FTools.log_d("FShineLayout", "onClick childAt = " + childAt.getId());
+        return false; //结束
     }
+
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        return super.dispatchTouchEvent(ev);
+//    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return true;//拦截向下
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int deviceId = event.getDeviceId();
+        FTools.log_d("FShineLayout", "onTouchEvent "
+                + " super.onTouchEvent(event) = " + super.onTouchEvent(event)
+                + " deviceId = " + deviceId);
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            View childAt = getChildAt(0);
+            childAt.callOnClick();//调用点击起效果
+        }
+        super.onTouchEvent(event);//响应保持原有点击
+        return true; //消费掉
+    }
+
+
 
 }

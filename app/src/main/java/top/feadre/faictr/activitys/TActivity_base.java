@@ -23,7 +23,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.xuexiang.xui.XUI;
 import com.xuexiang.xui.utils.XToastUtils;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
 import java.util.ArrayList;
 
@@ -88,6 +90,11 @@ public class TActivity_base extends FBaseActivity {
                 String local_ip_str = ipAddress.get(0);
                 break;
             case R.id.bt_t003:
+                new MaterialDialog.Builder(this)
+                        .content(R.string.tip_bluetooth_permission)
+                        .positiveText(R.string.lab_yes)
+                        .negativeText(R.string.lab_no)
+                        .show();
                 break;
             case R.id.bt_t004:
                 break;

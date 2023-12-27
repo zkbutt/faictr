@@ -224,7 +224,9 @@ public class FMainActivity extends FBaseActivity implements
         }
         state_dialog_run = 1;//网络启动开始
         fMainHelp4FProgressDialog.showDialog(text);
-        control_ip_str = help4SharedPreferences.getVetIpVal();
+
+        control_ip_str = vet_ip.getInputValue();
+        help4SharedPreferences.setVetIpVal(control_ip_str);
         fMainHelp4FProgressDialog.updateProgress(2, control_ip_str + "开始连接");
 
         boolean adbConnected = fMainHelp4ADBShellService.isAdbConnected();

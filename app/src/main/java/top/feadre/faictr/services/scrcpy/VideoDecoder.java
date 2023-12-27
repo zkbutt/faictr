@@ -33,6 +33,7 @@ public class VideoDecoder {
     }
 
     public void start_worker_thread() {
+        //服务开始时 恢复时
         if (mWorker == null) {
             mWorker = new Worker();
             mWorker.setIsWorkerRunning(true);

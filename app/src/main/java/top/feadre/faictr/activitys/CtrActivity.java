@@ -305,11 +305,11 @@ public class CtrActivity extends Activity implements
         FTools.log_d(TAG, "onResume: --------- is_first_run = " + is_first_run);
         if (FMainActivity.service_scrcpy != null && !is_first_run) {
             FMainActivity.service_scrcpy.resume();
+//            XToastUtils.info("请稍等10秒内，图像将恢复，在此期间，滑动控制等不受影响！");
         } else {
             is_first_run = false;
         }
     }
-
 
     @Override
     public void on_remote_rotation() {
@@ -327,6 +327,9 @@ public class CtrActivity extends Activity implements
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        /*
+        * "orientation|keyboardHidden" 只会执行 onConfigurationChanged 方法
+        * */
         super.onConfigurationChanged(newConfig);
         FTools.log_d(TAG, "onConfigurationChanged: ------newConfig = " + newConfig);
         if (!is_first_run) {

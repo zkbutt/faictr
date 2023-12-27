@@ -34,13 +34,15 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Function;
 
+import top.feadre.faictr.flib.FTools;
+import top.feadre.faictr.flib.base.DelayTask;
 import top.feadre.faictr.flib.base.DelayThread2Main;
 import top.feadre.faictr.flib.base.Thread2Main;
 
 
 public class ScrcpyService extends Service {
-    private boolean is_video = true;
     public static final int MSG_WHAT = 1;
     public static final int MSG_STATE_SUCCESS = 1;
     public static final int MSG_STATE_FAIL = 0;
@@ -50,10 +52,11 @@ public class ScrcpyService extends Service {
     private byte[] event_val_bytes = null;
     private VideoDecoder videoDecoder;
     private IBinder mBinder = new ScrcpyBinder();
-    private boolean is_first_run = true;
     private OnScrcpyServiceStateCallbacks onScrcpyServiceStateCallbacks;
     private OnScrcpyServiceRotationCallbacks onScrcpyServiceRotationCallbacks;
     private final int[] remote_resolution_wh = new int[2];
+    private boolean is_first_run = true;
+    private boolean is_video = true; //临时阻塞视频
     private AtomicBoolean is_socket_success = new AtomicBoolean(false);//控制 socket 出错时 等待
     private AtomicBoolean is_service_running = new AtomicBoolean(true); //连接成功后，控制视频更新 等待
     private AtomicBoolean is_receive_update_video = new AtomicBoolean(false); //阻塞 视频管道
@@ -229,7 +232,7 @@ public class ScrcpyService extends Service {
                                 Message msg = new Message();
                                 msg.what = MSG_WHAT;
                                 msg.arg1 = MSG_STATE_SUCCESS;
-                                msg.obj = "config 成功";
+                                msg.obj = "config成功，10秒内，图像将恢复！";
                                 handler4ser.sendMessage(msg);
                             }
 
@@ -252,8 +255,8 @@ public class ScrcpyService extends Service {
                             if (is_video) {
                                 // FRAME
                                 videoDecoder.decodeSample(data, 0, data.length, 0, videoPacket.flag.getFlag());
-//                                Log.d(TAG, "_show_video: videoDecoder.decodeSamp  videoPacket.flag = " + videoPacket.flag);
                             }
+//                            Log.d(TAG, "_show_video: data.length = " + data.length);
                         }
                     } else {
                         Log.e(TAG, "_show_video:  videoPacket.type 类型错误 = " + videoPacket.type);
@@ -357,7 +360,8 @@ public class ScrcpyService extends Service {
         this.is_first_run = true;
         is_video = true;
 //        is_receive_update_video.set(true);
-        if (videoDecoder == null) {
+        if (videoDecoder == null) { //是否执行，按 videoDecoder 而定
+            // 没有解码就开始运行解码工作者
             this.videoDecoder = new VideoDecoder();
             videoDecoder.start_worker_thread();
         }
@@ -366,15 +370,17 @@ public class ScrcpyService extends Service {
     public void pause() {
         //熄屏  数据仍然在传输， 但图像不会堆积  可以进行 触控
         Log.d(TAG, "ScrcpyService pause: -----------------");
+
+        is_video = false;
         if (videoDecoder != null) {
 //            is_receive_update_video.set(false);
             videoDecoder.stop_worker_thread();
             videoDecoder = null;
-            is_video = false;
         }
     }
 
     private void close_socket() {
+        // 开始时关闭    失败后关闭      stop_service运行
         if (socket != null && !socket.isClosed()) {
             try {
                 dataInputStream.close();
@@ -398,6 +404,7 @@ public class ScrcpyService extends Service {
     }
 
     public void stop_service() {
+        //解绑  onUnbind 调动
         this.pause();
         is_service_running.set(false);
         is_socket_success.set(false);

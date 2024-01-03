@@ -67,7 +67,6 @@ public class FMainDebug implements FlowTagLayout.OnTagClickListener {
         s.add(bt_start_transmit);
         String[] strings = s.toArray(new String[s.size()]);
         tagAdapter.addTags(strings);
-
     }
 
     @Override

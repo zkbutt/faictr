@@ -26,7 +26,7 @@ public class Help4SharedPreferences {
         public int vi_ctr_bitrate;
 
         public int vi_ctr_display_mode; // 拉伸尺寸-0  保持比例-1
-        public boolean vb_ctr_ss_size;
+        public boolean vb_ctr_ss_size;//是否指定尺寸
         public float vf_ctr_local_ratio;
         public boolean vb_ctr_bottom;
         public int[] vis_ctr_local_size;
@@ -54,7 +54,7 @@ public class Help4SharedPreferences {
         //本机参数配置
         int vi_ctr_display_mode = sp.getInt(FCFGBusiness.SPSet.SPD_DISPLAY_MODE, 0); // 0是拉伸屏幕
         boolean vb_ctr_ss_size = sp.getBoolean(FCFGBusiness.SPSet.SS_SIZE, true);
-        float vf_ctr_local_ratio = sp.getFloat(FCFGBusiness.SPSet.SPD_LOCAL_RATIO, 1.0F); // 0是拉伸屏幕
+        float vf_ctr_local_ratio = sp.getFloat(FCFGBusiness.SPSet.SPD_LOCAL_RATIO, 1.0F);
         boolean vb_ctr_bottom = sp.getBoolean(FCFGBusiness.SPSet.SS_BOTTOM, true);
 
         int[] vis_ctr_local_size = new int[2];

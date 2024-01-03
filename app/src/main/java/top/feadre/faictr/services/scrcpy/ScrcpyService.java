@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
+import top.feadre.faictr.cfg.FCFGBusiness;
 import top.feadre.faictr.flib.FTools;
 import top.feadre.faictr.flib.base.DelayTask;
 import top.feadre.faictr.flib.base.DelayThread2Main;
@@ -94,7 +95,8 @@ public class ScrcpyService extends Service {
 
             try {
                 if (socket == null) {
-                    socket = new Socket(serverAdr, 7007); //只能连接一次，断开后再连报错
+                    socket = new Socket(serverAdr, FCFGBusiness.APP.PORT_SOCKET); //只能连接一次，断开后再连报错
+//                    socket = new Socket(serverAdr, 7999);
                 }
                 dataInputStream = new DataInputStream(socket.getInputStream());
 

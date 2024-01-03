@@ -178,7 +178,8 @@ public class FDialogBottomEdit extends BottomSheetDialog implements View.OnClick
     public void addData(EntityItem4SimpleRecyclerAdapter e) {
         /* 这里不管是不是一样 全部进行添加最前操作 */
         // 新连接成功的要添加到第一个位置
-        LinkedList<EntityItem4SimpleRecyclerAdapter> datas = (LinkedList<EntityItem4SimpleRecyclerAdapter>) mAdapter.getDatas();
+        LinkedList<EntityItem4SimpleRecyclerAdapter> datas
+                = (LinkedList<EntityItem4SimpleRecyclerAdapter>) mAdapter.getDatas();
         for (EntityItem4SimpleRecyclerAdapter d : datas) {
             //如果内容相等，则删除后加到第一个
             if (d.getContent().equals(e.getContent())) {

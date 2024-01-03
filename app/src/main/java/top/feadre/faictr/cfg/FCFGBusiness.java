@@ -3,6 +3,10 @@ package top.feadre.faictr.cfg;
 public final class FCFGBusiness {
     public static final String PARSE_STRING = "%_%"; //要进度 需通过这个手动分解析
 
+    public static final class APP{
+        public static int PORT_SOCKET = 7007;//回退按钮  间隙临时
+    }
+
     public static final class Temp{
         public static long on_back_pressed_temp_time = 0;//回退按钮  间隙临时
     }

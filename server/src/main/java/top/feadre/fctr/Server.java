@@ -83,6 +83,8 @@ public final class Server {
          *  CLASSPATH=/data/local/tmp/scrcpy-server.jar app_process >>aaa / top.feadre.fctr.Server /192.168.22.122 608 4096000;
          * [/192.168.22.122,608,4096000]
          * */
+
+        // 输出当前时间，和转入的参数
         System.out.println();
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

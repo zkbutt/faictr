@@ -110,13 +110,13 @@ public class FMainActivity extends FBaseActivity implements
 
         /*添加顶部菜单*/
         tb_titlebar.setLeftImageDrawable(null);
-        tb_titlebar.addAction(new TitleBar.ImageAction(R.drawable.bt_help) {
-            @Override
-            public void performAction(View view) {
-                ActivityUtils.startActivity(TActivity_base.class);
-//                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
-            }
-        });
+//        tb_titlebar.addAction(new TitleBar.ImageAction(R.drawable.bt_help) {
+//            @Override
+//            public void performAction(View view) {
+//                ActivityUtils.startActivity(TActivity_base.class);
+////                startActivity(new Intent(FMainActivity.this, TActivity_base.class));
+//            }
+//        });
         tb_titlebar.setTitle(getString(R.string.main_title));
 
         //设置介面
@@ -155,7 +155,7 @@ public class FMainActivity extends FBaseActivity implements
 
 
         FMainDebug fMainDebug = new FMainDebug(this);
-        fMainDebug.debug_init();
+//        fMainDebug.debug_init();
     }
 
     @OnClick({R.id.xuiab_ip_res, R.id.bt_ip_search, R.id.bt_one_link, R.id.bt_pair_link,

@@ -44,4 +44,8 @@ public class SettingsItemBase<T>{
     public XUICommonListItemView getViewRes() {
         return viewCtr;
     }
+
+    public Context getContext() {
+        return context;
+    }
 }

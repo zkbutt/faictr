@@ -2,9 +2,12 @@ package top.feadre.faictr.fragments.setting_page;
 
 import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.Toast;
 
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xui.utils.ResUtils;
+import com.xuexiang.xui.utils.SnackbarUtils;
+import com.xuexiang.xui.utils.XToastUtils;
 import com.xuexiang.xui.widget.grouplist.XUIGroupListView;
 import com.xuexiang.xuidemo.base.BaseFragment;
 
@@ -133,8 +136,16 @@ public class SettingsFragment extends BaseFragment {
 
     }
 
-    private static void ss_size_ctr(SettingsSwitch ss_size, SettingsPullDown4Float spd_local_ratio, SettingsPullDown4IntsSize spd_size) {
-        if (ss_size.valRes) {
+    private void ss_size_ctr(SettingsSwitch ss_size, SettingsPullDown4Float spd_local_ratio, SettingsPullDown4IntsSize spd_size) {
+        if (ss_size.valRes) { // 是指定尺寸,逻辑没做提醒
+            XToastUtils.info("拉伸 - 设置分辨率暂时没做，设置无效，需要改ctr的初始代码", Toast.LENGTH_LONG);
+            //用不起
+//            SnackbarUtils.FIndefinite(spd_size.getContext(), spd_size.getViewRes(),
+//                            "拉伸 - 设置分辨率暂时没做，设置无效，需要改ctr的初始代码")
+//                    .danger()
+//                    .setAction("确定", v -> {
+//                    }) //v -> XToastUtils.toast("点击了确定！")
+//                    .show();
             spd_size.getViewRes().setVisibility(View.VISIBLE);//设置尺寸
             spd_local_ratio.getViewRes().setVisibility(View.GONE); //本机显示比例
         } else {

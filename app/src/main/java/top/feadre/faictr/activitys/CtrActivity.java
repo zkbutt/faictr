@@ -26,6 +26,7 @@ import com.xuexiang.xui.widget.dialog.materialdialog.DialogAction;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
 import java.util.Arrays;
+import java.util.OptionalInt;
 
 import rjsv.floatingmenu.floatingmenubutton.FloatingMenuButton;
 import rjsv.floatingmenu.floatingmenubutton.subbutton.FloatingSubButton;
@@ -128,18 +129,33 @@ public class CtrActivity extends Activity implements
                     + " is_landscape = " + is_landscape
                     + " display_wh = " + Arrays.toString(display_wh)
             );
-            if (!(Math.abs(spMainCfg.vf_ctr_local_ratio - 1.0f) < 0.000001f)) {
-                //拉伸 小于1 需要处理
-                layoutParams.width = (int) (spMainCfg.vf_ctr_local_ratio * display_wh[0]);
-                layoutParams.height = (int) (spMainCfg.vf_ctr_local_ratio * display_wh[1]);
-                sv_decoder.setLayoutParams(layoutParams);
+            if (spMainCfg.vb_ctr_ss_size) {
+                //是指定尺寸 找屏幕wh 和设置wh的比值  找出比例最小的
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    // 1. 判断横竖 保持一致
+                    
+
+                    // 2. 判断比例，  以A为准， B> A 先h
+
+
+                }
+
+
             } else {
-                layoutParams.addRule(RelativeLayout.ABOVE, R.id.ll_nav_bar);
-                //参数已设置不需要处理
-                sv_decoder.setLayoutParams(layoutParams);
+                //不是自己指定尺寸
+                if (!(Math.abs(spMainCfg.vf_ctr_local_ratio - 1.0f) < 0.000001f)) {
+                    //拉伸 比例小于1 需要处理
+                    layoutParams.width = (int) (spMainCfg.vf_ctr_local_ratio * display_wh[0]);
+                    layoutParams.height = (int) (spMainCfg.vf_ctr_local_ratio * display_wh[1]);
+                    sv_decoder.setLayoutParams(layoutParams);
+                } else {
+                    //全屏拉伸 参数已设置不需要处理
+                    layoutParams.addRule(RelativeLayout.ABOVE, R.id.ll_nav_bar);
+                    sv_decoder.setLayoutParams(layoutParams);
+                }
             }
         } else if (spMainCfg.vi_ctr_display_mode == 1) {//这个是 保持比例
-
+            // 长宽随控制机 判断最长宽高
         }
 
         //这里要先设置再侦听
@@ -328,8 +344,8 @@ public class CtrActivity extends Activity implements
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         /*
-        * "orientation|keyboardHidden" 只会执行 onConfigurationChanged 方法
-        * */
+         * "orientation|keyboardHidden" 只会执行 onConfigurationChanged 方法
+         * */
         super.onConfigurationChanged(newConfig);
         FTools.log_d(TAG, "onConfigurationChanged: ------newConfig = " + newConfig);
         if (!is_first_run) {

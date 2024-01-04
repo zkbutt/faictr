@@ -236,7 +236,9 @@ public class FAutoUpdater {
 
                 );
 
-                if (ver_code_local < ver_code_remote || BuildConfig.DEBUG) {
+//                if (ver_code_local < ver_code_remote || BuildConfig.DEBUG) {
+//                if (ver_code_local < ver_code_remote) {
+                if (false) {//不自动更新
                     //开始下载
                     url_apk = url_path + outputFile;
                     mHandler.sendEmptyMessage(MSG_SHOW_DOWN);
